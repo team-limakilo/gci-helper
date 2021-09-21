@@ -41,8 +41,10 @@
     <h2>{region}</h2>
     {#each Object.entries(assets)
         .filter(([_, asset]) => asset.type !== "SAM" && asset.strategic && !asset.dead)
-        .sort(([_1, a], [_2, b]) => (a.type > b.type ? 1 : 0)) as [_, asset]}
-        <div class="mono">{asset.type}: {asset.codename}</div>
+        .sort(([_1, a], [_2, b]) => (a.type > b.type ? 1 : 0)) as [name, asset]}
+        <div class="mono">
+            {asset.type}: {asset.type === "AIRBASE" ? name : asset.codename}
+        </div>
     {:else}
         <div class="mono">No Assets</div>
     {/each}
