@@ -1,4 +1,4 @@
-export default {
+const data = {
   "coalitions": {
     "0": {
       "assets": {
@@ -2189,7 +2189,7 @@ export default {
             "player": "Froggy 1-4 | kukiric"
           } ],
           "target": {
-            "coalition": 1,
+            "coalition": "1",
             "name": "Aleppo_1_Reg1Factory-1",
             "region": "Aleppo"
           },
@@ -2205,3 +2205,6 @@ export default {
   "date": "2021-09-20 22:54:23Z",
   "version": "v0.9.4"
 }
+
+export type ExportData = typeof data;
+export default data;
