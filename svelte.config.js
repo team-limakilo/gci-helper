@@ -1,5 +1,6 @@
 import preprocess from "svelte-preprocess";
-import adapter from "@sveltejs/adapter-netlify";
+import nodeAdapter from "@sveltejs/adapter-node";
+import netlifyAdapter from "@sveltejs/adapter-netlify";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -8,7 +9,7 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: adapter(),
+		adapter: process.env.NETLIFY ? netlifyAdapter() : nodeAdapter(),
 		target: "#svelte",
 	},
 };
