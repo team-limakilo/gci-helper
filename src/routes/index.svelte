@@ -27,10 +27,24 @@
 <h1 class="enemy">SAM Threats</h1>
 {#each Object.entries(data.coalitions[RED].assets) as [region, assets]}
     <h2>{region}</h2>
-    {#each Object.entries(assets).filter(([_, asset]) => asset.type === "SAM") as [_, asset]}
+    {#each Object.entries(assets)
+        .filter(([_, asset]) => asset.type === "SAM" && !asset.dead)
+        .sort( ([_1, a], [_2, b]) => (a.sitetype > b.sitetype ? 1 : 0) ) as [_, asset]}
         <div class="mono">{asset.sitetype}: {asset.codename}</div>
     {:else}
         <div class="mono">Clear</div>
+    {/each}
+{/each}
+
+<h1 class="enemy">Enemy Assets</h1>
+{#each Object.entries(data.coalitions[RED].assets) as [region, assets]}
+    <h2>{region}</h2>
+    {#each Object.entries(assets)
+        .filter(([_, asset]) => asset.type !== "SAM" && !asset.dead)
+        .sort(([_1, a], [_2, b]) => (a.type > b.type ? 1 : 0)) as [_, asset]}
+        <div class="mono">{asset.type}: {asset.codename}</div>
+    {:else}
+        <div class="mono">No Assets</div>
     {/each}
 {/each}
 
