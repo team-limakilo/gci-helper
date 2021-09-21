@@ -40,7 +40,7 @@
 {#each Object.entries(data.coalitions[RED].assets) as [region, assets]}
     <h2>{region}</h2>
     {#each Object.entries(assets)
-        .filter(([_, asset]) => asset.type !== "SAM" && !asset.dead)
+        .filter(([_, asset]) => asset.type !== "SAM" && asset.strategic && !asset.dead)
         .sort(([_1, a], [_2, b]) => (a.type > b.type ? 1 : 0)) as [_, asset]}
         <div class="mono">{asset.type}: {asset.codename}</div>
     {:else}
