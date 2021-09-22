@@ -1,9 +1,10 @@
 import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
 import type { ToJSON } from "@sveltejs/kit/types/helper";
-import type { ExportData } from "../../sample";
-import path from "path";
-import os from "os";
 import fs from "fs";
+import os from "os";
+import path from "path";
+import type { ExportData } from "../../sample";
+import sampleData from "../../sample";
 
 export interface ClientData extends ToJSON {
     missions: Mission[];
@@ -109,6 +110,9 @@ async function getExportFilePath(): Promise<string> {
 let exportFilePath: string | undefined;
 
 async function getExportData(): Promise<string> {
+    if (process.env.NETLIFY) {
+        return JSON.stringify(sampleData);
+    }
     if (!exportFilePath) {
         exportFilePath = await getExportFilePath();
         console.log(`Export file path: ${exportFilePath}`);
