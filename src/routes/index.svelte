@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
     import type { LoadInput, LoadOutput } from "@sveltejs/kit";
     import dayjs from "dayjs";
-    import relativeTime from "dayjs/plugin/relativeTime";
+    import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
     import type { ClientData } from "./data";
     import Main from "./main.svelte";
