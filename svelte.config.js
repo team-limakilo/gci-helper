@@ -9,7 +9,7 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: process.env.NETLIFY ? netlifyAdapter() : nodeAdapter(),
+		adapter: process.env.VITE_NETLIFY ? netlifyAdapter() : nodeAdapter(),
 		target: "#svelte",
 	},
 };

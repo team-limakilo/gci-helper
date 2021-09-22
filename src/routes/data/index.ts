@@ -110,7 +110,7 @@ async function getExportFilePath(): Promise<string> {
 let exportFilePath: string | undefined;
 
 async function getExportData(): Promise<string> {
-    if (process.env.NETLIFY) {
+    if (import.meta.env.VITE_NETLIFY) {
         return JSON.stringify(sampleData);
     }
     if (!exportFilePath) {
