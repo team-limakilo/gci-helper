@@ -2202,6 +2202,7 @@ const data = {
       }
     }
   },
+  "theater": "Syria",
   "date": "2021-09-20 22:54:23Z",
   "version": "v0.9.4"
 }

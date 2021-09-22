@@ -1,13 +1,16 @@
-import type { EndpointOutput } from "@sveltejs/kit";
+import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
 import type { ToJSON } from "@sveltejs/kit/types/helper";
-import type { ExportData } from "../sample";
-import data from "../sample";
+import type { ExportData } from "../../sample";
+import path from "path";
+import os from "os";
+import fs from "fs";
 
 export interface ClientData extends ToJSON {
     missions: Mission[];
     airbases: Asset[],
     enemysams: { name: string, assets: Asset[] }[],
     enemyassets: { name: string, assets: Asset[] }[],
+    theater: string;
     version: string,
     date: string,
 }
@@ -93,8 +96,39 @@ function getAssets(data: ExportData, coalition: Coalition) {
     }));
 }
 
-export function get(): EndpointOutput<ClientData> {
+async function getExportFilePath(): Promise<string> {
+    const savedGames = path.join(os.homedir(), "Saved Games");
+    const folders = await fs.promises.readdir(savedGames);
+    const DCSFolders = folders.filter((folder) => folder.match(/^DCS(_server)?(\.openbeta)?$/));
+    const firstDCSFolder = path.join(savedGames, DCSFolders[0]);
+    const DCSFolderContents = await fs.promises.readdir(firstDCSFolder);
+    const exportFile = DCSFolderContents.filter((file) => file.endsWith(".export.json"))[0];
+    return path.join(firstDCSFolder, exportFile);
+}
+
+let exportFilePath: string | undefined;
+
+async function getExportData(): Promise<string> {
+    if (!exportFilePath) {
+        exportFilePath = await getExportFilePath();
+        console.log(`Export file path: ${exportFilePath}`);
+    }
+    return fs.promises.readFile(exportFilePath, { encoding: "utf-8" });
+}
+
+export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientData>> {
+    const data: ExportData = JSON.parse(await getExportData());
+    const clientDate = new Date(req.headers["if-modified-since"]);
+    if (!isNaN(clientDate.valueOf()) && new Date(data.date) < clientDate) {
+        return {
+            status: 304,
+        };
+    }
     return {
+        headers: {
+            "Cache-Control": "no-cache, must-revalidate",
+            "Last-Modified": new Date(data.date).toUTCString(),
+        },
         body: {
             missions: extract(data.coalitions[Coalition.Blue].missions, false, (_, mission) => ({
                 region: mission.target.region,
@@ -105,6 +139,7 @@ export function get(): EndpointOutput<ClientData> {
             enemysams: getSAMs(data, Coalition.Red),
             enemyassets: getAssets(data, Coalition.Red),
             airbases: getAirbases(data),
+            theater: data.theater,
             version: data.version,
             date: data.date,
             toJSON() {

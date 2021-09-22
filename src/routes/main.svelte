@@ -1,7 +1,11 @@
 <script lang="ts">
-    import { ClientData, Coalition } from "./data";
+    import { ClientData, Coalition } from "./data/index";
     export let data: ClientData;
 </script>
+
+<svelte:head>
+    <title>GCI Helper - {data.theater}</title>
+</svelte:head>
 
 <section>
     <h1>Missions</h1>

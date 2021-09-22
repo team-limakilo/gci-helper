@@ -1,13 +1,23 @@
 <script context="module" lang="ts">
     import type { LoadInput, LoadOutput } from "@sveltejs/kit";
+    import dayjs from "dayjs";
+    import relativeTime from "dayjs/plugin/relativeTime";
+    import { onMount } from "svelte";
     import type { ClientData } from "./data";
     import Main from "./main.svelte";
+    type Fetch = typeof fetch;
+
+    dayjs.extend(relativeTime);
+
+    function getData(fetch: Fetch) {
+        return fetch("data").then((data) => data.json());
+    }
 
     export async function load({ fetch }: LoadInput): Promise<LoadOutput> {
         try {
             return {
                 props: {
-                    data: await fetch("data").then((data) => data.json()),
+                    data: await getData(fetch),
                 },
             };
         } catch (error) {
@@ -20,13 +30,37 @@
 
 <script lang="ts">
     export let data: ClientData;
+    let interval: NodeJS.Timer;
+    let error = "";
+
+    onMount(() => {
+        interval = setInterval(async () => {
+            try {
+                data = await getData(fetch);
+                error = "";
+                if (dayjs().diff(data.date, "minutes") >= 10) {
+                    const age = dayjs(data.date).fromNow(true);
+                    error = `Warning: this data is ${age} old (server may be offline)`;
+                }
+            } catch (err) {
+                console.log(err);
+                error = `Error: ${err.message ?? "Unknown error"}`;
+                throw err;
+            }
+        }, 5000);
+        return () => clearInterval(interval);
+    });
 </script>
 
-{#if data != null}
-    <Main {data} />
-{:else}
-    <h1>Loading...</h1>
-{/if}
+<div class="warning {error.length > 0 ? 'visible' : ''}">{error}</div>
+
+<main>
+    {#if data != null}
+        <Main {data} />
+    {:else}
+        <h1>Loading...</h1>
+    {/if}
+</main>
 
 <style global>
     body {
@@ -35,7 +69,7 @@
         background: #0f0f0f;
         line-height: 1.25;
         max-width: 1024px;
-        padding: 0 1em 0 1em;
+        padding: 0 1em;
         margin: auto;
     }
     h1 {
@@ -45,6 +79,23 @@
     }
     h2 {
         font-size: 16pt;
+    }
+    .warning {
+        top: -3em;
+        position: fixed;
+        background: #a33;
+        visibility: hidden;
+        color: white;
+        padding: 0.5em;
+        width: calc(1024px - 1em);
+        max-width: calc(100% - 3rem);
+        transition: top 100ms linear;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .warning.visible {
+        visibility: visible;
+        top: 1em;
     }
     .mono {
         font-family: "Courier New", Courier, monospace;
