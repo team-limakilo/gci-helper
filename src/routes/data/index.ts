@@ -123,7 +123,7 @@ async function getExportData(): Promise<string> {
 export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientData>> {
     const data: ExportData = JSON.parse(await getExportData());
     const clientDate = new Date(req.headers["if-modified-since"]);
-    if (!isNaN(clientDate.valueOf()) && new Date(data.date) < clientDate) {
+    if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
         return {
             status: 304,
         };
