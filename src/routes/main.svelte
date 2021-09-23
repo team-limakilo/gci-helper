@@ -21,6 +21,8 @@
                 .map((assigned) => assigned.player)
                 .join(", ")}
         </div>
+    {:else}
+        <div class="mono">No Missions</div>
     {/each}
 </section>
 
