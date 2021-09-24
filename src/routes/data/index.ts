@@ -28,6 +28,7 @@ export interface Asset {
     name?: string;
     sitetype?: string;
     coalition?: string;
+    status?: string;
 }
 
 export interface Mission {
@@ -56,6 +57,7 @@ function target(data: ExportData, { target }: { target: MissionTarget }): Asset 
     const asset = data.coalitions[target.coalition].assets[target.region][target.name];
     return {
         codename: asset.codename,
+        status: asset.status,
         type: asset.type,
     }
 }

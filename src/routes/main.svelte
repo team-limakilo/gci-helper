@@ -14,12 +14,20 @@
             <strong class="friendly">{mission.type}</strong>
             <br />
             Region: {mission.region}
-            <br />
-            Target: {mission.target.codename} ({mission.target.type})
+            {#if mission.target}
+                <br />
+                Target: {mission.target.codename} ({mission.target.type})
+            {/if}
             <br />
             Participants: {mission.assigned
                 .map((assigned) => assigned.player)
                 .join(", ")}
+            {#if mission.target}
+                <br />
+                Status: Active ({mission.target.status}% complete)
+            {:else}
+                Status: Active
+            {/if}
         </div>
     {:else}
         <div class="mono">No Missions</div>
@@ -35,7 +43,7 @@
             {:else if airbase.coalition == Coalition.Red}
                 <span class="enemy">Hostile&nbsp;</span> {airbase.name}
             {:else}
-                <span>Neutral&nbsp;</span> {airbase.name}
+                <span class="neutral">Neutral&nbsp;</span> {airbase.name}
             {/if}
         </div>
     {/each}

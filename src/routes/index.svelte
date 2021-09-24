@@ -106,6 +106,9 @@
     .enemy {
         color: #f55;
     }
+    .neutral {
+        color: #ff8;
+    }
     .left {
         float: left;
     }
