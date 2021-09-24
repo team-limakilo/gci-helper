@@ -1,53 +1,51 @@
-<script context="module" lang="ts">
-    import type { LoadInput, LoadOutput } from "@sveltejs/kit";
+<script lang="ts">
     import dayjs from "dayjs";
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
     import type { ClientData } from "./data";
     import Main from "./main.svelte";
-    type Fetch = typeof fetch;
-
     dayjs.extend(relativeTime);
 
-    function getData(fetch: Fetch) {
-        return fetch("data").then((data) => data.json());
-    }
-
-    export async function load({ fetch }: LoadInput): Promise<LoadOutput> {
-        try {
-            return {
-                props: {
-                    data: await getData(fetch),
-                },
-            };
-        } catch (error) {
-            return {
-                error,
-            };
-        }
-    }
-</script>
-
-<script lang="ts">
-    export let data: ClientData;
     let interval: NodeJS.Timer;
+    let data: ClientData;
     let error = "";
 
-    onMount(() => {
-        interval = setInterval(async () => {
-            try {
-                data = await getData(fetch);
-                error = "";
-                if (dayjs().diff(data.date, "minutes") >= 10) {
-                    const age = dayjs(data.date).fromNow(true);
-                    error = `Warning: this data is ${age} old (server may be offline)`;
-                }
-            } catch (err) {
-                console.log(err);
-                error = `Error: ${err.message ?? "Unknown error"}`;
-                throw err;
+    async function updateData() {
+        async function fetchData(): Promise<ClientData | Error> {
+            const response = await fetch("data").catch(() => {
+                return new Error("Could not connect to server");
+            });
+            if (response instanceof Error) {
+                return response;
             }
-        }, 5000);
+            if (response.status >= 200 && response.status < 400) {
+                return response.json().catch((err) => {
+                    console.error(err);
+                    return new Error("Could not understand data from server");
+                });
+            } else {
+                return new Error("The server returned an error");
+            }
+        }
+
+        const result = await fetchData();
+        if (result instanceof Error) {
+            error = `Error: ${result.message}`;
+        } else {
+            error = "";
+            data = result;
+
+            // Warn the user in case the server stops generating new data exports for a while
+            if (dayjs().diff(data.date, "minutes") >= 10) {
+                const ago = dayjs(data.date).fromNow();
+                error = `Warning: this data is from ${ago}`;
+            }
+        }
+    }
+
+    onMount(() => {
+        updateData();
+        interval = setInterval(updateData, 5000);
         return () => clearInterval(interval);
     });
 </script>
@@ -57,7 +55,7 @@
 <main>
     {#if data != null}
         <Main {data} />
-    {:else}
+    {:else if error == ""}
         <h1>Loading...</h1>
     {/if}
 </main>

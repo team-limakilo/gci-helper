@@ -1,8 +1,6 @@
 import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
 import type { ToJSON } from "@sveltejs/kit/types/helper";
-import fs from "fs";
-import os from "os";
-import path from "path";
+import axios from "axios";
 import type { ExportData } from "../../sample";
 import sampleData from "../../sample";
 
@@ -99,37 +97,26 @@ function getAssets(data: ExportData, coalition: Coalition) {
     }));
 }
 
-async function getExportFilePath(): Promise<string> {
-    const savedGames = path.join(os.homedir(), "Saved Games");
-    const folders = await fs.promises.readdir(savedGames);
-    const DCSFolders = folders.filter((folder) => folder.match(/^DCS(_server)?(\.openbeta)?$/));
-    const firstDCSFolder = path.join(savedGames, DCSFolders[0]);
-    const DCSFolderContents = await fs.promises.readdir(firstDCSFolder);
-    const exportFile = DCSFolderContents.filter((file) => file.endsWith(".export.json"))[0];
-    return path.join(firstDCSFolder, exportFile);
-}
+const exportDataEndpoint = import.meta.env.VITE_EXPORT_DATA_ENDPOINT;
 
-let exportFilePath: string | undefined;
-
-async function getExportData(): Promise<string> {
-    if (import.meta.env.VITE_NETLIFY) {
-        return JSON.stringify(sampleData);
+async function getExportData(): Promise<ExportData> {
+    if (typeof exportDataEndpoint === "string" && exportDataEndpoint.length > 0) {
+        return axios.get(exportDataEndpoint).then((response) => response.data);
+    } else {
+        return sampleData;
     }
-    if (!exportFilePath) {
-        exportFilePath = await getExportFilePath();
-        console.log(`Export file path: ${exportFilePath}`);
-    }
-    return fs.promises.readFile(exportFilePath, { encoding: "utf-8" });
 }
 
 export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientData>> {
-    const data: ExportData = JSON.parse(await getExportData());
+    const data = await getExportData();
+    // Return cached response if not newer than the last
     const clientDate = new Date(req.headers["if-modified-since"]);
     if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
         return {
             status: 304,
         };
     }
+    // Otherwise, build a new response
     return {
         headers: {
             "Cache-Control": "no-cache, must-revalidate",
