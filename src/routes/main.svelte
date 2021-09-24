@@ -3,10 +3,6 @@
     export let data: ClientData;
 </script>
 
-<svelte:head>
-    <title>GCI Helper - {data.theater}</title>
-</svelte:head>
-
 <section>
     <h1>Missions</h1>
     {#each data.missions as mission}
