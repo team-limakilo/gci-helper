@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ClientData, Coalition } from "./data/index";
+    import { ClientData, Coalition } from "./data/types";
     export let data: ClientData;
 </script>
 
@@ -47,7 +47,7 @@
 
 <section>
     <h1>SAM Threats</h1>
-    {#each data.enemysams as region}
+    {#each data.enemySAMs as region}
         <h2>{region.name}</h2>
         {#each region.assets as asset}
             <div class="mono">
@@ -61,7 +61,7 @@
 
 <section>
     <h1>Enemy Assets</h1>
-    {#each data.enemyassets as region}
+    {#each data.enemyAssets as region}
         <h2>{region.name}</h2>
         {#each region.assets as asset}
             <div class="mono">

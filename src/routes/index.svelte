@@ -2,21 +2,13 @@
     import dayjs from "dayjs";
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
-    import type { ClientData } from "./data";
+    import type { ClientData } from "./data/types";
     import Main from "./main.svelte";
     dayjs.extend(relativeTime);
 
-    let customTitle: string | undefined;
     let interval: NodeJS.Timer;
     let data: ClientData;
     let error = "";
-
-    if (
-        typeof import.meta.env.VITE_TITLE === "string" &&
-        import.meta.env.VITE_TITLE.length > 0
-    ) {
-        customTitle = import.meta.env.VITE_TITLE;
-    }
 
     async function updateData() {
         async function fetchData(): Promise<ClientData | Error> {
@@ -59,10 +51,8 @@
 </script>
 
 <svelte:head>
-    {#if customTitle != null}
-        <title>{customTitle}</title>
-    {:else if data != null}
-        <title>GCI Helper - {data.theater}</title>
+    {#if data != null}
+        <title>{data.pageTitle || `GCI Helper - ${data.theater}`}</title>
     {/if}
 </svelte:head>
 

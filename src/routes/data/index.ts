@@ -1,48 +1,8 @@
 import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
-import type { ToJSON } from "@sveltejs/kit/types/helper";
 import axios from "axios";
-import type { ExportData } from "../../sample";
 import sampleData from "../../sample";
-
-export interface ClientData extends ToJSON {
-    missions: Mission[];
-    airbases: Asset[],
-    enemysams: { name: string, assets: Asset[] }[],
-    enemyassets: { name: string, assets: Asset[] }[],
-    theater: string;
-    version: string,
-    date: string,
-}
-
-export enum Coalition {
-    Neutral = "0",
-    Red = "1",
-    Blue = "2",
-}
-
-export interface Asset {
-    codename?: string;
-    type?: string;
-    name?: string;
-    sitetype?: string;
-    coalition?: string;
-    status?: string;
-}
-
-export interface Mission {
-    type: string;
-    region: string;
-    target: Asset;
-    assigned: { group: string, player: string }[];
-}
-
-type ExportDataAsset = ExportData["coalitions"]["1"]["assets"]["Hama"]["Hama_1_Reg3Sa2-1"];
-
-interface MissionTarget {
-    coalition: string;
-    region: string;
-    name: string;
-}
+import type { Asset, ClientData, ExportData, ExportDataAsset, MissionTarget } from "./types";
+import { Coalition } from "./types";
 
 function extract<T, R>(obj: T, filter: ((id: string, props: T[keyof T]) => boolean) | false, fn: (id: string, props: T[keyof T]) => R): R[] {
     let values = filter
@@ -97,10 +57,11 @@ function getAssets(data: ExportData, coalition: Coalition) {
     }));
 }
 
-const exportDataEndpoint = import.meta.env.VITE_EXPORT_DATA_ENDPOINT;
+const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
+const customTitle = process.env["CUSTOM_TITLE"];
 
 async function getExportData(): Promise<ExportData> {
-    if (typeof exportDataEndpoint === "string" && exportDataEndpoint.length > 0) {
+    if (exportDataEndpoint != null && exportDataEndpoint.length > 0) {
         return axios.get(exportDataEndpoint).then((response) => response.data);
     } else {
         return sampleData;
@@ -129,12 +90,13 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
                 assigned: mission.assigned,
                 type: mission.type,
             })),
-            enemysams: getSAMs(data, Coalition.Red),
-            enemyassets: getAssets(data, Coalition.Red),
+            enemySAMs: getSAMs(data, Coalition.Red),
+            enemyAssets: getAssets(data, Coalition.Red),
             airbases: getAirbases(data),
             theater: data.theater,
             version: data.version,
             date: data.date,
+            pageTitle: customTitle,
             toJSON() {
                 return this;
             },
