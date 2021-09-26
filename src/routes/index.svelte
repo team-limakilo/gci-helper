@@ -52,7 +52,7 @@
 
 <svelte:head>
     {#if data != null}
-        <title>{data.pageTitle || `GCI Helper - ${data.theater}`}</title>
+        <title>{data.pageTitle || `Campaign Status - ${data.theater}`}</title>
     {/if}
 </svelte:head>
 
