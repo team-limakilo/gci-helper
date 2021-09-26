@@ -5,3 +5,4 @@ Run container: `docker run --name "container-name" -e EXPORT_DATA_ENDPOINT="http
 Optional container environment variables:
 
 * `CUSTOM_TITLE`: Page title (will be set after data is loaded)
+* `EXPORT_DATA_SUBKEY`: A sub-key in the JSON returned by the endpoint where the data resides (otherwise, assumes the data lives in the root of the object)
