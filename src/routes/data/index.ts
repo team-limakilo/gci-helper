@@ -95,11 +95,11 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
     const data = await getExportData();
     // Return cached response if not newer than the last
     const clientDate = new Date(req.headers["if-modified-since"]);
-    // if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
-    //     return {
-    //         status: 304,
-    //     };
-    // }
+    if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
+        return {
+            status: 304,
+        };
+    }
     // Otherwise, build a new response
     return {
         headers: {
