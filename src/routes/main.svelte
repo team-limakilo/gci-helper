@@ -1,6 +1,10 @@
 <script lang="ts">
     import { ClientData, Coalition } from "./data/types";
     export let data: ClientData;
+
+    let version: string;
+    $: version =
+        data.version.length > 20 ? data.version.substring(0, 8) : data.version;
 </script>
 
 <section>
@@ -77,6 +81,6 @@
     <div class="left dim">
         Last Update: {new Date(data.date).toLocaleString()}
     </div>
-    <div class="right dim">Server DCT Version: {data.version}</div>
+    <div class="right dim">Server DCT Version: {version}</div>
     <br />
 </footer>
