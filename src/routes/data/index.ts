@@ -8,7 +8,9 @@ function extract<T, R>(obj: T, filter: ((id: string, props: T[keyof T]) => boole
     let values = filter
         ? Object.entries(obj).filter(([id, props]) => filter(id, props))
         : Object.entries(obj);
-    return values.map(([id, props]) => fn(id, props));
+    return values
+        .sort(([a], [b]) => a > b ? 1 : -1)
+        .map(([id, props]) => fn(id, props));
 }
 
 function target(data: ExportData, { target }: { target: MissionTarget }): Asset {
