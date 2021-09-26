@@ -104,6 +104,9 @@
     .mono {
         font-family: "Courier New", Courier, monospace;
     }
+    .spaced + .spaced {
+        margin-top: 1em;
+    }
     .friendly {
         color: #5af;
     }

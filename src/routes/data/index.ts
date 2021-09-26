@@ -1,7 +1,7 @@
 import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
 import axios from "axios";
 import sampleData from "../../sample";
-import type { Asset, ClientData, ExportData, ExportDataAsset, MissionTarget } from "./types";
+import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
 
 function extract<T, R>(obj: T, filter: ((id: string, props: T[keyof T]) => boolean) | false, fn: (id: string, props: T[keyof T]) => R): R[] {
@@ -40,29 +40,52 @@ function getAirbases(data: ExportData, coalition?: Coalition) {
 function getSAMs(data: ExportData, coalition: Coalition) {
     return extract(data.coalitions[coalition].assets, false, (region, assets) => ({
         name: region,
-        assets: extract(assets, (_, asset: ExportDataAsset) => !asset.dead && asset.type === "SAM", (_, asset: ExportDataAsset) => ({
-            sitetype: asset.sitetype ?? "Unknown",
-            codename: asset.codename,
-        })).sort((a, b) => a.sitetype > b.sitetype ? 1 : -1)
+        assets: extract(assets,
+            (_, asset: ExportDataAsset) => !asset.dead && asset.type === "SAM",
+            (_, asset: ExportDataAsset) => ({
+                sitetype: asset.sitetype ?? "Unknown",
+                codename: asset.codename,
+            })).sort((a, b) => a.sitetype > b.sitetype ? 1 : -1)
     }));
 }
 
 function getAssets(data: ExportData, coalition: Coalition) {
     return extract(data.coalitions[coalition].assets, false, (region, assets) => ({
         name: region,
-        assets: extract(assets, (_, asset: ExportDataAsset) => !asset.dead && asset.strategic && asset.type !== "SAM", (name, asset: ExportDataAsset) => ({
-            codename: asset.type === "AIRBASE" ? name : asset.codename,
-            type: asset.type,
-        })).sort((a, b) => a.type > b.type ? 1 : -1)
+        assets: extract(assets,
+            (_, asset: ExportDataAsset) => !asset.dead && asset.strategic && asset.type !== "SAM",
+            (name, asset: ExportDataAsset) => ({
+                codename: asset.type === "AIRBASE" ? name : asset.codename,
+                type: asset.type,
+            })).sort((a, b) => a.type > b.type ? 1 : -1)
     }));
 }
 
+function getMissions(data: ExportData, coalition: Coalition) {
+    return extract(data.coalitions[coalition].missions,
+        (_, mission: ExportDataMission) => mission.assigned.filter((assigned) => assigned.player != null).length > 0,
+        (_, mission: ExportDataMission) => ({
+            region: mission.target.region,
+            target: target(data, mission),
+            assigned: mission.assigned.filter((assigned) => assigned.player != null),
+            type: mission.type,
+        }))
+        .sort((a, b) => a.target > b.target ? 1 : -1)
+        .sort((a, b) => a.type > b.type ? 1 : -1);
+}
+
 const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
+const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
 const customTitle = process.env["CUSTOM_TITLE"];
 
 async function getExportData(): Promise<ExportData> {
     if (exportDataEndpoint != null && exportDataEndpoint.length > 0) {
-        return axios.get(exportDataEndpoint).then((response) => response.data);
+        const data = await axios.get(exportDataEndpoint).then((response) => response.data);
+        if (exportDataSubkey != null && exportDataSubkey.length > 0) {
+            return data[exportDataSubkey];
+        } else {
+            return data;
+        }
     } else {
         return sampleData;
     }
@@ -72,11 +95,11 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
     const data = await getExportData();
     // Return cached response if not newer than the last
     const clientDate = new Date(req.headers["if-modified-since"]);
-    if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
-        return {
-            status: 304,
-        };
-    }
+    // if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
+    //     return {
+    //         status: 304,
+    //     };
+    // }
     // Otherwise, build a new response
     return {
         headers: {
@@ -84,12 +107,7 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
             "Last-Modified": new Date(data.date).toUTCString(),
         },
         body: {
-            missions: extract(data.coalitions[Coalition.Blue].missions, false, (_, mission) => ({
-                region: mission.target.region,
-                target: target(data, mission),
-                assigned: mission.assigned,
-                type: mission.type,
-            })),
+            missions: getMissions(data, Coalition.Blue),
             enemySAMs: getSAMs(data, Coalition.Red),
             enemyAssets: getAssets(data, Coalition.Red),
             airbases: getAirbases(data),

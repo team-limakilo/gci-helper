@@ -6,7 +6,7 @@
 <section>
     <h1>Missions</h1>
     {#each data.missions as mission}
-        <div class="mono">
+        <div class="mono spaced">
             <strong class="friendly">{mission.type}</strong>
             <br />
             Region: {mission.region}
