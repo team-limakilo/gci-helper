@@ -14,8 +14,9 @@ function extract<T, R>(obj: T, filter: ((id: string, props: T[keyof T]) => boole
 }
 
 function target(data: ExportData, { target }: { target: MissionTarget }): Asset {
-    const asset = data.coalitions[target.coalition].assets[target.region][target.name];
+    const asset: ExportDataAsset = data.coalitions[target.coalition].assets[target.region][target.name];
     return {
+        sitetype: asset.sitetype,
         codename: asset.codename,
         status: asset.status,
         type: asset.type,

@@ -25,7 +25,7 @@ export interface Asset {
     name?: string;
     sitetype?: string;
     coalition?: string;
-    status?: string;
+    status?: number;
 }
 
 export interface Mission {

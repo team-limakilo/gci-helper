@@ -17,6 +17,9 @@
             {#if mission.target}
                 <br />
                 Target: {mission.target.codename} ({mission.target.type})
+                {#if mission.target.sitetype}
+                    [{mission.target.sitetype}]
+                {/if}
             {/if}
             <br />
             Participants: {mission.assigned
