@@ -22,7 +22,7 @@
                 {/if}
             {/if}
             <br />
-            Participants: {mission.assigned
+            Pilots: {mission.assigned
                 .map((assigned) => assigned.player)
                 .join(", ")}
             {#if mission.target}
