@@ -45,7 +45,7 @@
 
     onMount(() => {
         updateData();
-        interval = setInterval(updateData, 30 * 1000);
+        interval = setInterval(updateData, 10 * 1000);
         return () => clearInterval(interval);
     });
 </script>
