@@ -9,6 +9,10 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
+		paths: {
+			base: process.env.BASE_URL,
+			assets: process.env.ASSETS_URL,
+		},
 		adapter: process.env.VITE_NETLIFY ? netlifyAdapter() : nodeAdapter(),
 		target: "#svelte",
 		ssr: false,

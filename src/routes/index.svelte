@@ -1,4 +1,6 @@
 <script lang="ts">
+import { base } from "$app/paths";
+
     import dayjs from "dayjs";
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
@@ -12,7 +14,7 @@
 
     async function updateData() {
         async function fetchData(): Promise<ClientData | Error> {
-            const response = await fetch("data").catch(() => {
+            const response = await fetch(`${base}/data`).catch(() => {
                 return new Error("Could not connect to server");
             });
             if (response instanceof Error) {
