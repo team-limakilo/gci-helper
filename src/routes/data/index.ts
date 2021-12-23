@@ -3,6 +3,7 @@ import axios from "axios";
 import sampleData from "../../sample";
 import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
+import fs from "fs/promises";
 
 function extract<T, R>(obj: T, filter: ((id: string, props: T[keyof T]) => boolean) | false, fn: (id: string, props: T[keyof T]) => R): R[] {
     let values = filter
@@ -77,12 +78,16 @@ function getMissions(data: ExportData, coalition: Coalition) {
         .sort((a, b) => a.type > b.type ? 1 : -1);
 }
 
+const exportDataPath = process.env["EXPORT_DATA_PATH"];
 const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
 const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
 const customTitle = process.env["CUSTOM_TITLE"];
 
 async function getExportData(): Promise<ExportData> {
-    if (exportDataEndpoint != null && exportDataEndpoint.length > 0) {
+    if (exportDataPath != null && exportDataPath.length > 0) {
+        const data = await fs.readFile(exportDataPath, { encoding: "utf-8" });
+        return JSON.parse(data);
+    } else if (exportDataEndpoint != null && exportDataEndpoint.length > 0) {
         const data = await axios.get(exportDataEndpoint).then((response) => response.data);
         if (exportDataSubkey != null && exportDataSubkey.length > 0) {
             return data[exportDataSubkey];
