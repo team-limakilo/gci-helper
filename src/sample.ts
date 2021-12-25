@@ -2186,13 +2186,15 @@ const data = {
         "5760": {
           "assigned": [ {
             "group": "104th fs Maryland 1-1",
-            "player": "Froggy 1-4 | kukiric"
+            "player": "Froggy 1-4 | kukiric",
+            "iffmode3": "5760",
           } ],
           "target": {
             "coalition": "1",
             "name": "Aleppo_1_Reg1Factory-1",
             "region": "Aleppo"
           },
+          "iffmode1": "50",
           "type": "STRIKE"
         }
       },
@@ -2203,7 +2205,7 @@ const data = {
     }
   },
   "theater": "Syria",
-  "date": "2021-09-20 22:54:23Z",
+  "date": "2021-09-20 22:54:24Z",
   "version": "v0.9.4"
 }
 

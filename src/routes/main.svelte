@@ -12,6 +12,11 @@
     {#each data.missions as mission}
         <div class="mono spaced">
             <strong class="friendly">{mission.type}</strong>
+            {#if mission.mode1}
+                <span class="dim">
+                    M1({mission.mode1})
+                </span>
+            {/if}
             <br />
             Region: {mission.region}
             {#if mission.target}

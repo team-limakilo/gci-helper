@@ -73,6 +73,7 @@ function getMissions(data: ExportData, coalition: Coalition) {
             target: target(data, mission),
             assigned: mission.assigned.filter((assigned) => assigned.player != null),
             type: mission.type,
+            mode1: mission.iffmode1,
         }))
         .sort((a, b) => a.target > b.target ? 1 : -1)
         .sort((a, b) => a.type > b.type ? 1 : -1);
