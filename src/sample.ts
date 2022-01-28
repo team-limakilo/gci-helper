@@ -48,7 +48,8 @@ const data = {
       "missions": [],
       "tickets": {
         "current": 0,
-        "start": 0
+        "start": 0,
+        "status": "Excellent"
       }
     },
     "1": {
@@ -2483,8 +2484,9 @@ const data = {
       },
       "missions": [],
       "tickets": {
-        "current": 294,
-        "start": 300
+        "current": 15,
+        "start": 300,
+        "status": "Critical"
       }
     },
     "2": {
@@ -2728,7 +2730,8 @@ const data = {
       },
       "tickets": {
         "current": 150,
-        "start": 150
+        "start": 150,
+        "status": "Nominal"
       }
     }
   },

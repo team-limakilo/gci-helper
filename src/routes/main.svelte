@@ -11,6 +11,18 @@
         data.version.length > 20 ? data.version.substring(0, 8) : data.version;
 </script>
 
+{#if data.tickets?.["1"].status != null}
+    <section>
+        <h1>Status</h1>
+        <div class="mono">
+            <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"].status}
+        </div>
+        <div class="mono">
+            <span class="enemy">REDFOR</span> Tickets: {data.tickets["1"].status}
+        </div>
+    </section>
+{/if}
+
 <section>
     <h1>Missions</h1>
     {#each data.missions as mission}
@@ -51,7 +63,8 @@
     {#each data.airbases as airbase}
         <div class="mono">
             {#if airbase.coalition == Coalition.Blue}
-                <span class="friendly">{pad("Friendly", 8)}</span> {airbase.name}
+                <span class="friendly">{pad("Friendly", 8)}</span>
+                {airbase.name}
             {:else if airbase.coalition == Coalition.Red}
                 <span class="enemy">{pad("Hostile", 8)}</span> {airbase.name}
             {:else}
@@ -67,7 +80,8 @@
         <h2>{region.name}</h2>
         {#each region.assets as asset}
             <div class="mono">
-                <span class="enemy">{pad(asset.sitetype, 5)}</span> ({asset.codename})
+                <span class="enemy">{pad(asset.sitetype, 5)}</span>
+                ({asset.codename})
             </div>
         {:else}
             <div class="mono">Clear</div>
@@ -81,7 +95,8 @@
         <h2>{region.name}</h2>
         {#each region.assets as asset}
             <div class="mono">
-                <span class="enemy">{pad(asset.type, 10)}</span> ({asset.codename})
+                <span class="enemy">{pad(asset.type, 10)}</span>
+                ({asset.codename})
             </div>
         {:else}
             <div class="mono">No Assets</div>

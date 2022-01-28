@@ -90,6 +90,17 @@ function getMissions(data: ExportData, coalition: Coalition) {
         .sort(byKey("type"));
 }
 
+function getTickets(data: ExportData) {
+    return {
+        "1": {
+            status: data.coalitions[1].tickets.status
+        },
+        "2": {
+            status: data.coalitions[2].tickets.status
+        }
+    };
+}
+
 const exportDataPath = process.env["EXPORT_DATA_PATH"];
 const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
 const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
@@ -131,6 +142,7 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
             enemySAMs: getSAMs(data, Coalition.Red),
             enemyAssets: getAssets(data, Coalition.Red),
             airbases: getAirbases(data),
+            tickets: getTickets(data),
             theater: data.theater,
             sortie: data.sortie,
             version: data.version,
