@@ -1,16 +1,22 @@
 import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
 import axios from "axios";
+import fs from "fs/promises";
 import sampleData from "../../sample";
 import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
-import fs from "fs/promises";
+
+function byKey<T>(key: keyof T) {
+    return (a: T, b: T) => {
+        return a[key] > b[key] ? 1 : a[key] === b[key] ? 0 : -1;
+    }
+}
 
 function extract<T, R>(obj: T, filter: ((id: string, props: T[keyof T]) => boolean) | false, fn: (id: string, props: T[keyof T]) => R): R[] {
     let values = filter
         ? Object.entries(obj).filter(([id, props]) => filter(id, props))
         : Object.entries(obj);
     return values
-        .sort(([a], [b]) => a > b ? 1 : -1)
+        .sort(([a], [b]) => a > b ? 1 : a === b ? 0 : -1)
         .map(([id, props]) => fn(id, props));
 }
 
@@ -24,21 +30,22 @@ function target(data: ExportData, { target }: { target: MissionTarget }): Asset 
     }
 }
 
-function getAirbases(data: ExportData, coalition?: Coalition) {
-    if (coalition == null) {
-        return [
-            ...getAirbases(data, Coalition.Blue),
-            ...getAirbases(data, Coalition.Red),
-            ...getAirbases(data, Coalition.Neutral),
-        ].flat();
+function getAirbases(data: ExportData, coalitions: Coalition[] = []) {
+    if (coalitions.length === 0) {
+        coalitions = [Coalition.Blue, Coalition.Neutral, Coalition.Red];
     }
-    return extract(data.coalitions[coalition].assets, false, (region, assets) =>
-        extract(assets, (_, asset: any) => !asset.dead && asset.type === "AIRBASE", (name, _) => ({
-            coalition,
-            region,
-            name,
-        }))
-    );
+    let output: Asset[] = [];
+    for (const coalition of coalitions) {
+        const coalitionAirbases = extract(data.coalitions[coalition].assets, false, (region, assets) =>
+            extract(assets, (_, asset: any) => !asset.dead && asset.type === "AIRBASE", (name, _) => ({
+                coalition,
+                region,
+                name,
+            }))
+        );
+        output = output.concat(coalitionAirbases.flat().sort(byKey("name")));
+    }
+    return output;
 }
 
 function getSAMs(data: ExportData, coalition: Coalition) {
@@ -49,7 +56,9 @@ function getSAMs(data: ExportData, coalition: Coalition) {
             (_, asset: ExportDataAsset) => ({
                 sitetype: asset.sitetype ?? "Unknown",
                 codename: asset.codename,
-            })).sort((a, b) => a.sitetype > b.sitetype ? 1 : -1)
+            }))
+            .sort(byKey("codename"))
+            .sort(byKey("sitetype"))
     }));
 }
 
@@ -61,7 +70,9 @@ function getAssets(data: ExportData, coalition: Coalition) {
             (name, asset: ExportDataAsset) => ({
                 codename: asset.type === "AIRBASE" ? name : asset.codename,
                 type: asset.type,
-            })).sort((a, b) => a.type > b.type ? 1 : -1)
+            }))
+            .sort(byKey("codename"))
+            .sort(byKey("type"))
     }));
 }
 
@@ -75,8 +86,8 @@ function getMissions(data: ExportData, coalition: Coalition) {
             type: mission.type,
             mode1: mission.iffmode1,
         }))
-        .sort((a, b) => a.target > b.target ? 1 : -1)
-        .sort((a, b) => a.type > b.type ? 1 : -1);
+        .sort(byKey("target"))
+        .sort(byKey("type"));
 }
 
 const exportDataPath = process.env["EXPORT_DATA_PATH"];

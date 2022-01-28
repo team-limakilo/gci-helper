@@ -2,6 +2,10 @@
     import { ClientData, Coalition } from "./data/types";
     export let data: ClientData;
 
+    function pad(str: string, len: number) {
+        return str.padEnd(len, "\xA0");
+    }
+
     let version: string;
     $: version =
         data.version.length > 20 ? data.version.substring(0, 8) : data.version;
@@ -47,11 +51,11 @@
     {#each data.airbases as airbase}
         <div class="mono">
             {#if airbase.coalition == Coalition.Blue}
-                <span class="friendly">Friendly</span> {airbase.name}
+                <span class="friendly">{pad("Friendly", 8)}</span> {airbase.name}
             {:else if airbase.coalition == Coalition.Red}
-                <span class="enemy">Hostile&nbsp;</span> {airbase.name}
+                <span class="enemy">{pad("Hostile", 8)}</span> {airbase.name}
             {:else}
-                <span class="neutral">Neutral&nbsp;</span> {airbase.name}
+                <span class="neutral">{pad("Neutral", 8)}</span> {airbase.name}
             {/if}
         </div>
     {/each}
@@ -63,7 +67,7 @@
         <h2>{region.name}</h2>
         {#each region.assets as asset}
             <div class="mono">
-                <span class="enemy">{asset.sitetype}</span> ({asset.codename})
+                <span class="enemy">{pad(asset.sitetype, 5)}</span> ({asset.codename})
             </div>
         {:else}
             <div class="mono">Clear</div>
@@ -77,7 +81,7 @@
         <h2>{region.name}</h2>
         {#each region.assets as asset}
             <div class="mono">
-                <span class="enemy">{asset.type}</span> ({asset.codename})
+                <span class="enemy">{pad(asset.type, 10)}</span> ({asset.codename})
             </div>
         {:else}
             <div class="mono">No Assets</div>
