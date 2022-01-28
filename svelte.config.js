@@ -15,7 +15,6 @@ const config = {
 		},
 		adapter: process.env.VITE_NETLIFY ? netlifyAdapter() : nodeAdapter(),
 		target: "#svelte",
-		ssr: false,
 	},
 };
 

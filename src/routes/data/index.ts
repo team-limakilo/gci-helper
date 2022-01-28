@@ -1,4 +1,4 @@
-import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
+import type { EndpointOutput, RequestEvent } from "@sveltejs/kit";
 import axios from "axios";
 import fs from "fs/promises";
 import sampleData from "../../sample";
@@ -122,10 +122,10 @@ async function getExportData(): Promise<ExportData> {
     }
 }
 
-export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientData>> {
+export async function get(event: RequestEvent): Promise<EndpointOutput<ClientData>> {
     const data = await getExportData();
     // Return cached response if not newer than the last
-    const clientDate = new Date(req.headers["if-modified-since"]);
+    const clientDate = new Date(event.request.headers["if-modified-since"]);
     if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
         return {
             status: 304,

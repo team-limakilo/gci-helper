@@ -1,6 +1,5 @@
 <script lang="ts">
-import { base } from "$app/paths";
-
+    import { base } from "$app/paths";
     import dayjs from "dayjs";
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
