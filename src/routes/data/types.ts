@@ -33,6 +33,7 @@ export interface Mission {
     region: string;
     target: Asset;
     assigned: { group: string, player: string }[];
+    mode1?: string;
 }
 
 export type ExportDataAsset = ExportData["coalitions"]["1"]["assets"]["Hama"]["Hama_1_Reg3Sa2-1"];
