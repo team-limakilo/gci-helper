@@ -5,19 +5,35 @@ const data = {
         "Aleppo": [],
         "Coast": [],
         "Cyprus": [],
-        "Damascus": [],
-        "Hama": [],
-        "Hatay": {
-          "Hatay_0_airspace": {
-            "codename": "Sam's Galore",
+        "Damascus": {
+          "Damascus_0_airspace": {
+            "codename": "HOUSTON",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 36.294546540417,
-              "lon": 36.276158199028,
-              "x": 140195.95573444,
-              "y": 69.479629516602,
-              "z": 38195.949505028
+              "lat": 33.482713511778,
+              "lon": 36.235064059083,
+              "x": -171641.84375,
+              "y": 718.09167480469,
+              "z": 25888.533203125
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "AIRSPACE"
+          }
+        },
+        "Hama": [],
+        "Hatay": {
+          "Hatay_0_airspace": {
+            "codename": "LISBON",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 36.324673971743,
+              "lon": 36.271491000915,
+              "x": 143550.65758956,
+              "y": 68.610366821289,
+              "z": 37871.07067381
             },
             "status": 0,
             "strategic": false,
@@ -25,6 +41,7 @@ const data = {
           }
         },
         "Israel": [],
+        "Lebanon": [],
         "Palmyra": [],
         "Turkey": []
       },
@@ -37,23 +54,38 @@ const data = {
     "1": {
       "assets": {
         "Aleppo": {
+          "Aleppo": {
+            "codename": "TAMPA",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 36.182211524331,
+              "lon": 37.210383232385,
+              "x": 125776.703125,
+              "y": 382.19104003906,
+              "z": 121870.953125
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
           "Aleppo_0_airspace": {
-            "codename": "Dirty and the Boys",
+            "codename": "BOSTON",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 36.130010565394,
-              "lon": 36.953045269942,
-              "x": 120443.18792964,
-              "y": 347.38876342773,
-              "z": 98605.081898509
+              "lat": 36.249438408566,
+              "lon": 37.021108584907,
+              "x": 133565.36954859,
+              "y": 472.15115356445,
+              "z": 105000.83999338
             },
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           },
-          "Aleppo_1_Reg1Bai1": {
-            "codename": "LBJ's Bunghole",
+          "Aleppo_1_Reg1Bai11": {
+            "codename": "HAMBURG",
             "cost": 5,
             "dead": false,
             "location": {
@@ -67,8 +99,8 @@ const data = {
             "strategic": false,
             "type": "LOGISTICS"
           },
-          "Aleppo_1_Reg1Bai2": {
-            "codename": "Asura",
+          "Aleppo_1_Reg1Bai12": {
+            "codename": "PHOENIX",
             "cost": 5,
             "dead": false,
             "location": {
@@ -83,7 +115,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Aleppo_1_Reg1EWR-1": {
-            "codename": "Jimmez's Trousers",
+            "codename": "RIO",
             "cost": 2,
             "dead": false,
             "location": {
@@ -99,7 +131,7 @@ const data = {
             "type": "EWR"
           },
           "Aleppo_1_Reg1EWR-1-SHORAD": {
-            "codename": "Dragonfly Wolf's Den",
+            "codename": "HANOI",
             "cost": 0,
             "dead": false,
             "location": {
@@ -114,7 +146,7 @@ const data = {
             "type": "SHORAD"
           },
           "Aleppo_1_Reg1Factory-1": {
-            "codename": "Salty Dalty",
+            "codename": "MESA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -129,7 +161,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-10": {
-            "codename": "SNAFU",
+            "codename": "MOSCOW",
             "cost": 3,
             "dead": false,
             "location": {
@@ -144,7 +176,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-11": {
-            "codename": "You an ath-hole",
+            "codename": "LONDON",
             "cost": 3,
             "dead": false,
             "location": {
@@ -159,7 +191,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-12": {
-            "codename": "Tannu what",
+            "codename": "PHOENIX",
             "cost": 3,
             "dead": false,
             "location": {
@@ -174,7 +206,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-2": {
-            "codename": "SGM's Daughter",
+            "codename": "SHANGHAI",
             "cost": 3,
             "dead": false,
             "location": {
@@ -189,7 +221,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-3": {
-            "codename": "Grabacr",
+            "codename": "ATHENS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -204,7 +236,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-4": {
-            "codename": "Dallas",
+            "codename": "WARSAW",
             "cost": 3,
             "dead": false,
             "location": {
@@ -219,7 +251,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-5": {
-            "codename": "Stiffler's Mom",
+            "codename": "HAMBURG",
             "cost": 3,
             "dead": false,
             "location": {
@@ -234,7 +266,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-6": {
-            "codename": "Prague",
+            "codename": "MADRID",
             "cost": 3,
             "dead": false,
             "location": {
@@ -249,7 +281,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-7": {
-            "codename": "High Ground",
+            "codename": "BEIJING",
             "cost": 3,
             "dead": false,
             "location": {
@@ -264,7 +296,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-8": {
-            "codename": "Naked Flash Dance",
+            "codename": "BOSTON",
             "cost": 3,
             "dead": false,
             "location": {
@@ -279,7 +311,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-9": {
-            "codename": "popular demand",
+            "codename": "LISBON",
             "cost": 3,
             "dead": false,
             "location": {
@@ -294,7 +326,7 @@ const data = {
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Sa2-1": {
-            "codename": "Salmonslapper",
+            "codename": "LOLA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -309,8 +341,263 @@ const data = {
             "strategic": true,
             "type": "SAM"
           },
+          "Aleppo_1_reg1BAI1": {
+            "codename": "SYDNEY",
+            "cost": 5,
+            "dead": false,
+            "location": {
+              "lat": 36.239664893082,
+              "lon": 36.650932444378,
+              "x": 133224.2802085,
+              "y": 275.70526123047,
+              "z": 71709.619304297
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "LOGISTICS"
+          },
+          "Aleppo_1_reg1BAI2": {
+            "codename": "MOSCOW",
+            "cost": 5,
+            "dead": false,
+            "location": {
+              "lat": 36.419988367424,
+              "lon": 36.627402056543,
+              "x": 153282.58989201,
+              "y": 506.17666625977,
+              "z": 70085.863832507
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "LOGISTICS"
+          },
+          "Aleppo_1_reg1BAI3": {
+            "codename": "MUMBAI",
+            "cost": 5,
+            "dead": false,
+            "location": {
+              "lat": 36.597693335352,
+              "lon": 37.052191658179,
+              "x": 172144.70235495,
+              "y": 568.01715087891,
+              "z": 108574.10285182
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "LOGISTICS"
+          },
+          "Aleppo_1_reg1BAI4": {
+            "codename": "CAIRO",
+            "cost": 5,
+            "dead": false,
+            "location": {
+              "lat": 35.815229314284,
+              "lon": 36.323209274144,
+              "x": 86896.214917397,
+              "y": 179.82595825195,
+              "z": 40958.742198296
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "LOGISTICS"
+          },
+          "Aleppo_1_reg1CAS1": {
+            "codename": "PARIS",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.481451895165,
+              "lon": 37.040894258794,
+              "x": 159268.99305332,
+              "y": 469.10278320313,
+              "z": 107300.823401
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS10": {
+            "codename": "MUNICH",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.574356318161,
+              "lon": 37.218243667625,
+              "x": 169267.32981516,
+              "y": 451.11111450195,
+              "z": 123380.52403924
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS11": {
+            "codename": "VIENNA",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.531422366725,
+              "lon": 37.05686137762,
+              "x": 164783.89073711,
+              "y": 479.07452392578,
+              "z": 108843.23942801
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS12": {
+            "codename": "BEIJING",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.50112103744,
+              "lon": 37.073859885074,
+              "x": 161391.57204766,
+              "y": 478.47161865234,
+              "z": 110297.91215334
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS13": {
+            "codename": "LONDON",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.594109658096,
+              "lon": 37.942904847096,
+              "x": 170501.19857073,
+              "y": 419.73480224609,
+              "z": 188245.6911882
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS2": {
+            "codename": "HANOI",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.585588751752,
+              "lon": 37.037148324742,
+              "x": 170829.15647553,
+              "y": 547.37750244141,
+              "z": 107200.92297814
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS3": {
+            "codename": "MEMPHIS",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.628390282308,
+              "lon": 37.051704596254,
+              "x": 175551.24685577,
+              "y": 617.07751464844,
+              "z": 108599.62117106
+            },
+            "status": 25,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS4": {
+            "codename": "LISBON",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.538166381376,
+              "lon": 37.020268043355,
+              "x": 165598.89473267,
+              "y": 495.53399658203,
+              "z": 105582.27629358
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS5": {
+            "codename": "TAMPA",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.266888047773,
+              "lon": 36.569562259346,
+              "x": 136425.10293657,
+              "y": 135.65264892578,
+              "z": 64472.050717719
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS6": {
+            "codename": "SHANGHAI",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.29752087897,
+              "lon": 37.068402847451,
+              "x": 138813.79568494,
+              "y": 383.14453125,
+              "z": 109357.08659072
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS7": {
+            "codename": "ROME",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.871941578486,
+              "lon": 38.022725113399,
+              "x": 201246.32732097,
+              "y": 334.65676879883,
+              "z": 195700.12703814
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS8": {
+            "codename": "WARSAW",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.637602692531,
+              "lon": 37.935944398188,
+              "x": 175332.82237662,
+              "y": 376.93255615234,
+              "z": 187676.50827028
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Aleppo_1_reg1CAS9": {
+            "codename": "TULSA",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.627115125233,
+              "lon": 37.234310570318,
+              "x": 175093.92492,
+              "y": 475.44845581055,
+              "z": 124925.80531706
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
           "Aleppo_1_reg1aaa1": {
-            "codename": "Flat Spin Out to Sea",
+            "codename": "HOUSTON",
             "cost": 5,
             "dead": false,
             "location": {
@@ -324,23 +611,23 @@ const data = {
             "strategic": false,
             "type": "LOGISTICS"
           },
-          "Aleppo_1_reg1aaa2-2": {
-            "codename": "an inch of weed",
+          "Aleppo_1_reg1aaa2-1": {
+            "codename": "DALLAS",
             "cost": 5,
             "dead": false,
             "location": {
-              "lat": 36.179967937568,
-              "lon": 37.226154364408,
-              "x": 125501.76460493,
+              "lat": 36.181095269327,
+              "lon": 37.222559409432,
+              "x": 125632.74093283,
               "y": 382.19104003906,
-              "z": 123284.7499915
+              "z": 122963.72749425
             },
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1aaa3": {
-            "codename": "ralfidude's next video",
+            "codename": "DETROIT",
             "cost": 5,
             "dead": false,
             "location": {
@@ -355,7 +642,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1aaa4": {
-            "codename": "Rome",
+            "codename": "LAGOS",
             "cost": 5,
             "dead": false,
             "location": {
@@ -369,8 +656,8 @@ const data = {
             "strategic": false,
             "type": "LOGISTICS"
           },
-          "Aleppo_1_reg1bai3": {
-            "codename": "CCP Virus",
+          "Aleppo_1_reg1bai13": {
+            "codename": "MADRID",
             "cost": 5,
             "dead": false,
             "location": {
@@ -384,8 +671,8 @@ const data = {
             "strategic": false,
             "type": "LOGISTICS"
           },
-          "Aleppo_1_reg1bai4": {
-            "codename": "Melbourne",
+          "Aleppo_1_reg1bai14": {
+            "codename": "SEOUL",
             "cost": 5,
             "dead": false,
             "location": {
@@ -400,7 +687,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai5": {
-            "codename": "Bosco wants his biscuit",
+            "codename": "MELBOURNE",
             "cost": 5,
             "dead": false,
             "location": {
@@ -415,7 +702,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai6": {
-            "codename": "ZA WARUDOOO",
+            "codename": "DELHI",
             "cost": 5,
             "dead": false,
             "location": {
@@ -430,7 +717,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai7": {
-            "codename": "Sabre Squadron’s Toilet",
+            "codename": "MILAN",
             "cost": 5,
             "dead": false,
             "location": {
@@ -445,7 +732,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai8": {
-            "codename": "Rock Lobster",
+            "codename": "BERLIN",
             "cost": 5,
             "dead": false,
             "location": {
@@ -460,7 +747,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai9": {
-            "codename": "Warsaw",
+            "codename": "MESA",
             "cost": 5,
             "dead": false,
             "location": {
@@ -475,7 +762,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1sa3-1": {
-            "codename": "Walla Walla",
+            "codename": "JEEP",
             "cost": 3,
             "dead": false,
             "location": {
@@ -491,7 +778,7 @@ const data = {
             "type": "SAM"
           },
           "Aleppo_1_reg1sa3-2": {
-            "codename": "Tulsa",
+            "codename": "TESLA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -507,7 +794,7 @@ const data = {
             "type": "SAM"
           },
           "Aleppo_1_reg1sa3-3": {
-            "codename": "Dingo",
+            "codename": "PORSCHE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -521,26 +808,71 @@ const data = {
             "status": 0,
             "strategic": true,
             "type": "SAM"
+          },
+          "Kuweires": {
+            "codename": "TOKYO",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 36.18937442608,
+              "lon": 37.570439309206,
+              "x": 126034.1171875,
+              "y": 366.00036621094,
+              "z": 154262.765625
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
+          "Taftanaz": {
+            "codename": "TOKYO",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 35.973223381816,
+              "lon": 36.785894108748,
+              "x": 103379,
+              "y": 311.00030517578,
+              "z": 83165.9296875
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
           }
         },
         "Coast": {
+          "Bassel Al-Assad": {
+            "codename": "TOKYO",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 35.411589930353,
+              "lon": 35.95003283514,
+              "x": 43096.125,
+              "y": 28.363424301147,
+              "z": 5843.9418945313
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
           "Coast_0_airspace": {
-            "codename": "popular demand",
+            "codename": "ATHENS",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 35.171411157968,
-              "lon": 35.720376620965,
-              "x": 17113.700204784,
-              "y": 0,
-              "z": -15899.931638002
+              "lat": 34.805554187054,
+              "lon": 36.109963812014,
+              "x": -24578.038217774,
+              "y": 220.11111450195,
+              "z": 18418.70649026
             },
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           },
           "Coast_1_Reg2EWR-1": {
-            "codename": "Hamburg",
+            "codename": "SEOUL",
             "cost": 2,
             "dead": false,
             "location": {
@@ -556,7 +888,7 @@ const data = {
             "type": "EWR"
           },
           "Coast_1_Reg2EWR-1-SHORAD": {
-            "codename": "Salty Dalty",
+            "codename": "TULSA",
             "cost": 0,
             "dead": false,
             "location": {
@@ -571,7 +903,7 @@ const data = {
             "type": "SHORAD"
           },
           "Coast_1_Reg2EWR-2": {
-            "codename": "Tampa",
+            "codename": "MADRID",
             "cost": 2,
             "dead": false,
             "location": {
@@ -587,7 +919,7 @@ const data = {
             "type": "EWR"
           },
           "Coast_1_Reg2EWR-2-SHORAD": {
-            "codename": "Lemon Cake",
+            "codename": "WARSAW",
             "cost": 0,
             "dead": false,
             "location": {
@@ -602,7 +934,7 @@ const data = {
             "type": "SHORAD"
           },
           "Coast_1_Reg2Factory-1": {
-            "codename": "Athens",
+            "codename": "TOKYO",
             "cost": 3,
             "dead": false,
             "location": {
@@ -617,7 +949,7 @@ const data = {
             "type": "FACTORY"
           },
           "Coast_1_Reg2Factory-2": {
-            "codename": "Detroit",
+            "codename": "HAMBURG",
             "cost": 3,
             "dead": false,
             "location": {
@@ -632,7 +964,7 @@ const data = {
             "type": "FACTORY"
           },
           "Coast_1_Reg2Factory-3": {
-            "codename": "unnamed objective",
+            "codename": "CAIRO",
             "cost": 3,
             "dead": false,
             "location": {
@@ -647,7 +979,7 @@ const data = {
             "type": "FACTORY"
           },
           "Coast_1_Reg2Sa2-1": {
-            "codename": "Luke's Diner",
+            "codename": "JAGUAR",
             "cost": 3,
             "dead": false,
             "location": {
@@ -663,7 +995,7 @@ const data = {
             "type": "SAM"
           },
           "Coast_1_Reg2Sa2-2": {
-            "codename": "PONTI",
+            "codename": "JAGUAR",
             "cost": 3,
             "dead": false,
             "location": {
@@ -679,7 +1011,7 @@ const data = {
             "type": "SAM"
           },
           "Coast_1_Reg2Sa2-3": {
-            "codename": "ZA WARUDOOO",
+            "codename": "SEAT",
             "cost": 3,
             "dead": false,
             "location": {
@@ -695,7 +1027,7 @@ const data = {
             "type": "SAM"
           },
           "Coast_1_Reg2Sa2-4": {
-            "codename": "Memphis",
+            "codename": "LOLA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -711,7 +1043,7 @@ const data = {
             "type": "SAM"
           },
           "Coast_1_Reg2Sa2-5": {
-            "codename": "Berlin",
+            "codename": "JEEP",
             "cost": 3,
             "dead": false,
             "location": {
@@ -727,7 +1059,7 @@ const data = {
             "type": "SAM"
           },
           "Coast_1_Reg2Sa2-6": {
-            "codename": "Ferret",
+            "codename": "PORSCHE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -742,8 +1074,113 @@ const data = {
             "strategic": true,
             "type": "SAM"
           },
+          "Coast_1_reg1ship1": {
+            "codename": "MELBOURNE",
+            "cost": 15,
+            "dead": false,
+            "location": {
+              "lat": 33.89290094737,
+              "lon": 33.113976245873,
+              "x": -113952.41855185,
+              "y": 0,
+              "z": -261806.0144652
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "SEA"
+          },
+          "Coast_1_reg1ship2": {
+            "codename": "PHOENIX",
+            "cost": 15,
+            "dead": false,
+            "location": {
+              "lat": 34.375413605338,
+              "lon": 35.632417939101,
+              "x": -70941.69162147,
+              "y": 0,
+              "z": -26878.259058638
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "SEA"
+          },
+          "Coast_1_reg1ship3": {
+            "codename": "DALLAS",
+            "cost": 15,
+            "dead": false,
+            "location": {
+              "lat": 35.53890037591,
+              "lon": 35.752488279183,
+              "x": 57794.946843472,
+              "y": 0,
+              "z": -11635.372398446
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "SEA"
+          },
+          "Coast_1_reg1ship4": {
+            "codename": "MUMBAI",
+            "cost": 15,
+            "dead": false,
+            "location": {
+              "lat": 33.916732991169,
+              "lon": 35.581047027714,
+              "x": -121676.02533149,
+              "y": 0,
+              "z": -33310.950325095
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "SEA"
+          },
+          "Coast_1_reg1trigger3": {
+            "codename": "BERLIN",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 32.54634873483,
+              "lon": 38.188401654984,
+              "x": -278578.70218464,
+              "y": 688.00067138672,
+              "z": 206598.1768283
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "SHORAD"
+          },
+          "Coast_1_reg1trigger4": {
+            "codename": "HANOI",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 32.544084170899,
+              "lon": 38.185596137456,
+              "x": -278827.71730591,
+              "y": 688.00067138672,
+              "z": 206332.82811697
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "SHORAD"
+          },
+          "Coast_1_reg1trigger5": {
+            "codename": "LAGOS",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 32.544432059139,
+              "lon": 38.189308505578,
+              "x": -278791.80201782,
+              "y": 688.00067138672,
+              "z": 206681.70483615
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "SHORAD"
+          },
           "Coast_1_reg2aaa1": {
-            "codename": "Jedi Scum",
+            "codename": "MUNICH",
             "cost": 5,
             "dead": false,
             "location": {
@@ -758,7 +1195,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Coast_1_reg2aaa2": {
-            "codename": "Kyra The Great",
+            "codename": "BEIJING",
             "cost": 5,
             "dead": false,
             "location": {
@@ -773,7 +1210,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Coast_1_reg2aaa3": {
-            "codename": "Milk Plant",
+            "codename": "DELHI",
             "cost": 5,
             "dead": false,
             "location": {
@@ -788,7 +1225,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Coast_1_reg2aaa4": {
-            "codename": "Bosco wants his biscuit",
+            "codename": "DETROIT",
             "cost": 5,
             "dead": false,
             "location": {
@@ -802,83 +1239,8 @@ const data = {
             "strategic": false,
             "type": "LOGISTICS"
           },
-          "Coast_1_reg2asm1": {
-            "codename": "Seoul",
-            "cost": 15,
-            "dead": false,
-            "location": {
-              "lat": 34.91227401123,
-              "lon": 35.854995876317,
-              "x": -12035.203898842,
-              "y": 0,
-              "z": -4541.9450982387
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "SEA"
-          },
-          "Coast_1_reg2asm2": {
-            "codename": "Milan",
-            "cost": 15,
-            "dead": false,
-            "location": {
-              "lat": 35.200199231565,
-              "lon": 35.857219215578,
-              "x": 19904.982668362,
-              "y": 0,
-              "z": -3331.2172084713
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "SEA"
-          },
-          "Coast_1_reg2asm3": {
-            "codename": "Asura",
-            "cost": 15,
-            "dead": false,
-            "location": {
-              "lat": 33.401393433078,
-              "lon": 32.691380075777,
-              "x": -166242.06741173,
-              "y": 0,
-              "z": -304310.86946489
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "SEA"
-          },
-          "Coast_1_reg2asm4": {
-            "codename": "Prague",
-            "cost": 15,
-            "dead": false,
-            "location": {
-              "lat": 33.794331629491,
-              "lon": 35.265971584261,
-              "x": -134241.80934286,
-              "y": 0,
-              "z": -62951.257318945
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "SEA"
-          },
-          "Coast_1_reg2asm5": {
-            "codename": "Stiffler's Mom",
-            "cost": 15,
-            "dead": false,
-            "location": {
-              "lat": 36.02565520051,
-              "lon": 35.844514913138,
-              "x": 111535.93426601,
-              "y": 0,
-              "z": -1547.889249963
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "SEA"
-          },
           "Coast_1_reg2sa3-1": {
-            "codename": "Burning Puss",
+            "codename": "BENTLEY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -894,7 +1256,7 @@ const data = {
             "type": "SAM"
           },
           "Coast_1_reg2sa3-2": {
-            "codename": "Li Quang Tran Viet",
+            "codename": "DODGE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -910,7 +1272,7 @@ const data = {
             "type": "SAM"
           },
           "Coast_1_reg2sa3-3": {
-            "codename": "Lisbon",
+            "codename": "LEXUS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -924,59 +1286,120 @@ const data = {
             "status": 0,
             "strategic": true,
             "type": "SAM"
+          },
+          "Coast_1_reg2sa5-1": {
+            "codename": "NISSAN",
+            "cost": 3,
+            "dead": false,
+            "location": {
+              "lat": 35.432985316351,
+              "lon": 36.199173624074,
+              "x": 44799.797274456,
+              "y": 1379.6651611328,
+              "z": 28541.101571277
+            },
+            "sitetype": "SA-5",
+            "status": 0,
+            "strategic": true,
+            "type": "SAM"
+          },
+          "Coast_1_reg2sa5-1-SHORAD": {
+            "codename": "WARSAW",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 35.43300494813,
+              "lon": 36.198674059427,
+              "x": 44803.260781251,
+              "y": 1368.0145263672,
+              "z": 28495.800785932
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "SHORAD"
+          },
+          "Coast_1_reg2static1": {
+            "codename": "SHANGHAI",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 34.915095371833,
+              "lon": 35.865238887669,
+              "x": -11751.559963962,
+              "y": 0,
+              "z": -3595.9565093462
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "SHORAD"
+          },
+          "Coast_1_reg2static2": {
+            "codename": "MEMPHIS",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 32.545895280644,
+              "lon": 38.186151731796,
+              "x": -278627.32888534,
+              "y": 688.00067138672,
+              "z": 206386.53706058
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "SHORAD"
           }
         },
         "Cyprus": [],
         "Damascus": {
-          "Damascus_0_airspace": {
-            "codename": "SGM's Daughter",
-            "cost": 0,
+          "Mezzeh": {
+            "codename": "MILAN",
+            "cost": 20,
             "dead": false,
             "location": {
-              "lat": 34.717031826359,
-              "lon": 36.642764919742,
-              "x": -35672.525317383,
-              "y": 489.29885864258,
-              "z": 66939.963427734
-            },
-            "status": 0,
-            "strategic": false,
-            "type": "AIRSPACE"
-          },
-          "Damascus_1_Reg3Factory-13": {
-            "codename": "Naked Flash Dance",
-            "cost": 15000,
-            "dead": false,
-            "location": {
-              "lat": 34.717031826359,
-              "lon": 36.642764919742,
-              "x": -35672.525317383,
-              "y": 489.29885864258,
-              "z": 66939.963427734
+              "lat": 33.482713511778,
+              "lon": 36.235064059083,
+              "x": -171641.84375,
+              "y": 718.09167480469,
+              "z": 25888.533203125
             },
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "AIRBASE"
           }
         },
         "Hama": {
+          "Hama": {
+            "codename": "MELBOURNE",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 35.116099484431,
+              "lon": 36.72547347191,
+              "x": 8419.59375,
+              "y": 300.00030517578,
+              "z": 75521.7109375
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
           "Hama_0_airspace": {
-            "codename": "Paris",
+            "codename": "SYDNEY",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 34.967565766724,
-              "lon": 36.728159955448,
-              "x": -8062.3832156035,
-              "y": 410.24221801758,
-              "z": 75391.262009743
+              "lat": 34.954809321463,
+              "lon": 36.726323094836,
+              "x": -9473.5862573774,
+              "y": 407.99948120117,
+              "z": 75191.345089529
             },
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           },
           "Hama_1_Reg3EWR-1": {
-            "codename": "Annobanno - Sebach",
+            "codename": "HOUSTON",
             "cost": 2,
             "dead": false,
             "location": {
@@ -992,7 +1415,7 @@ const data = {
             "type": "EWR"
           },
           "Hama_1_Reg3EWR-1-SHORAD": {
-            "codename": "Primrose",
+            "codename": "RIO",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1007,7 +1430,7 @@ const data = {
             "type": "SHORAD"
           },
           "Hama_1_Reg3EWR-2": {
-            "codename": "Not Even My Final Form",
+            "codename": "DELHI",
             "cost": 2,
             "dead": false,
             "location": {
@@ -1023,7 +1446,7 @@ const data = {
             "type": "EWR"
           },
           "Hama_1_Reg3EWR-2-SHORAD": {
-            "codename": "Houston",
+            "codename": "MESA",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1038,7 +1461,7 @@ const data = {
             "type": "SHORAD"
           },
           "Hama_1_Reg3Factory-1": {
-            "codename": "Burning Puss",
+            "codename": "LAGOS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1053,7 +1476,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-10": {
-            "codename": "Furor Divinus",
+            "codename": "BOSTON",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1068,7 +1491,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-11": {
-            "codename": "Vienna",
+            "codename": "SYDNEY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1083,7 +1506,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-12": {
-            "codename": "Lisbon",
+            "codename": "MESA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1097,8 +1520,23 @@ const data = {
             "strategic": true,
             "type": "FACTORY"
           },
+          "Hama_1_Reg3Factory-13": {
+            "codename": "TAMPA",
+            "cost": 15000,
+            "dead": false,
+            "location": {
+              "lat": 34.717031826359,
+              "lon": 36.642764919742,
+              "x": -35672.525317383,
+              "y": 489.29885864258,
+              "z": 66939.963427734
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "FACTORY"
+          },
           "Hama_1_Reg3Factory-14": {
-            "codename": "Disappointment alley",
+            "codename": "LISBON",
             "cost": 15,
             "dead": false,
             "location": {
@@ -1113,7 +1551,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-2": {
-            "codename": "Suggin' On Chili Dogs",
+            "codename": "ROME",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1128,7 +1566,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-3": {
-            "codename": "Save The Bees",
+            "codename": "RIO",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1143,7 +1581,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-4": {
-            "codename": "Bareback",
+            "codename": "MUNICH",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1158,7 +1596,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-5": {
-            "codename": "Flash' Dreams",
+            "codename": "TULSA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1173,7 +1611,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-6": {
-            "codename": "Black Horse",
+            "codename": "MELBOURNE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1188,7 +1626,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-7": {
-            "codename": "Bakunin",
+            "codename": "HAMBURG",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1203,7 +1641,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-8": {
-            "codename": "REDCROWNS CASTLE",
+            "codename": "SHANGHAI",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1218,7 +1656,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-9": {
-            "codename": "Delhi",
+            "codename": "WARSAW",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1233,7 +1671,7 @@ const data = {
             "type": "FACTORY"
           },
           "Hama_1_Reg3Sa2-1": {
-            "codename": "Gunny Bunny",
+            "codename": "SUBARU",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1249,7 +1687,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_Reg3Sa2-2": {
-            "codename": "Sydney",
+            "codename": "SAAB",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1265,7 +1703,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_Reg3Sa2-3": {
-            "codename": "Seoul",
+            "codename": "FORD",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1281,7 +1719,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-1": {
-            "codename": "Lagos",
+            "codename": "PONTIAC",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1297,7 +1735,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-2": {
-            "codename": "Hanoi",
+            "codename": "CADDY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1313,7 +1751,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-3": {
-            "codename": "Tampa",
+            "codename": "SEAT",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1329,7 +1767,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-4": {
-            "codename": "Li Quang Tran Viet",
+            "codename": "CHEVY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1345,7 +1783,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-5": {
-            "codename": "What a load of malarkey",
+            "codename": "BUICK",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1360,8 +1798,39 @@ const data = {
             "strategic": true,
             "type": "SAM"
           },
+          "Hama_1_reg3sa5-1": {
+            "codename": "OPEL",
+            "cost": 3,
+            "dead": false,
+            "location": {
+              "lat": 34.610292473971,
+              "lon": 36.750195830779,
+              "x": -47737.527583288,
+              "y": 632.71752929688,
+              "z": 76515.102536265
+            },
+            "sitetype": "SA-5",
+            "status": 0,
+            "strategic": true,
+            "type": "SAM"
+          },
+          "Hama_1_reg3sa5-1-SHORAD": {
+            "codename": "SEOUL",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 34.611019076834,
+              "lon": 36.750923592767,
+              "x": -47658.420455394,
+              "y": 631.98840332031,
+              "z": 76583.644067287
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "SHORAD"
+          },
           "Hama_1_reg4aaa1": {
-            "codename": "Grays Recycling bin",
+            "codename": "DETROIT",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1376,7 +1845,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Hama_1_reg4aaa2": {
-            "codename": "Phoenix",
+            "codename": "DALLAS",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1391,7 +1860,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Hama_1_reg4aaa3": {
-            "codename": "Avalon",
+            "codename": "PARIS",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1406,7 +1875,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Hama_1_reg4sa3-1": {
-            "codename": "Steve1989MREInfo",
+            "codename": "NISSAN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1422,7 +1891,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_reg4sa3-2": {
-            "codename": "Qwyjibo",
+            "codename": "LEXUS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1438,7 +1907,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_reg4sa3-3": {
-            "codename": "Konchil",
+            "codename": "BENTLEY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1454,7 +1923,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_reg4sa3-4": {
-            "codename": "Things Hentai Collection",
+            "codename": "NOBLE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1470,7 +1939,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_reg4sa3-5": {
-            "codename": "Kyra The Great",
+            "codename": "TRIUMPH",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1486,7 +1955,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_reg4sa3-6": {
-            "codename": "Feline's Squishy Thighs",
+            "codename": "DODGE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1502,7 +1971,7 @@ const data = {
             "type": "SAM"
           },
           "Hama_1_reg4sa3-7": {
-            "codename": "Yarr!!",
+            "codename": "ALFA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1520,7 +1989,7 @@ const data = {
         },
         "Hatay": {
           "Hatay_1_reg1AR1": {
-            "codename": "Cow>Jones",
+            "codename": "TAMPA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1535,7 +2004,7 @@ const data = {
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR10": {
-            "codename": "Po-Tato Casserole",
+            "codename": "LONDON",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1550,7 +2019,7 @@ const data = {
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR11": {
-            "codename": "Milan",
+            "codename": "MOSCOW",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1565,7 +2034,7 @@ const data = {
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR12": {
-            "codename": "Milk Plant",
+            "codename": "SHANGHAI",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1580,7 +2049,7 @@ const data = {
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR13": {
-            "codename": "Sine Nomine",
+            "codename": "PRAGUE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1595,7 +2064,7 @@ const data = {
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR14": {
-            "codename": "Luke's Diner",
+            "codename": "BERLIN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1609,23 +2078,23 @@ const data = {
             "strategic": false,
             "type": "SPECIALFORCES"
           },
-          "Hatay_1_reg1AR2": {
-            "codename": "PONTI",
+          "Hatay_1_reg1AR16": {
+            "codename": "BEIJING",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 36.180751796563,
-              "lon": 36.147988883283,
-              "x": 127901.06248514,
-              "y": 86.747169494629,
-              "z": 26311.500903153
+              "lat": 36.539311744255,
+              "lon": 36.319643835309,
+              "x": 167245.61678994,
+              "y": 578.76910400391,
+              "z": 42856.696413803
             },
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR3": {
-            "codename": "Rio",
+            "codename": "MADRID",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1640,7 +2109,7 @@ const data = {
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR4": {
-            "codename": "London",
+            "codename": "ROME",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1654,23 +2123,8 @@ const data = {
             "strategic": false,
             "type": "SPECIALFORCES"
           },
-          "Hatay_1_reg1AR5": {
-            "codename": "Don Cheadle",
-            "cost": 3,
-            "dead": false,
-            "location": {
-              "lat": 36.341609878381,
-              "lon": 36.350958791802,
-              "x": 145231.31891599,
-              "y": 73.053657531738,
-              "z": 45057.716454127
-            },
-            "status": 0,
-            "strategic": false,
-            "type": "SPECIALFORCES"
-          },
           "Hatay_1_reg1AR6": {
-            "codename": "Thunderstruck",
+            "codename": "VIENNA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1684,23 +2138,23 @@ const data = {
             "strategic": false,
             "type": "SPECIALFORCES"
           },
-          "Hatay_1_reg1AR7-4": {
-            "codename": "Ferret",
+          "Hatay_1_reg1AR7-2": {
+            "codename": "PHOENIX",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 36.50299641394,
-              "lon": 36.426667861511,
-              "x": 162954.40503165,
-              "y": 80.556816101074,
-              "z": 52331.595120627
+              "lat": 36.509899275567,
+              "lon": 36.415607336736,
+              "x": 163746.86979154,
+              "y": 69.999084472656,
+              "z": 51361.374170183
             },
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR8": {
-            "codename": "Deposit freedom HERE",
+            "codename": "BOSTON",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1714,23 +2168,8 @@ const data = {
             "strategic": false,
             "type": "SPECIALFORCES"
           },
-          "Hatay_1_reg1AR9": {
-            "codename": "TikTok",
-            "cost": 3,
-            "dead": false,
-            "location": {
-              "lat": 36.364427621628,
-              "lon": 36.282957204454,
-              "x": 147932.64900617,
-              "y": 74.809722900391,
-              "z": 39024.648069116
-            },
-            "status": 0,
-            "strategic": false,
-            "type": "SPECIALFORCES"
-          },
           "Hatay_1_reg1ar15": {
-            "codename": "Cavalry",
+            "codename": "MUNICH",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1743,27 +2182,74 @@ const data = {
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
+          },
+          "Hatay_1_reg1ar5": {
+            "codename": "TULSA",
+            "cost": 3,
+            "dead": false,
+            "location": {
+              "lat": 36.461922006346,
+              "lon": 36.274988599858,
+              "x": 158770.75219939,
+              "y": 312.447265625,
+              "z": 38615.180074983
+            },
+            "status": 0,
+            "strategic": false,
+            "type": "SPECIALFORCES"
           }
         },
         "Israel": [],
+        "Lebanon": {
+          "Beirut-Rafic Hariri": {
+            "codename": "HANOI",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 33.836465479357,
+              "lon": 35.487416760577,
+              "x": -130289.4375,
+              "y": 12.000012397766,
+              "z": -42276.67578125
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          }
+        },
         "Palmyra": {
+          "Palmyra": {
+            "codename": "WARSAW",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 34.558235536659,
+              "lon": 38.331123062337,
+              "x": -55607.97265625,
+              "y": 386.22402954102,
+              "z": 221438.15625
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
           "Palmyra_0_airspace": {
-            "codename": "Don't Bomb Me Please",
+            "codename": "PHOENIX",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 35.335402002428,
-              "lon": 38.467508986829,
-              "x": 30502.96059443,
-              "y": 398.10516357422,
-              "z": 234409.18660699
+              "lat": 35.36195374152,
+              "lon": 38.498287250688,
+              "x": 33433.055942587,
+              "y": 378.43157958984,
+              "z": 237221.19863987
             },
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           },
           "Palmyra_1_Reg4EWR-1": {
-            "codename": "BlueOnBlue",
+            "codename": "SHANGHAI",
             "cost": 2,
             "dead": false,
             "location": {
@@ -1779,7 +2265,7 @@ const data = {
             "type": "EWR"
           },
           "Palmyra_1_Reg4EWR-1-SHORAD": {
-            "codename": "ED's QA Department",
+            "codename": "TULSA",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1794,7 +2280,7 @@ const data = {
             "type": "SHORAD"
           },
           "Palmyra_1_Reg4EWR-2": {
-            "codename": "Madrid",
+            "codename": "DALLAS",
             "cost": 2,
             "dead": false,
             "location": {
@@ -1810,7 +2296,7 @@ const data = {
             "type": "EWR"
           },
           "Palmyra_1_Reg4EWR-2-SHORAD": {
-            "codename": "Shanghai",
+            "codename": "PRAGUE",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1825,7 +2311,7 @@ const data = {
             "type": "SHORAD"
           },
           "Palmyra_1_Reg4EWR-3": {
-            "codename": "MEGATRON",
+            "codename": "MELBOURNE",
             "cost": 2,
             "dead": false,
             "location": {
@@ -1841,7 +2327,7 @@ const data = {
             "type": "EWR"
           },
           "Palmyra_1_Reg4EWR-3-SHORAD": {
-            "codename": "Ordnance Disposal",
+            "codename": "HAMBURG",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1856,7 +2342,7 @@ const data = {
             "type": "SHORAD"
           },
           "Palmyra_1_Reg4Factory-1": {
-            "codename": "Moscow",
+            "codename": "RIO",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1871,7 +2357,7 @@ const data = {
             "type": "FACTORY"
           },
           "Palmyra_1_Reg4Factory-2": {
-            "codename": "Boston",
+            "codename": "PRAGUE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1886,7 +2372,7 @@ const data = {
             "type": "FACTORY"
           },
           "Palmyra_1_Reg4Factory-3": {
-            "codename": "Mumbai",
+            "codename": "ATHENS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1900,16 +2386,32 @@ const data = {
             "strategic": true,
             "type": "FACTORY"
           },
-          "Palmyra_1_Reg4Sa2-2": {
-            "codename": "Petrichor",
+          "Palmyra_1_Reg4Sa2-3": {
+            "codename": "MAZDA",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 34.490716139616,
-              "lon": 37.62671229495,
-              "x": -62442.422105788,
-              "y": 535.11138916016,
-              "z": 156710.38951084
+              "lat": 35.790250300215,
+              "lon": 38.634566665795,
+              "x": 80880.138068449,
+              "y": 321.2385559082,
+              "z": 249778.29329939
+            },
+            "sitetype": "SA-2",
+            "status": 0,
+            "strategic": true,
+            "type": "SAM"
+          },
+          "Palmyra_1_Reg4Sa2-4": {
+            "codename": "LOTUS",
+            "cost": 3,
+            "dead": false,
+            "location": {
+              "lat": 35.759683638956,
+              "lon": 38.510010982714,
+              "x": 77539.080848055,
+              "y": 352.39202880859,
+              "z": 238505.69244463
             },
             "sitetype": "SA-2",
             "status": 0,
@@ -1917,7 +2419,7 @@ const data = {
             "type": "SAM"
           },
           "Palmyra_1_reg3aaa1": {
-            "codename": "Beijing",
+            "codename": "CAIRO",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1932,7 +2434,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Palmyra_1_reg3aaa2": {
-            "codename": "Hamburg",
+            "codename": "TOKYO",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1947,7 +2449,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Palmyra_1_reg3aaa3": {
-            "codename": "Munich",
+            "codename": "BERLIN",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1962,7 +2464,7 @@ const data = {
             "type": "LOGISTICS"
           },
           "Palmyra_1_reg3aaa4": {
-            "codename": "Jedi Scum",
+            "codename": "LONDON",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1975,45 +2477,13 @@ const data = {
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
-          },
-          "Palmyra_1_reg3sa1": {
-            "codename": "Memphis",
-            "cost": 3,
-            "dead": false,
-            "location": {
-              "lat": 35.933074119562,
-              "lon": 38.991634559929,
-              "x": 96659.468245571,
-              "y": 235.1018371582,
-              "z": 282046.40944866
-            },
-            "sitetype": "SA-3",
-            "status": 0,
-            "strategic": true,
-            "type": "SAM"
           }
         },
-        "Turkey": {
-          "Hatay": {
-            "codename": "Husky",
-            "cost": 20,
-            "dead": false,
-            "location": {
-              "lat": 36.371269972814,
-              "lon": 36.298090184913,
-              "x": 148653.765625,
-              "y": 77.175567626953,
-              "z": 40403.9453125
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "AIRBASE"
-          }
-        }
+        "Turkey": []
       },
       "missions": [],
       "tickets": {
-        "current": 300,
+        "current": 294,
         "start": 300
       }
     },
@@ -2023,7 +2493,7 @@ const data = {
         "Coast": [],
         "Cyprus": {
           "Akrotiri": {
-            "codename": "Ordnance Disposal",
+            "codename": "HAMBURG",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2038,7 +2508,7 @@ const data = {
             "type": "AIRBASE"
           },
           "Gazipasa": {
-            "codename": "BlueOnBlue",
+            "codename": "PRAGUE",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2055,10 +2525,26 @@ const data = {
         },
         "Damascus": [],
         "Hama": [],
-        "Hatay": [],
+        "Hatay": {
+          "Hatay": {
+            "codename": "MEMPHIS",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 36.371269972814,
+              "lon": 36.298090184913,
+              "x": 148653.765625,
+              "y": 77.175567626953,
+              "z": 40403.9453125
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          }
+        },
         "Israel": {
           "Naqoura": {
-            "codename": "Mesa",
+            "codename": "MUMBAI",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2073,10 +2559,11 @@ const data = {
             "type": "AIRBASE"
           }
         },
+        "Lebanon": [],
         "Palmyra": [],
         "Turkey": {
           "Adana Sakirpasa": {
-            "codename": "Berlin",
+            "codename": "PARIS",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2090,68 +2577,98 @@ const data = {
             "strategic": true,
             "type": "AIRBASE"
           },
+          "CV-59 Forrestal": {
+            "codename": "ATHENS",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 35.889635603344,
+              "lon": 32.585580828459,
+              "x": 110897.6304712,
+              "y": 0.016897811740819,
+              "z": -296500.01860511
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
           "CVN-73 George Washington": {
-            "codename": "Cairo",
+            "codename": "BEIJING",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 35.726374435338,
-              "lon": 32.729363821268,
-              "x": 91908.608464929,
-              "y": 0.04538725841121,
-              "z": -284664.59586669
+              "lat": 35.774343313338,
+              "lon": 32.773152416656,
+              "x": 96985.158004631,
+              "y": 0.016300815435898,
+              "z": -280357.1104278
             },
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
-          "CVN-74 John C. Stennis": {
-            "codename": "Astro Umbrella",
+          "FARP Helena": {
+            "codename": "MUNICH",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 35.741573180149,
-              "lon": 32.738204037738,
-              "x": 93546.147771,
-              "y": 0.045153262355598,
-              "z": -283755.34434163
+              "lat": 36.7035699604,
+              "lon": 37.111042780003,
+              "x": 183785.96875,
+              "y": 629.93542480469,
+              "z": 114070.015625
             },
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
-          "FARP Berlin": {
-            "codename": "Lemon Cake",
+          "FARP Lancelot": {
+            "codename": "DETROIT",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 36.63381668043,
-              "lon": 36.207871059617,
-              "x": 178017.03125,
-              "y": 13.723810195923,
-              "z": 33153.40625
+              "lat": 36.566351429441,
+              "lon": 36.121748969547,
+              "x": 170758.25,
+              "y": 4.969174861908,
+              "z": 25226.857421875
             },
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
-          "FARP Rome": {
-            "codename": "Akvadiskoteka #1 ",
+          "Gaziantep": {
+            "codename": "PHOENIX",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 36.747887714822,
-              "lon": 36.532027343789,
-              "x": 189879.453125,
-              "y": 314.14492797852,
-              "z": 62468.10546875
+              "lat": 36.951397233614,
+              "lon": 37.464512889798,
+              "x": 210716.109375,
+              "y": 697.21142578125,
+              "z": 146087.90625
+            },
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
+          "Gecitkale": {
+            "codename": "MILAN",
+            "cost": 20,
+            "dead": false,
+            "location": {
+              "lat": 35.236403909864,
+              "lon": 33.707277702803,
+              "x": 32254.640625,
+              "y": 45.000045776367,
+              "z": -199005.984375
             },
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Incirlik": {
-            "codename": "[H] Stormman 1-1's grave",
+            "codename": "VIENNA",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2166,15 +2683,15 @@ const data = {
             "type": "AIRBASE"
           },
           "LHA-4 Nassau": {
-            "codename": "Tokyo",
+            "codename": "MUMBAI",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 35.355205334198,
-              "lon": 34.614055403117,
-              "x": 41407.601924819,
-              "y": -0.048430205672048,
-              "z": -115815.99954793
+              "lat": 35.355210010059,
+              "lon": 34.614169488629,
+              "x": 41407.661563194,
+              "y": -0.017346254779113,
+              "z": -115805.60340845
             },
             "status": 0,
             "strategic": true,
@@ -2183,19 +2700,30 @@ const data = {
         }
       },
       "missions": {
-        "5760": {
-          "assigned": [ {
+        "5500": {
+          "assigned": [{
+            "aircraft": "A-10C",
             "group": "104th fs Maryland 1-1",
-            "player": "Froggy 1-4 | kukiric",
-            "iffmode3": "5760",
-          } ],
+            "iffmode3": "5500",
+            "player": "kukiric"
+          }],
+          "iffmode1": "53",
+          "state": "Active",
           "target": {
             "coalition": "1",
-            "name": "Aleppo_1_Reg1Factory-1",
-            "region": "Aleppo"
+            "intel": 3,
+            "location_degraded": {
+              "lat": 36.628000047773,
+              "lon": 37.051000030741,
+              "x": 175509.234375,
+              "y": 0,
+              "z": 108535.7421875
+            },
+            "name": "Aleppo_1_reg1CAS3",
+            "region": "Aleppo",
+            "status": 25
           },
-          "iffmode1": "50",
-          "type": "STRIKE"
+          "type": "CAS"
         }
       },
       "tickets": {
@@ -2204,10 +2732,11 @@ const data = {
       }
     }
   },
+  "date": "2022-01-28 16:15:00Z",
+  "sortie": "Flashpoint Levant",
   "theater": "Syria",
-  "date": "2021-09-20 22:54:24Z",
-  "version": "v0.9.4"
-}
+  "version": "v0.11.0"
+};
 
 export type ExportData = typeof data;
 export default data;

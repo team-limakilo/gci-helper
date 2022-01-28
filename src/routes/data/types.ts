@@ -37,7 +37,7 @@ export interface Mission {
 }
 
 export type ExportDataAsset = ExportData["coalitions"]["1"]["assets"]["Hama"]["Hama_1_Reg3Sa2-1"];
-export type ExportDataMission = ExportData["coalitions"]["2"]["missions"]["5760"];
+export type ExportDataMission = ExportData["coalitions"]["2"]["missions"]["5500"];
 
 export interface MissionTarget {
     coalition: string;
