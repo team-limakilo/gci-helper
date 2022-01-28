@@ -121,6 +121,7 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
             enemyAssets: getAssets(data, Coalition.Red),
             airbases: getAirbases(data),
             theater: data.theater,
+            sortie: data.sortie,
             version: data.version,
             date: data.date,
             pageTitle: customTitle,

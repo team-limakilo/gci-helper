@@ -8,6 +8,7 @@ export interface ClientData extends ToJSON {
     enemySAMs: { name: string, assets: Asset[] }[];
     enemyAssets: { name: string, assets: Asset[] }[];
     theater: string;
+    sortie?: string;
     version: string;
     date: string;
     pageTitle?: string;

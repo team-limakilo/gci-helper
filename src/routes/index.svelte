@@ -54,7 +54,7 @@ import { base } from "$app/paths";
 
 <svelte:head>
     {#if data != null}
-        <title>{data.pageTitle || `Campaign Status - ${data.theater}`}</title>
+        <title>{data.pageTitle || `Campaign Status - ${data.sortie || data.theater}`}</title>
     {/if}
 </svelte:head>
 
