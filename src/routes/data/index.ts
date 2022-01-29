@@ -92,11 +92,11 @@ function getMissions(data: ExportData, coalition: Coalition) {
 
 function getTickets(data: ExportData) {
     return {
-        "1": {
-            status: data.coalitions[1].tickets.status
+        "1": data.coalitions[1].tickets && {
+            text: data.coalitions[1].tickets.text
         },
-        "2": {
-            status: data.coalitions[2].tickets.status
+        "2": data.coalitions[2].tickets && {
+            text: data.coalitions[2].tickets.text
         }
     };
 }

@@ -7,7 +7,7 @@ export interface ClientData extends ToJSON {
     airbases: Asset[];
     enemySAMs: { name: string, assets: Asset[] }[];
     enemyAssets: { name: string, assets: Asset[] }[];
-    tickets: { [coalition: string]: { status?: string }};
+    tickets: { [coalition: string]: { text?: string }};
     theater: string;
     sortie?: string;
     version: string;

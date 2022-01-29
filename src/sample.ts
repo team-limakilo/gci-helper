@@ -49,7 +49,7 @@ const data = {
       "tickets": {
         "current": 0,
         "start": 0,
-        "status": "Excellent"
+        "text": "Excellent"
       }
     },
     "1": {
@@ -2486,7 +2486,7 @@ const data = {
       "tickets": {
         "current": 15,
         "start": 300,
-        "status": "Critical"
+        "text": "Critical"
       }
     },
     "2": {
@@ -2731,7 +2731,7 @@ const data = {
       "tickets": {
         "current": 150,
         "start": 150,
-        "status": "Nominal"
+        "text": "Nominal"
       }
     }
   },

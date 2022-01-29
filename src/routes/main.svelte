@@ -11,14 +11,14 @@
         data.version.length > 20 ? data.version.substring(0, 8) : data.version;
 </script>
 
-{#if data.tickets?.["1"].status != null}
+{#if data.tickets["1"] != null && data.tickets["2"] != null}
     <section>
         <h1>Status</h1>
         <div class="mono">
-            <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"].status}
+            <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"].text}
         </div>
         <div class="mono">
-            <span class="enemy">REDFOR</span> Tickets: {data.tickets["1"].status}
+            <span class="enemy">REDFOR</span> Tickets: {data.tickets["1"].text}
         </div>
     </section>
 {/if}
