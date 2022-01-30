@@ -1,4 +1,6 @@
 <script lang="ts">
+import { text } from "svelte/internal";
+
     import { ClientData, Coalition } from "./data/types";
     export let data: ClientData;
 
@@ -11,7 +13,7 @@
         data.version.length > 20 ? data.version.substring(0, 8) : data.version;
 </script>
 
-{#if data.tickets["1"] != null && data.tickets["2"] != null}
+{#if data.tickets["1"]?.text != null}
     <section>
         <h1>Status</h1>
         <div class="mono">
