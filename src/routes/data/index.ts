@@ -2,7 +2,7 @@ import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
 import axios from "axios";
 import fs from "fs/promises";
 import sampleData from "../../sample";
-import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
+import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, ExportDataMissionPilot, MissionTarget } from "./types";
 import { Coalition } from "./types";
 
 function byKey<T>(key: keyof T) {
@@ -76,13 +76,19 @@ function getAssets(data: ExportData, coalition: Coalition) {
     }));
 }
 
+function assignedPilots(mission: ExportDataMission) {
+    return mission.assigned
+        .filter((assigned) => assigned.player != null)
+        .map(({ group, player, aircraft }) => ({ group, player, aircraft }));
+}
+
 function getMissions(data: ExportData, coalition: Coalition) {
     return extract(data.coalitions[coalition].missions,
         (_, mission: ExportDataMission) => mission.assigned.filter((assigned) => assigned.player != null).length > 0,
         (_, mission: ExportDataMission) => ({
             region: mission.target.region,
             target: target(data, mission),
-            assigned: mission.assigned.filter((assigned) => assigned.player != null),
+            assigned: assignedPilots(mission),
             type: mission.type,
             mode1: mission.iffmode1,
         }))
