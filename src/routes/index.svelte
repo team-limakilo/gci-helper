@@ -117,6 +117,10 @@
     .neutral {
         color: #ff8;
     }
+    .player {
+        text-decoration: underline dotted;
+        cursor: help;
+    }
     .left {
         float: left;
     }

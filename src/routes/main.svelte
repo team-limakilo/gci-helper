@@ -43,9 +43,13 @@
                 {/if}
             {/if}
             <br />
-            Pilots: {mission.assigned
-                .map((assigned) => assigned.player)
-                .join(", ")}
+            Pilots:
+            {#each mission.assigned as assigned, index (assigned.group)}
+                {#if index !== 0},{/if}
+                <span class="player" title="Aircraft: {assigned.aircraft}">
+                    {assigned.player}
+                </span>
+            {/each}
             {#if mission.target}
                 <br />
                 Status: Active ({mission.target.status}% complete)

@@ -34,7 +34,7 @@ export interface Mission {
     type: string;
     region: string;
     target: Asset;
-    assigned: { group: string, player: string }[];
+    assigned: { aircraft: string, group: string, player: string }[];
     mode1?: string;
 }
 
