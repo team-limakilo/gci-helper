@@ -126,6 +126,7 @@ async function getExportData(): Promise<ExportData> {
             return data;
         }
     } else {
+        sampleData.date = new Date().toJSON();
         return sampleData;
     }
 }
