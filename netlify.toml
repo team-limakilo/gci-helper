@@ -4,3 +4,6 @@ publish = "build"
 
 [build.environment]
 VITE_NETLIFY = "1"
+
+[functions]
+node_bundler = "esbuild"
