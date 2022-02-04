@@ -12,6 +12,8 @@ export interface ClientData extends ToJSON {
     sortie?: string;
     version: string;
     date: string;
+    startDate?: string;
+    players?: { current: number, max: number },
     pageTitle?: string;
 }
 

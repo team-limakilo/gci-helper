@@ -1,6 +1,4 @@
 <script lang="ts">
-import { text } from "svelte/internal";
-
     import { ClientData, Coalition } from "./data/types";
     export let data: ClientData;
 
@@ -13,15 +11,26 @@ import { text } from "svelte/internal";
         data.version.length > 20 ? data.version.substring(0, 8) : data.version;
 </script>
 
-{#if data.tickets["1"]?.text != null}
+{#if data.tickets != null}
     <section>
-        <h1>Status</h1>
+        <h1>Overview</h1>
+        {#if data.startDate != null}
+            <div class="mono">
+                Campaign Started: {new Date(data.startDate).toLocaleString()}
+            </div>
+        {/if}
         <div class="mono">
-            <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"].text}
+            <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"]
+                .text}
         </div>
         <div class="mono">
             <span class="enemy">REDFOR</span> Tickets: {data.tickets["1"].text}
         </div>
+        {#if data.players != null}
+            <div class="mono">
+                Players: {data.players.current - 1}/{data.players.max - 1}
+            </div>
+        {/if}
     </section>
 {/if}
 

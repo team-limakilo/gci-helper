@@ -97,14 +97,16 @@ function getMissions(data: ExportData, coalition: Coalition) {
 }
 
 function getTickets(data: ExportData) {
-    return {
-        "1": data.coalitions[1].tickets && {
-            text: data.coalitions[1].tickets.text
-        },
-        "2": data.coalitions[2].tickets && {
-            text: data.coalitions[2].tickets.text
-        }
-    };
+    const tickets = {}
+    if (data.coalitions[1].tickets.text) {
+        tickets[1] = { text: data.coalitions[1].tickets.text };
+    }
+    if (data.coalitions[2].tickets.text) {
+        tickets[2] = { text: data.coalitions[2].tickets.text };
+    }
+    if (Object.keys(tickets).length > 0) {
+        return tickets;
+    }
 }
 
 const exportDataPath = process.env["EXPORT_DATA_PATH"];
@@ -153,6 +155,8 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
             sortie: data.sortie,
             version: data.version,
             date: data.date,
+            startDate: data.startdate,
+            players: data.players,
             pageTitle: customTitle,
             toJSON() {
                 return this;

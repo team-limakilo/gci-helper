@@ -2735,7 +2735,12 @@ const data = {
       }
     }
   },
+  "players": {
+    "current": 2,
+    "max": 16,
+  },
   "date": "2022-01-28 16:15:00Z",
+  "startdate": "2022-01-27 14:30:00Z",
   "sortie": "Flashpoint Levant",
   "theater": "Syria",
   "version": "v0.11.0"
