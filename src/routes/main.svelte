@@ -1,49 +1,75 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { ClientData, Coalition } from "./data/types";
     export let data: ClientData;
 
-    function pad(str: string, len: number) {
-        return str.padEnd(len, "\xA0");
+    let currentWorldDate: number;
+    let missionTimers: { [key: string]: string } = {};
+
+    function padTime(str: any, len: number) {
+        return str.toString().padStart(len, "0");
     }
+
+    function padType(str: any, len: number) {
+        return str.toString().padEnd(len, "\xA0");
+    }
+
+    function updateTimers() {
+        const worldDate = new Date(data.worldDate).getTime();
+        const updateDate = new Date(data.date).getTime();
+        const updateAge = Date.now() - updateDate;
+        currentWorldDate = worldDate + updateAge;
+        missionTimers = {};
+        for (const mission of data.missions) {
+            const secondsLeft = Math.max(
+                0,
+                mission.timeout - data.absTime - updateAge / 1000
+            );
+            const hours = String(Math.floor(secondsLeft / 3600));
+            const minutes = padTime(Math.floor((secondsLeft / 60) % 60), 2);
+            const seconds = padTime(Math.floor(secondsLeft % 60), 2);
+            missionTimers[mission.id] = `${hours}:${minutes}:${seconds}`;
+        }
+    }
+
+    onMount(() => {
+        updateTimers();
+        const interval = setInterval(updateTimers, 1000);
+        return () => clearInterval(interval);
+    });
 
     let version: string;
     $: version =
         data.version.length > 20 ? data.version.substring(0, 8) : data.version;
 </script>
 
-{#if data.tickets != null}
-    <section>
-        <h1>Overview</h1>
-        {#if data.startDate != null}
-            <div class="mono">
-                Campaign Started: {new Date(data.startDate).toLocaleString()}
-            </div>
-        {/if}
-        <div class="mono">
-            <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"]
-                .text}
-        </div>
-        <div class="mono">
-            <span class="enemy">REDFOR</span> Tickets: {data.tickets["1"].text}
-        </div>
-        {#if data.players != null}
-            <div class="mono">
-                Players: {data.players.current - 1}/{data.players.max - 1}
-            </div>
-        {/if}
-    </section>
-{/if}
+<section>
+    <h1>Overview</h1>
+    <div class="mono">
+        Campaign Started: {new Date(data.startDate).toLocaleString()}
+    </div>
+    <div class="mono">
+        DCS Local Time: {new Date(currentWorldDate).toLocaleString()}
+    </div>
+    <div class="mono">
+        <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"].text}
+    </div>
+    <div class="mono">
+        <span class="enemy">REDFOR</span> Tickets: {data.tickets["1"].text}
+    </div>
+    <div class="mono">
+        Players: {data.players.current - 1}/{data.players.max - 1}
+    </div>
+</section>
 
 <section>
     <h1>Missions</h1>
     {#each data.missions as mission}
         <div class="mono spaced">
             <strong class="friendly">{mission.type}</strong>
-            {#if mission.mode1}
-                <span class="dim">
-                    M1({mission.mode1})
-                </span>
-            {/if}
+            <span class="dim">
+                M1({mission.mode1}) - Time Left: {missionTimers[mission.id]}
+            </span>
             <br />
             Region: {mission.region}
             {#if mission.target}
@@ -78,12 +104,14 @@
     {#each data.airbases as airbase}
         <div class="mono">
             {#if airbase.coalition == Coalition.Blue}
-                <span class="friendly">{pad("Friendly", 8)}</span>
+                <span class="friendly">{padType("Friendly", 8)}</span>
                 {airbase.name}
             {:else if airbase.coalition == Coalition.Red}
-                <span class="enemy">{pad("Hostile", 8)}</span> {airbase.name}
+                <span class="enemy">{padType("Hostile", 8)}</span>
+                {airbase.name}
             {:else}
-                <span class="neutral">{pad("Neutral", 8)}</span> {airbase.name}
+                <span class="neutral">{padType("Neutral", 8)}</span>
+                {airbase.name}
             {/if}
         </div>
     {/each}
@@ -95,7 +123,7 @@
         <h2>{region.name}</h2>
         {#each region.assets as asset}
             <div class="mono">
-                <span class="enemy">{pad(asset.sitetype, 5)}</span>
+                <span class="enemy">{padType(asset.sitetype, 5)}</span>
                 ({asset.codename})
             </div>
         {:else}
@@ -110,7 +138,7 @@
         <h2>{region.name}</h2>
         {#each region.assets as asset}
             <div class="mono">
-                <span class="enemy">{pad(asset.type, 10)}</span>
+                <span class="enemy">{padType(asset.type, 10)}</span>
                 ({asset.codename})
             </div>
         {:else}

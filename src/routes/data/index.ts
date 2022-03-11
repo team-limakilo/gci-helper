@@ -2,8 +2,11 @@ import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
 import axios from "axios";
 import fs from "fs/promises";
 import sampleData from "../../sample";
-import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, ExportDataMissionPilot, MissionTarget } from "./types";
+import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
+import crypto from "crypto";
+
+const SALT = crypto.pseudoRandomBytes(4).toString("hex");
 
 function byKey<T>(key: keyof T) {
     return (a: T, b: T) => {
@@ -85,12 +88,14 @@ function assignedPilots(mission: ExportDataMission) {
 function getMissions(data: ExportData, coalition: Coalition) {
     return extract(data.coalitions[coalition].missions,
         (_, mission: ExportDataMission) => mission.assigned.filter((assigned) => assigned.player != null).length > 0,
-        (_, mission: ExportDataMission) => ({
+        (id, mission: ExportDataMission) => ({
+            id: crypto.createHash("sha1").update(`${SALT}${id}`).digest("hex").substring(0, 8),
             region: mission.target.region,
             target: target(data, mission),
             assigned: assignedPilots(mission),
             type: mission.type,
             mode1: mission.iffmode1,
+            timeout: mission.timeout,
         }))
         .sort(byKey("target"))
         .sort(byKey("type"));
@@ -113,6 +118,7 @@ const exportDataPath = process.env["EXPORT_DATA_PATH"];
 const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
 const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
 const customTitle = process.env["CUSTOM_TITLE"];
+const startDate = new Date();
 
 async function getExportData(): Promise<ExportData> {
     if (exportDataPath != null && exportDataPath.length > 0) {
@@ -126,9 +132,14 @@ async function getExportData(): Promise<ExportData> {
             return data;
         }
     } else {
-        sampleData.date = new Date().toJSON();
+        sampleData.date = startDate.toJSON();
         return sampleData;
     }
+}
+
+function getDCSDateTime(isoDate: string, absTime: number): Date {
+    const date = new Date(isoDate).getTime() + absTime * 1000;
+    return new Date(date);
 }
 
 export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientData>> {
@@ -156,6 +167,8 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
             sortie: data.sortie,
             version: data.version,
             date: data.date,
+            absTime: data.abstime,
+            worldDate: getDCSDateTime(data.modeldate, data.abstime).toISOString(),
             startDate: data.startdate,
             players: data.players,
             pageTitle: customTitle,

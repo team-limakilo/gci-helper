@@ -12,7 +12,9 @@ export interface ClientData extends ToJSON {
     sortie?: string;
     version: string;
     date: string;
+    absTime?: number;
     startDate?: string;
+    worldDate?: string;
     players?: { current: number, max: number },
     pageTitle?: string;
 }
@@ -33,11 +35,13 @@ export interface Asset {
 }
 
 export interface Mission {
+    id: string;
     type: string;
     region: string;
     target: Asset;
     assigned: { aircraft: string, group: string, player: string }[];
-    mode1?: string;
+    timeout: number;
+    mode1: string;
 }
 
 export type ExportDataAsset = ExportData["coalitions"]["1"]["assets"]["Hama"]["Hama_1_Reg3Sa2-1"];

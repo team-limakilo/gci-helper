@@ -2725,6 +2725,7 @@ const data = {
             "region": "Aleppo",
             "status": 25
           },
+          "timeout": 64800,
           "type": "CAS"
         }
       },
@@ -2735,11 +2736,14 @@ const data = {
       }
     }
   },
+  "modeldate": "2016-6-21",
+  "modeltime": 0,
+  "abstime": 54000,
   "players": {
     "current": 2,
     "max": 16,
   },
-  "date": "2022-01-28 16:15:00Z",
+  "date": "2022-01-28 16:20:00Z",
   "startdate": "2022-01-27 14:30:00Z",
   "sortie": "Flashpoint Levant",
   "theater": "Syria",
