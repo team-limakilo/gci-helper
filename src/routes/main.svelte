@@ -68,6 +68,8 @@
         <strong>Available</strong>
         {#each data.availableMissions as { type, count }}
             <div>{padType(`${type}:`, 12)} {count}</div>
+        {:else}
+            <div>None</div>
         {/each}
     </div>
     {#each data.missions as mission}
@@ -100,8 +102,6 @@
                 Status: Active
             {/if}
         </div>
-    {:else}
-        <div class="mono">No Missions</div>
     {/each}
 </section>
 
