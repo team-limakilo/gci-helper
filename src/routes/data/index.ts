@@ -1,10 +1,10 @@
 import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
 import axios from "axios";
+import crypto from "crypto";
 import fs from "fs/promises";
 import sampleData from "../../sample";
 import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
-import crypto from "crypto";
 
 const SALT = crypto.pseudoRandomBytes(4).toString("hex");
 
@@ -101,6 +101,14 @@ function getMissions(data: ExportData, coalition: Coalition) {
         .sort(byKey("type"));
 }
 
+function getAvailableMissions(data: ExportData, coalition: Coalition) {
+    if (data.coalitions[coalition].commander) {
+        return Object.entries(data.coalitions[coalition].commander.availablemissions)
+            .map(([type, count]) => ({ type, count }))
+            .sort(byKey("type"));
+    }
+}
+
 function getTickets(data: ExportData) {
     const tickets = {}
     if (data.coalitions[1].tickets.text) {
@@ -159,6 +167,7 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
         },
         body: {
             missions: getMissions(data, Coalition.Blue),
+            availableMissions: getAvailableMissions(data, Coalition.Blue),
             enemySAMs: getSAMs(data, Coalition.Red),
             enemyAssets: getAssets(data, Coalition.Red),
             airbases: getAirbases(data),

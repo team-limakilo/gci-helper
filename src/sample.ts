@@ -1,4 +1,5 @@
 const data = {
+  "abstime": 22560,
   "coalitions": {
     "0": {
       "assets": {
@@ -7,7 +8,7 @@ const data = {
         "Cyprus": [],
         "Damascus": {
           "Damascus_0_airspace": {
-            "codename": "HOUSTON",
+            "codename": "KURSK",
             "cost": 0,
             "dead": false,
             "location": {
@@ -17,6 +18,8 @@ const data = {
               "y": 718.09167480469,
               "z": 25888.533203125
             },
+            "missiontype": "CAP",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
@@ -25,25 +28,31 @@ const data = {
         "Hama": [],
         "Hatay": {
           "Hatay_0_airspace": {
-            "codename": "LISBON",
+            "codename": "NAPLES",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 36.324673971743,
-              "lon": 36.271491000915,
-              "x": 143550.65758956,
-              "y": 68.610366821289,
-              "z": 37871.07067381
+              "lat": 36.315018392407,
+              "lon": 36.288227774465,
+              "x": 142436.99887681,
+              "y": 65.089782714844,
+              "z": 39343.759904055
             },
+            "missiontype": "CAP",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           }
         },
+        "Homs Refinery": [],
         "Israel": [],
         "Lebanon": [],
         "Palmyra": [],
         "Turkey": []
+      },
+      "commander": {
+        "availablemissions": []
       },
       "missions": [],
       "tickets": {
@@ -56,8 +65,8 @@ const data = {
       "assets": {
         "Aleppo": {
           "Aleppo": {
-            "codename": "TAMPA",
-            "cost": 20,
+            "codename": "KURSK",
+            "cost": 10,
             "dead": false,
             "location": {
               "lat": 36.182211524331,
@@ -66,27 +75,31 @@ const data = {
               "y": 382.19104003906,
               "z": 121870.953125
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Aleppo_0_airspace": {
-            "codename": "BOSTON",
+            "codename": "SHENZEN",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 36.249438408566,
-              "lon": 37.021108584907,
-              "x": 133565.36954859,
-              "y": 472.15115356445,
-              "z": 105000.83999338
+              "lat": 36.254798709653,
+              "lon": 37.021353495884,
+              "x": 134159.59606479,
+              "y": 441.89865112305,
+              "z": 105035.00075944
             },
+            "missiontype": "CAP",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           },
           "Aleppo_1_Reg1Bai11": {
-            "codename": "HAMBURG",
+            "codename": "CAIRO",
             "cost": 5,
             "dead": false,
             "location": {
@@ -96,12 +109,14 @@ const data = {
               "y": 301.42330932617,
               "z": 75774.511667336
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_Reg1Bai12": {
-            "codename": "PHOENIX",
+            "codename": "TOKYO",
             "cost": 5,
             "dead": false,
             "location": {
@@ -111,12 +126,14 @@ const data = {
               "y": 346.89334106445,
               "z": 74846.997984803
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_Reg1EWR-1": {
-            "codename": "RIO",
+            "codename": "WROCLAW",
             "cost": 2,
             "dead": false,
             "location": {
@@ -126,13 +143,15 @@ const data = {
               "y": 530.86236572266,
               "z": 140615.9007294
             },
+            "missiontype": "SEAD",
             "sitetype": "EWR",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "EWR"
           },
           "Aleppo_1_Reg1EWR-1-SHORAD": {
-            "codename": "HANOI",
+            "codename": "MUNICH",
             "cost": 0,
             "dead": false,
             "location": {
@@ -142,12 +161,13 @@ const data = {
               "y": 530.86236572266,
               "z": 140615.9007294
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Aleppo_1_Reg1Factory-1": {
-            "codename": "MESA",
+            "codename": "KIEV",
             "cost": 3,
             "dead": false,
             "location": {
@@ -157,12 +177,14 @@ const data = {
               "y": 485.60174560547,
               "z": 106895.578125
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "AMMODUMP"
           },
           "Aleppo_1_Reg1Factory-10": {
-            "codename": "MOSCOW",
+            "codename": "SYDNEY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -172,12 +194,14 @@ const data = {
               "y": 374.79327392578,
               "z": 128506.4375
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-11": {
-            "codename": "LONDON",
+            "codename": "MESA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -187,12 +211,14 @@ const data = {
               "y": 373.30029296875,
               "z": 132927.296875
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-12": {
-            "codename": "PHOENIX",
+            "codename": "OSAKA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -202,12 +228,14 @@ const data = {
               "y": 350.41299438477,
               "z": 184504.48095703
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Aleppo_1_Reg1Factory-2": {
-            "codename": "SHANGHAI",
+            "codename": "LISBON",
             "cost": 3,
             "dead": false,
             "location": {
@@ -217,12 +245,14 @@ const data = {
               "y": 346.89331054688,
               "z": 75179.953125
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "AMMODUMP"
           },
           "Aleppo_1_Reg1Factory-3": {
-            "codename": "ATHENS",
+            "codename": "LAGOS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -232,9 +262,11 @@ const data = {
               "y": 419.29055786133,
               "z": 69966.426757813
             },
+            "missiontype": "STRIKE",
+            "spawned": true,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Aleppo_1_Reg1Factory-4": {
             "codename": "WARSAW",
@@ -247,12 +279,14 @@ const data = {
               "y": 407.81253051758,
               "z": 70389.555175781
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-5": {
-            "codename": "HAMBURG",
+            "codename": "SEOUL",
             "cost": 3,
             "dead": false,
             "location": {
@@ -262,12 +296,14 @@ const data = {
               "y": 381.39804077148,
               "z": 116380.234375
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-6": {
-            "codename": "MADRID",
+            "codename": "SHENZEN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -277,12 +313,14 @@ const data = {
               "y": 414.26284790039,
               "z": 118284.2890625
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-7": {
-            "codename": "BEIJING",
+            "codename": "JAKARTA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -292,12 +330,14 @@ const data = {
               "y": 454.20443725586,
               "z": 126881.8359375
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-8": {
-            "codename": "BOSTON",
+            "codename": "ROME",
             "cost": 3,
             "dead": false,
             "location": {
@@ -307,12 +347,14 @@ const data = {
               "y": 398.50991821289,
               "z": 112968.4140625
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Factory-9": {
-            "codename": "LISBON",
+            "codename": "DELHI",
             "cost": 3,
             "dead": false,
             "location": {
@@ -322,12 +364,14 @@ const data = {
               "y": 376.36578369141,
               "z": 116866.3203125
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Aleppo_1_Reg1Sa2-1": {
-            "codename": "LOLA",
+            "codename": "NOBLE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -337,13 +381,15 @@ const data = {
               "y": 505.09634399414,
               "z": 133401.14214643
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Aleppo_1_reg1BAI1": {
-            "codename": "SYDNEY",
+            "codename": "TAIPEI",
             "cost": 5,
             "dead": false,
             "location": {
@@ -353,12 +399,14 @@ const data = {
               "y": 275.70526123047,
               "z": 71709.619304297
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1BAI2": {
-            "codename": "MOSCOW",
+            "codename": "ZURICH",
             "cost": 5,
             "dead": false,
             "location": {
@@ -368,12 +416,14 @@ const data = {
               "y": 506.17666625977,
               "z": 70085.863832507
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1BAI3": {
-            "codename": "MUMBAI",
+            "codename": "SHANGHAI",
             "cost": 5,
             "dead": false,
             "location": {
@@ -383,12 +433,14 @@ const data = {
               "y": 568.01715087891,
               "z": 108574.10285182
             },
+            "missiontype": "BAI",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1BAI4": {
-            "codename": "CAIRO",
+            "codename": "SYDNEY",
             "cost": 5,
             "dead": false,
             "location": {
@@ -398,12 +450,14 @@ const data = {
               "y": 179.82595825195,
               "z": 40958.742198296
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1CAS1": {
-            "codename": "PARIS",
+            "codename": "OSLO",
             "cost": 2,
             "dead": false,
             "location": {
@@ -413,12 +467,14 @@ const data = {
               "y": 469.10278320313,
               "z": 107300.823401
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS10": {
-            "codename": "MUNICH",
+            "codename": "ISTANBUL",
             "cost": 2,
             "dead": false,
             "location": {
@@ -428,12 +484,14 @@ const data = {
               "y": 451.11111450195,
               "z": 123380.52403924
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS11": {
-            "codename": "VIENNA",
+            "codename": "TULSA",
             "cost": 2,
             "dead": false,
             "location": {
@@ -443,12 +501,14 @@ const data = {
               "y": 479.07452392578,
               "z": 108843.23942801
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS12": {
-            "codename": "BEIJING",
+            "codename": "CAIRO",
             "cost": 2,
             "dead": false,
             "location": {
@@ -458,12 +518,14 @@ const data = {
               "y": 478.47161865234,
               "z": 110297.91215334
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS13": {
-            "codename": "LONDON",
+            "codename": "MADRID",
             "cost": 2,
             "dead": false,
             "location": {
@@ -473,12 +535,14 @@ const data = {
               "y": 419.73480224609,
               "z": 188245.6911882
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS2": {
-            "codename": "HANOI",
+            "codename": "ATHENS",
             "cost": 2,
             "dead": false,
             "location": {
@@ -488,12 +552,14 @@ const data = {
               "y": 547.37750244141,
               "z": 107200.92297814
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS3": {
-            "codename": "MEMPHIS",
+            "codename": "CHICAGO",
             "cost": 2,
             "dead": false,
             "location": {
@@ -503,12 +569,14 @@ const data = {
               "y": 617.07751464844,
               "z": 108599.62117106
             },
-            "status": 25,
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS4": {
-            "codename": "LISBON",
+            "codename": "ZURICH",
             "cost": 2,
             "dead": false,
             "location": {
@@ -518,12 +586,14 @@ const data = {
               "y": 495.53399658203,
               "z": 105582.27629358
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS5": {
-            "codename": "TAMPA",
+            "codename": "MILAN",
             "cost": 2,
             "dead": false,
             "location": {
@@ -533,12 +603,14 @@ const data = {
               "y": 135.65264892578,
               "z": 64472.050717719
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS6": {
-            "codename": "SHANGHAI",
+            "codename": "MEMPHIS",
             "cost": 2,
             "dead": false,
             "location": {
@@ -548,12 +620,14 @@ const data = {
               "y": 383.14453125,
               "z": 109357.08659072
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS7": {
-            "codename": "ROME",
+            "codename": "HOUSTON",
             "cost": 2,
             "dead": false,
             "location": {
@@ -563,12 +637,14 @@ const data = {
               "y": 334.65676879883,
               "z": 195700.12703814
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS8": {
-            "codename": "WARSAW",
+            "codename": "BERLIN",
             "cost": 2,
             "dead": false,
             "location": {
@@ -578,12 +654,14 @@ const data = {
               "y": 376.93255615234,
               "z": 187676.50827028
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1CAS9": {
-            "codename": "TULSA",
+            "codename": "DETROIT",
             "cost": 2,
             "dead": false,
             "location": {
@@ -593,12 +671,14 @@ const data = {
               "y": 475.44845581055,
               "z": 124925.80531706
             },
+            "missiontype": "CAS",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "FRONTLINE"
           },
           "Aleppo_1_reg1aaa1": {
-            "codename": "HOUSTON",
+            "codename": "DELHI",
             "cost": 5,
             "dead": false,
             "location": {
@@ -608,12 +688,14 @@ const data = {
               "y": 416.56411743164,
               "z": 115468.86065861
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1aaa2-1": {
-            "codename": "DALLAS",
+            "codename": "DENVER",
             "cost": 5,
             "dead": false,
             "location": {
@@ -623,12 +705,14 @@ const data = {
               "y": 382.19104003906,
               "z": 122963.72749425
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1aaa3": {
-            "codename": "DETROIT",
+            "codename": "SEOUL",
             "cost": 5,
             "dead": false,
             "location": {
@@ -638,12 +722,14 @@ const data = {
               "y": 407.15563964844,
               "z": 70486.844459134
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1aaa4": {
-            "codename": "LAGOS",
+            "codename": "XIAN",
             "cost": 5,
             "dead": false,
             "location": {
@@ -653,12 +739,14 @@ const data = {
               "y": 366.00036621094,
               "z": 155800.90237903
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai13": {
-            "codename": "MADRID",
+            "codename": "TULSA",
             "cost": 5,
             "dead": false,
             "location": {
@@ -668,12 +756,14 @@ const data = {
               "y": 320.54580688477,
               "z": 74166.703579343
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai14": {
-            "codename": "SEOUL",
+            "codename": "KIEV",
             "cost": 5,
             "dead": false,
             "location": {
@@ -683,12 +773,14 @@ const data = {
               "y": 224.59233093262,
               "z": 56388.378280411
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai5": {
-            "codename": "MELBOURNE",
+            "codename": "GIZA",
             "cost": 5,
             "dead": false,
             "location": {
@@ -698,12 +790,14 @@ const data = {
               "y": 179.7702331543,
               "z": 40957.506250746
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai6": {
-            "codename": "DELHI",
+            "codename": "ISTANBUL",
             "cost": 5,
             "dead": false,
             "location": {
@@ -713,12 +807,14 @@ const data = {
               "y": 345.99822998047,
               "z": 106843.05922696
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai7": {
-            "codename": "MILAN",
+            "codename": "MADRID",
             "cost": 5,
             "dead": false,
             "location": {
@@ -728,12 +824,14 @@ const data = {
               "y": 367.18408203125,
               "z": 36548.6979766
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai8": {
-            "codename": "BERLIN",
+            "codename": "RIO",
             "cost": 5,
             "dead": false,
             "location": {
@@ -743,12 +841,14 @@ const data = {
               "y": 6.5010757446289,
               "z": 8237.085256343
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1bai9": {
-            "codename": "MESA",
+            "codename": "HAMBURG",
             "cost": 5,
             "dead": false,
             "location": {
@@ -758,12 +858,14 @@ const data = {
               "y": 34.721252441406,
               "z": -5383.3123051878
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Aleppo_1_reg1sa3-1": {
-            "codename": "JEEP",
+            "codename": "NISSAN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -773,13 +875,15 @@ const data = {
               "y": 437.54083251953,
               "z": 109674.09851439
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Aleppo_1_reg1sa3-2": {
-            "codename": "TESLA",
+            "codename": "LOTUS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -789,13 +893,15 @@ const data = {
               "y": 368.84680175781,
               "z": 127540.11115461
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Aleppo_1_reg1sa3-3": {
-            "codename": "PORSCHE",
+            "codename": "BENTLEY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -805,14 +911,16 @@ const data = {
               "y": 365.92758178711,
               "z": 153749.39673919
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Kuweires": {
-            "codename": "TOKYO",
-            "cost": 20,
+            "codename": "DRESDEN",
+            "cost": 30,
             "dead": false,
             "location": {
               "lat": 36.18937442608,
@@ -821,13 +929,32 @@ const data = {
               "y": 366.00036621094,
               "z": 154262.765625
             },
+            "missiontype": "OCA",
+            "spawned": true,
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
+          "Minakh": {
+            "codename": "ATLANTA",
+            "cost": 10,
+            "dead": false,
+            "location": {
+              "lat": 36.522812218953,
+              "lon": 37.033622455645,
+              "x": 163870.921875,
+              "y": 492.00051879883,
+              "z": 106743.0390625
+            },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Taftanaz": {
-            "codename": "TOKYO",
-            "cost": 20,
+            "codename": "TAMPA",
+            "cost": 10,
             "dead": false,
             "location": {
               "lat": 35.973223381816,
@@ -836,6 +963,8 @@ const data = {
               "y": 311.00030517578,
               "z": 83165.9296875
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
@@ -843,7 +972,7 @@ const data = {
         },
         "Coast": {
           "Bassel Al-Assad": {
-            "codename": "TOKYO",
+            "codename": "MOSCOW",
             "cost": 20,
             "dead": false,
             "location": {
@@ -853,27 +982,31 @@ const data = {
               "y": 28.363424301147,
               "z": 5843.9418945313
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Coast_0_airspace": {
-            "codename": "ATHENS",
+            "codename": "MEMPHIS",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 34.805554187054,
-              "lon": 36.109963812014,
-              "x": -24578.038217774,
-              "y": 220.11111450195,
-              "z": 18418.70649026
+              "lat": 35.1834336817,
+              "lon": 36.433251796053,
+              "x": 16537.148030378,
+              "y": 194.21420288086,
+              "z": 49078.389965941
             },
+            "missiontype": "CAP",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           },
           "Coast_1_Reg2EWR-1": {
-            "codename": "SEOUL",
+            "codename": "WROCLAW",
             "cost": 2,
             "dead": false,
             "location": {
@@ -883,13 +1016,15 @@ const data = {
               "y": 86.610084533691,
               "z": -4832.0792309659
             },
+            "missiontype": "SEAD",
             "sitetype": "EWR",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "EWR"
           },
           "Coast_1_Reg2EWR-1-SHORAD": {
-            "codename": "TULSA",
+            "codename": "SHANGHAI",
             "cost": 0,
             "dead": false,
             "location": {
@@ -899,12 +1034,13 @@ const data = {
               "y": 86.610084533691,
               "z": -4832.0792309659
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Coast_1_Reg2EWR-2": {
-            "codename": "MADRID",
+            "codename": "KIEV",
             "cost": 2,
             "dead": false,
             "location": {
@@ -914,13 +1050,15 @@ const data = {
               "y": 8.467529296875,
               "z": 3129.1466512494
             },
+            "missiontype": "SEAD",
             "sitetype": "EWR",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "EWR"
           },
           "Coast_1_Reg2EWR-2-SHORAD": {
-            "codename": "WARSAW",
+            "codename": "MADRID",
             "cost": 0,
             "dead": false,
             "location": {
@@ -930,6 +1068,7 @@ const data = {
               "y": 8.467529296875,
               "z": 3129.1466512494
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
@@ -945,12 +1084,14 @@ const data = {
               "y": 22.865516662598,
               "z": 6674.5737304688
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FACILITY"
           },
           "Coast_1_Reg2Factory-2": {
-            "codename": "HAMBURG",
+            "codename": "DRESDEN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -960,12 +1101,14 @@ const data = {
               "y": 23.079864501953,
               "z": 5699.9438476563
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Coast_1_Reg2Factory-3": {
-            "codename": "CAIRO",
+            "codename": "TAMPA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -975,12 +1118,14 @@ const data = {
               "y": 6.941249370575,
               "z": -4582.171875
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Coast_1_Reg2Sa2-1": {
-            "codename": "JAGUAR",
+            "codename": "TRIUMPH",
             "cost": 3,
             "dead": false,
             "location": {
@@ -990,13 +1135,15 @@ const data = {
               "y": 20.001842498779,
               "z": 3311.0138628819
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Coast_1_Reg2Sa2-2": {
-            "codename": "JAGUAR",
+            "codename": "PONTIAC",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1006,45 +1153,15 @@ const data = {
               "y": 12.056257247925,
               "z": -8445.6026378981
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
-            "status": 0,
-            "strategic": true,
-            "type": "SAM"
-          },
-          "Coast_1_Reg2Sa2-3": {
-            "codename": "SEAT",
-            "cost": 3,
-            "dead": false,
-            "location": {
-              "lat": 35.570818246677,
-              "lon": 35.804618323465,
-              "x": 61181.958186232,
-              "y": 42.875106811523,
-              "z": -6792.4020363617
-            },
-            "sitetype": "SA-2",
-            "status": 0,
-            "strategic": true,
-            "type": "SAM"
-          },
-          "Coast_1_Reg2Sa2-4": {
-            "codename": "LOLA",
-            "cost": 3,
-            "dead": false,
-            "location": {
-              "lat": 35.235080441207,
-              "lon": 35.957755639129,
-              "x": 23489.999512777,
-              "y": 11.79111289978,
-              "z": 5943.6219677357
-            },
-            "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Coast_1_Reg2Sa2-5": {
-            "codename": "JEEP",
+            "codename": "SAAB",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1054,13 +1171,15 @@ const data = {
               "y": 87.347457885742,
               "z": 2726.5911898609
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Coast_1_Reg2Sa2-6": {
-            "codename": "PORSCHE",
+            "codename": "NISSAN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1070,13 +1189,15 @@ const data = {
               "y": 7.8301362991333,
               "z": 6618.5626797794
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Coast_1_reg1ship1": {
-            "codename": "MELBOURNE",
+            "codename": "TAIPEI",
             "cost": 15,
             "dead": false,
             "location": {
@@ -1086,12 +1207,14 @@ const data = {
               "y": 0,
               "z": -261806.0144652
             },
+            "missiontype": "ANTISHIP",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SEA"
           },
           "Coast_1_reg1ship2": {
-            "codename": "PHOENIX",
+            "codename": "ATLANTA",
             "cost": 15,
             "dead": false,
             "location": {
@@ -1101,12 +1224,14 @@ const data = {
               "y": 0,
               "z": -26878.259058638
             },
+            "missiontype": "ANTISHIP",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SEA"
           },
           "Coast_1_reg1ship3": {
-            "codename": "DALLAS",
+            "codename": "ZURICH",
             "cost": 15,
             "dead": false,
             "location": {
@@ -1116,12 +1241,14 @@ const data = {
               "y": 0,
               "z": -11635.372398446
             },
+            "missiontype": "ANTISHIP",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SEA"
           },
           "Coast_1_reg1ship4": {
-            "codename": "MUMBAI",
+            "codename": "DENVER",
             "cost": 15,
             "dead": false,
             "location": {
@@ -1131,6 +1258,8 @@ const data = {
               "y": 0,
               "z": -33310.950325095
             },
+            "missiontype": "ANTISHIP",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SEA"
@@ -1146,12 +1275,13 @@ const data = {
               "y": 688.00067138672,
               "z": 206598.1768283
             },
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Coast_1_reg1trigger4": {
-            "codename": "HANOI",
+            "codename": "DUBLIN",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1161,12 +1291,13 @@ const data = {
               "y": 688.00067138672,
               "z": 206332.82811697
             },
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Coast_1_reg1trigger5": {
-            "codename": "LAGOS",
+            "codename": "KYOTO",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1176,12 +1307,13 @@ const data = {
               "y": 688.00067138672,
               "z": 206681.70483615
             },
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Coast_1_reg2aaa1": {
-            "codename": "MUNICH",
+            "codename": "PARIS",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1191,12 +1323,14 @@ const data = {
               "y": 15.979866027832,
               "z": -7114.8535068998
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Coast_1_reg2aaa2": {
-            "codename": "BEIJING",
+            "codename": "MILAN",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1206,12 +1340,14 @@ const data = {
               "y": 28.600542068481,
               "z": 5728.5072350574
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Coast_1_reg2aaa3": {
-            "codename": "DELHI",
+            "codename": "XIAN",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1221,12 +1357,14 @@ const data = {
               "y": 8.7021436691284,
               "z": 5403.3662699937
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Coast_1_reg2aaa4": {
-            "codename": "DETROIT",
+            "codename": "OSAKA",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1236,12 +1374,201 @@ const data = {
               "y": 3.0000033378601,
               "z": -3047.8986660386
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
+          "Coast_1_reg2cas1": {
+            "codename": "RIO",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.217356044898,
+              "lon": 37.157768486044,
+              "x": 129764.05435062,
+              "y": 380.17239379883,
+              "z": 117213.17860894
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas10": {
+            "codename": "KARACHI",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.178903393377,
+              "lon": 37.436211486748,
+              "x": 125058.76608811,
+              "y": 345.00033569336,
+              "z": 142174.14509473
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas11": {
+            "codename": "STOCKHOLM",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.188112307876,
+              "lon": 37.428085865056,
+              "x": 126092.12794603,
+              "y": 355.49319458008,
+              "z": 141459.92339643
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas2": {
+            "codename": "DALLAS",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.242203885784,
+              "lon": 37.105409440326,
+              "x": 132611.33196801,
+              "y": 410.52603149414,
+              "z": 112560.29695495
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas3": {
+            "codename": "DETROIT",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.199050349708,
+              "lon": 37.130971105643,
+              "x": 127779.40039625,
+              "y": 398.88980102539,
+              "z": 114765.10779577
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas4": {
+            "codename": "VIENNA",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.170617682183,
+              "lon": 37.122477236858,
+              "x": 124639.93781804,
+              "y": 376.16937255859,
+              "z": 113940.33821451
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas5": {
+            "codename": "LAGOS",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.196454627242,
+              "lon": 37.161848863532,
+              "x": 127438.37121451,
+              "y": 391.1110534668,
+              "z": 117536.02003562
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas6": {
+            "codename": "PHOENIX",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.267599079237,
+              "lon": 37.18957945242,
+              "x": 135283.93929718,
+              "y": 391.85009765625,
+              "z": 120176.93919532
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas7": {
+            "codename": "HOUSTON",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.244614578991,
+              "lon": 37.164694492413,
+              "x": 132776.20123073,
+              "y": 376.9938659668,
+              "z": 117893.05745575
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas8": {
+            "codename": "BOSTON",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.224609161555,
+              "lon": 37.15956196001,
+              "x": 130565.62127422,
+              "y": 375.63525390625,
+              "z": 117389.67721953
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
+          "Coast_1_reg2cas9": {
+            "codename": "WARSAW",
+            "cost": 2,
+            "dead": false,
+            "location": {
+              "lat": 36.25365334659,
+              "lon": 37.130937043624,
+              "x": 133836.93958513,
+              "y": 434.1875,
+              "z": 114878.86644805
+            },
+            "missiontype": "CAS",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "FRONTLINE"
+          },
           "Coast_1_reg2sa3-1": {
-            "codename": "BENTLEY",
+            "codename": "LOTUS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1251,13 +1578,15 @@ const data = {
               "y": 7.5730867385864,
               "z": -9233.330556488
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Coast_1_reg2sa3-2": {
-            "codename": "DODGE",
+            "codename": "SUBARU",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1267,13 +1596,15 @@ const data = {
               "y": 54.953117370605,
               "z": 4257.1072263719
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Coast_1_reg2sa3-3": {
-            "codename": "LEXUS",
+            "codename": "MAZDA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1283,13 +1614,15 @@ const data = {
               "y": 11.20223903656,
               "z": 5540.6545150556
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Coast_1_reg2sa5-1": {
-            "codename": "NISSAN",
+            "codename": "OPEL",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1299,13 +1632,15 @@ const data = {
               "y": 1379.6651611328,
               "z": 28541.101571277
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-5",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Coast_1_reg2sa5-1-SHORAD": {
-            "codename": "WARSAW",
+            "codename": "ATHENS",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1315,12 +1650,13 @@ const data = {
               "y": 1368.0145263672,
               "z": 28495.800785932
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Coast_1_reg2static1": {
-            "codename": "SHANGHAI",
+            "codename": "CHENGDU",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1330,12 +1666,13 @@ const data = {
               "y": 0,
               "z": -3595.9565093462
             },
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Coast_1_reg2static2": {
-            "codename": "MEMPHIS",
+            "codename": "OSLO",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1345,6 +1682,7 @@ const data = {
               "y": 688.00067138672,
               "z": 206386.53706058
             },
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
@@ -1353,7 +1691,7 @@ const data = {
         "Cyprus": [],
         "Damascus": {
           "Mezzeh": {
-            "codename": "MILAN",
+            "codename": "SEOUL",
             "cost": 20,
             "dead": false,
             "location": {
@@ -1363,6 +1701,8 @@ const data = {
               "y": 718.09167480469,
               "z": 25888.533203125
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
@@ -1370,7 +1710,7 @@ const data = {
         },
         "Hama": {
           "Hama": {
-            "codename": "MELBOURNE",
+            "codename": "HOUSTON",
             "cost": 20,
             "dead": false,
             "location": {
@@ -1380,27 +1720,31 @@ const data = {
               "y": 300.00030517578,
               "z": 75521.7109375
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Hama_0_airspace": {
-            "codename": "SYDNEY",
+            "codename": "KIEV",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 34.954809321463,
-              "lon": 36.726323094836,
-              "x": -9473.5862573774,
-              "y": 407.99948120117,
-              "z": 75191.345089529
+              "lat": 34.957839466985,
+              "lon": 36.725823348925,
+              "x": -9136.4267255768,
+              "y": 408.06478881836,
+              "z": 75153.35105334
             },
+            "missiontype": "CAP",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           },
           "Hama_1_Reg3EWR-1": {
-            "codename": "HOUSTON",
+            "codename": "MUNICH",
             "cost": 2,
             "dead": false,
             "location": {
@@ -1410,13 +1754,15 @@ const data = {
               "y": 522.35296630859,
               "z": 91633.777176644
             },
+            "missiontype": "SEAD",
             "sitetype": "EWR",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "EWR"
           },
           "Hama_1_Reg3EWR-1-SHORAD": {
-            "codename": "RIO",
+            "codename": "PHOENIX",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1426,12 +1772,13 @@ const data = {
               "y": 522.35296630859,
               "z": 91633.777176644
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Hama_1_Reg3EWR-2": {
-            "codename": "DELHI",
+            "codename": "ISTANBUL",
             "cost": 2,
             "dead": false,
             "location": {
@@ -1441,13 +1788,15 @@ const data = {
               "y": 618.38500976563,
               "z": 74999.235154243
             },
+            "missiontype": "SEAD",
             "sitetype": "EWR",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "EWR"
           },
           "Hama_1_Reg3EWR-2-SHORAD": {
-            "codename": "MESA",
+            "codename": "GIZA",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1457,12 +1806,13 @@ const data = {
               "y": 618.38500976563,
               "z": 74999.235154243
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Hama_1_Reg3Factory-1": {
-            "codename": "LAGOS",
+            "codename": "SEOUL",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1472,27 +1822,14 @@ const data = {
               "y": 271.67144775391,
               "z": 63085.357421875
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-10": {
-            "codename": "BOSTON",
-            "cost": 3,
-            "dead": false,
-            "location": {
-              "lat": 34.753507102997,
-              "lon": 36.674367190809,
-              "x": -31693.95703125,
-              "y": 489.89849853516,
-              "z": 69928.09375
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "FACTORY"
-          },
-          "Hama_1_Reg3Factory-11": {
-            "codename": "SYDNEY",
+            "codename": "TULSA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1502,12 +1839,31 @@ const data = {
               "y": 481.91882324219,
               "z": 73932.6484375
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
+            "status": 0,
+            "strategic": true,
+            "type": "FACTORY"
+          },
+          "Hama_1_Reg3Factory-11": {
+            "codename": "PRAGUE",
+            "cost": 3,
+            "dead": false,
+            "location": {
+              "lat": 34.753507102997,
+              "lon": 36.674367190809,
+              "x": -31693.95703125,
+              "y": 489.89849853516,
+              "z": 69928.09375
+            },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-12": {
-            "codename": "MESA",
+            "codename": "HANOI",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1517,27 +1873,14 @@ const data = {
               "y": 508.46719360352,
               "z": 72891.135253906
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
-          },
-          "Hama_1_Reg3Factory-13": {
-            "codename": "TAMPA",
-            "cost": 15000,
-            "dead": false,
-            "location": {
-              "lat": 34.717031826359,
-              "lon": 36.642764919742,
-              "x": -35672.525317383,
-              "y": 489.29885864258,
-              "z": 66939.963427734
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Hama_1_Reg3Factory-14": {
-            "codename": "LISBON",
+            "codename": "ATHENS",
             "cost": 15,
             "dead": false,
             "location": {
@@ -1547,12 +1890,14 @@ const data = {
               "y": 498.69812011719,
               "z": 64639.97265625
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-2": {
-            "codename": "ROME",
+            "codename": "DETROIT",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1562,12 +1907,14 @@ const data = {
               "y": 253.97911071777,
               "z": 75467.26171875
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Hama_1_Reg3Factory-3": {
-            "codename": "RIO",
+            "codename": "OSLO",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1577,12 +1924,14 @@ const data = {
               "y": 295.69012451172,
               "z": 74369.125
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-4": {
-            "codename": "MUNICH",
+            "codename": "PARIS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1592,12 +1941,14 @@ const data = {
               "y": 302.60485839844,
               "z": 72583.749511719
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Hama_1_Reg3Factory-5": {
-            "codename": "TULSA",
+            "codename": "VENICE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1607,27 +1958,31 @@ const data = {
               "y": 286.68591308594,
               "z": 80978.91796875
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Hama_1_Reg3Factory-6": {
-            "codename": "MELBOURNE",
+            "codename": "TAMPA",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 35.110090493684,
-              "lon": 36.787078630231,
-              "x": 7626.484375,
-              "y": 284.57217407227,
-              "z": 81121.986328125
+              "lat": 35.140084850697,
+              "lon": 36.785232600551,
+              "x": 10957.401367188,
+              "y": 288.09030151367,
+              "z": 81027.74609375
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Hama_1_Reg3Factory-7": {
-            "codename": "HAMBURG",
+            "codename": "STOCKHOLM",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1637,12 +1992,14 @@ const data = {
               "y": 318.59661865234,
               "z": 80308.784179688
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Hama_1_Reg3Factory-8": {
-            "codename": "SHANGHAI",
+            "codename": "TOKYO",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1652,12 +2009,14 @@ const data = {
               "y": 350.4211730957,
               "z": 78664.484375
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Hama_1_Reg3Factory-9": {
-            "codename": "WARSAW",
+            "codename": "HAMBURG",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1667,12 +2026,14 @@ const data = {
               "y": 404.28985595703,
               "z": 69359.4296875
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "FACTORY"
           },
           "Hama_1_Reg3Sa2-1": {
-            "codename": "SUBARU",
+            "codename": "LEXUS",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1682,7 +2043,9 @@ const data = {
               "y": 410.25729370117,
               "z": 90877.709118812
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
@@ -1698,29 +2061,15 @@ const data = {
               "y": 274.00469970703,
               "z": 66284.334032143
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
-            "status": 0,
-            "strategic": true,
-            "type": "SAM"
-          },
-          "Hama_1_Reg3Sa2-3": {
-            "codename": "FORD",
-            "cost": 3,
-            "dead": false,
-            "location": {
-              "lat": 35.068487808035,
-              "lon": 36.721622533131,
-              "x": 3146.1588439178,
-              "y": 313.16564941406,
-              "z": 75049.903140017
-            },
-            "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-1": {
-            "codename": "PONTIAC",
+            "codename": "FORD",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1730,13 +2079,15 @@ const data = {
               "y": 330.43118286133,
               "z": 72591.079059033
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-6",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-2": {
-            "codename": "CADDY",
+            "codename": "BUICK",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1746,29 +2097,15 @@ const data = {
               "y": 673.41595458984,
               "z": 79978.45563149
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-6",
-            "status": 0,
-            "strategic": true,
-            "type": "SAM"
-          },
-          "Hama_1_Reg3Sa6-3": {
-            "codename": "SEAT",
-            "cost": 3,
-            "dead": false,
-            "location": {
-              "lat": 35.008840424473,
-              "lon": 36.829494201364,
-              "x": -3689.7398558994,
-              "y": 670.83319091797,
-              "z": 84743.731660679
-            },
-            "sitetype": "SA-6",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-4": {
-            "codename": "CHEVY",
+            "codename": "JAGUAR",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1778,13 +2115,15 @@ const data = {
               "y": 542.53948974609,
               "z": 69691.096526066
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-6",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_Reg3Sa6-5": {
-            "codename": "BUICK",
+            "codename": "CADDY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1794,13 +2133,15 @@ const data = {
               "y": 650.96508789063,
               "z": 79449.59009056
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-6",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_reg3sa5-1": {
-            "codename": "OPEL",
+            "codename": "SUBARU",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1810,13 +2151,15 @@ const data = {
               "y": 632.71752929688,
               "z": 76515.102536265
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-5",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_reg3sa5-1-SHORAD": {
-            "codename": "SEOUL",
+            "codename": "LONDON",
             "cost": 0,
             "dead": false,
             "location": {
@@ -1826,12 +2169,13 @@ const data = {
               "y": 631.98840332031,
               "z": 76583.644067287
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Hama_1_reg4aaa1": {
-            "codename": "DETROIT",
+            "codename": "KURSK",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1841,12 +2185,14 @@ const data = {
               "y": 273.1760559082,
               "z": 63452.810353592
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Hama_1_reg4aaa2": {
-            "codename": "DALLAS",
+            "codename": "XIAN",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1856,12 +2202,14 @@ const data = {
               "y": 300.00030517578,
               "z": 74922.713488508
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Hama_1_reg4aaa3": {
-            "codename": "PARIS",
+            "codename": "MOSCOW",
             "cost": 5,
             "dead": false,
             "location": {
@@ -1871,12 +2219,14 @@ const data = {
               "y": 298.85766601563,
               "z": 80701.533493484
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Hama_1_reg4sa3-1": {
-            "codename": "NISSAN",
+            "codename": "LOLA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1886,13 +2236,15 @@ const data = {
               "y": 305.68905639648,
               "z": 78899.476968975
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_reg4sa3-2": {
-            "codename": "LEXUS",
+            "codename": "JEEP",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1902,13 +2254,15 @@ const data = {
               "y": 670.50915527344,
               "z": 85079.982678406
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_reg4sa3-3": {
-            "codename": "BENTLEY",
+            "codename": "DODGE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1918,13 +2272,15 @@ const data = {
               "y": 393.74108886719,
               "z": 70106.344045975
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_reg4sa3-4": {
-            "codename": "NOBLE",
+            "codename": "MAZDA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1934,13 +2290,15 @@ const data = {
               "y": 513.61376953125,
               "z": 77735.882591621
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_reg4sa3-5": {
-            "codename": "TRIUMPH",
+            "codename": "CHEVY",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1950,13 +2308,15 @@ const data = {
               "y": 490.10198974609,
               "z": 65100.96877874
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Hama_1_reg4sa3-6": {
-            "codename": "DODGE",
+            "codename": "PORSCHE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -1966,7 +2326,9 @@ const data = {
               "y": 559.43634033203,
               "z": 73645.994870648
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
@@ -1982,15 +2344,34 @@ const data = {
               "y": 639.89178466797,
               "z": 75636.081172836
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-3",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           }
         },
         "Hatay": {
+          "Hatay": {
+            "codename": "HANOI",
+            "cost": 10,
+            "dead": false,
+            "location": {
+              "lat": 36.371269972814,
+              "lon": 36.298090184913,
+              "x": 148653.765625,
+              "y": 77.175567626953,
+              "z": 40403.9453125
+            },
+            "missiontype": "OCA",
+            "spawned": true,
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
           "Hatay_1_reg1AR1": {
-            "codename": "TAMPA",
+            "codename": "OSAKA",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2000,12 +2381,14 @@ const data = {
               "y": 86.58854675293,
               "z": 34228.511687189
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR10": {
-            "codename": "LONDON",
+            "codename": "TAIPEI",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2015,12 +2398,14 @@ const data = {
               "y": 92.727607727051,
               "z": 63676.404089757
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR11": {
-            "codename": "MOSCOW",
+            "codename": "MELBOURNE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2030,12 +2415,14 @@ const data = {
               "y": 209.03721618652,
               "z": 61963.108628268
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR12": {
-            "codename": "SHANGHAI",
+            "codename": "ROME",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2045,12 +2432,14 @@ const data = {
               "y": 190.10432434082,
               "z": 41100.572301822
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR13": {
-            "codename": "PRAGUE",
+            "codename": "DELHI",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2060,6 +2449,8 @@ const data = {
               "y": 9.1822948455811,
               "z": 11963.456406437
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
@@ -2075,27 +2466,48 @@ const data = {
               "y": 90.027702331543,
               "z": 26850.141409408
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR16": {
-            "codename": "BEIJING",
+            "codename": "MEMPHIS",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 36.539311744255,
-              "lon": 36.319643835309,
-              "x": 167245.61678994,
-              "y": 578.76910400391,
-              "z": 42856.696413803
+              "lat": 36.514351520227,
+              "lon": 36.519067511294,
+              "x": 163997,
+              "y": 0,
+              "z": 60641
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
+          "Hatay_1_reg1AR2": {
+            "codename": "CAIRO",
+            "cost": 3,
+            "dead": false,
+            "location": {
+              "lat": 36.180751796563,
+              "lon": 36.147988883283,
+              "x": 127901.06248514,
+              "y": 86.747169494629,
+              "z": 26311.500903153
+            },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
+            "status": 22,
+            "strategic": false,
+            "type": "SPECIALFORCES"
+          },
           "Hatay_1_reg1AR3": {
-            "codename": "MADRID",
+            "codename": "CHICAGO",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2105,12 +2517,14 @@ const data = {
               "y": 88.456977844238,
               "z": 30185.192921246
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR4": {
-            "codename": "ROME",
+            "codename": "KYOTO",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2120,12 +2534,14 @@ const data = {
               "y": 450.30117797852,
               "z": 30080.49557171
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR6": {
-            "codename": "VIENNA",
+            "codename": "LIVERPOOL",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2135,27 +2551,31 @@ const data = {
               "y": 85.231674194336,
               "z": 54727.689295043
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
-          "Hatay_1_reg1AR7-2": {
-            "codename": "PHOENIX",
+          "Hatay_1_reg1AR7-3": {
+            "codename": "LAGOS",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 36.509899275567,
-              "lon": 36.415607336736,
-              "x": 163746.86979154,
-              "y": 69.999084472656,
-              "z": 51361.374170183
+              "lat": 36.501930786796,
+              "lon": 36.415052921211,
+              "x": 162864.04066404,
+              "y": 70.944259643555,
+              "z": 51287.967573119
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1AR8": {
-            "codename": "BOSTON",
+            "codename": "MILAN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2165,12 +2585,31 @@ const data = {
               "y": 121.10816955566,
               "z": 49842.058499685
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
+            "status": 0,
+            "strategic": false,
+            "type": "SPECIALFORCES"
+          },
+          "Hatay_1_reg1AR9": {
+            "codename": "SHANGHAI",
+            "cost": 3,
+            "dead": false,
+            "location": {
+              "lat": 36.42790242128,
+              "lon": 36.22521967505,
+              "x": 155123.21155393,
+              "y": 306.02172851563,
+              "z": 34045.722551761
+            },
+            "missiontype": "ARMEDRECON",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1ar15": {
-            "codename": "MUNICH",
+            "codename": "TEHRAN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2180,30 +2619,70 @@ const data = {
               "y": 6.7204561233521,
               "z": 5596.151217831
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           },
           "Hatay_1_reg1ar5": {
-            "codename": "TULSA",
+            "codename": "JAKARTA",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 36.461922006346,
-              "lon": 36.274988599858,
-              "x": 158770.75219939,
-              "y": 312.447265625,
-              "z": 38615.180074983
+              "lat": 36.33046814169,
+              "lon": 36.36116360837,
+              "x": 143970,
+              "y": 73,
+              "z": 45940
             },
+            "missiontype": "ARMEDRECON",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "SPECIALFORCES"
           }
         },
+        "Homs Refinery": {
+          "Homs Refinery_0_airspace": {
+            "codename": "LISBON",
+            "cost": 0,
+            "dead": false,
+            "location": {
+              "lat": 34.716939243493,
+              "lon": 36.641304542385,
+              "x": -35679.6546875,
+              "y": 489.44641113281,
+              "z": 66805.9609375
+            },
+            "missiontype": "CAP",
+            "spawned": true,
+            "status": 0,
+            "strategic": false,
+            "type": "AIRSPACE"
+          },
+          "Homs Refinery_1_Reg3Factory-13": {
+            "codename": "TEHRAN",
+            "cost": 10000,
+            "dead": false,
+            "location": {
+              "lat": 34.716939243493,
+              "lon": 36.641304542385,
+              "x": -35679.6546875,
+              "y": 489.44641113281,
+              "z": 66805.9609375
+            },
+            "missiontype": "STRIKE",
+            "spawned": false,
+            "status": 0,
+            "strategic": true,
+            "type": "FACILITY"
+          }
+        },
         "Israel": [],
         "Lebanon": {
           "Beirut-Rafic Hariri": {
-            "codename": "HANOI",
+            "codename": "SHENZEN",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2213,6 +2692,8 @@ const data = {
               "y": 12.000012397766,
               "z": -42276.67578125
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
@@ -2230,27 +2711,48 @@ const data = {
               "y": 386.22402954102,
               "z": 221438.15625
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Palmyra_0_airspace": {
-            "codename": "PHOENIX",
+            "codename": "KYOTO",
             "cost": 0,
             "dead": false,
             "location": {
-              "lat": 35.36195374152,
-              "lon": 38.498287250688,
-              "x": 33433.055942587,
-              "y": 378.43157958984,
-              "z": 237221.19863987
+              "lat": 35.237095240222,
+              "lon": 38.390294990457,
+              "x": 19640.845959145,
+              "y": 507.34069824219,
+              "z": 227325.02293517
             },
+            "missiontype": "CAP",
+            "spawned": true,
             "status": 0,
             "strategic": false,
             "type": "AIRSPACE"
           },
+          "Palmyra_1_Reg4Comms1": {
+            "codename": "PHOENIX",
+            "cost": 1,
+            "dead": false,
+            "location": {
+              "lat": 36.129810745166,
+              "lon": 38.942693665147,
+              "x": 118482.03678365,
+              "y": 278.3674621582,
+              "z": 277644.59369054
+            },
+            "missiontype": "STRIKE",
+            "spawned": false,
+            "status": 0,
+            "strategic": true,
+            "type": "FACILITY"
+          },
           "Palmyra_1_Reg4EWR-1": {
-            "codename": "SHANGHAI",
+            "codename": "BEIJING",
             "cost": 2,
             "dead": false,
             "location": {
@@ -2260,13 +2762,15 @@ const data = {
               "y": 578.12042236328,
               "z": 155442.53996567
             },
+            "missiontype": "SEAD",
             "sitetype": "EWR",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "EWR"
           },
           "Palmyra_1_Reg4EWR-1-SHORAD": {
-            "codename": "TULSA",
+            "codename": "MOSCOW",
             "cost": 0,
             "dead": false,
             "location": {
@@ -2276,6 +2780,7 @@ const data = {
               "y": 578.12042236328,
               "z": 155442.53996567
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
@@ -2291,13 +2796,15 @@ const data = {
               "y": 393.18353271484,
               "z": 222378.13804218
             },
+            "missiontype": "SEAD",
             "sitetype": "EWR",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "EWR"
           },
           "Palmyra_1_Reg4EWR-2-SHORAD": {
-            "codename": "PRAGUE",
+            "codename": "MUNICH",
             "cost": 0,
             "dead": false,
             "location": {
@@ -2307,12 +2814,13 @@ const data = {
               "y": 393.18353271484,
               "z": 222378.13804218
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Palmyra_1_Reg4EWR-3": {
-            "codename": "MELBOURNE",
+            "codename": "KARACHI",
             "cost": 2,
             "dead": false,
             "location": {
@@ -2322,13 +2830,15 @@ const data = {
               "y": 335.00033569336,
               "z": 243697.30689676
             },
+            "missiontype": "SEAD",
             "sitetype": "EWR",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "EWR"
           },
           "Palmyra_1_Reg4EWR-3-SHORAD": {
-            "codename": "HAMBURG",
+            "codename": "MEMPHIS",
             "cost": 0,
             "dead": false,
             "location": {
@@ -2338,12 +2848,13 @@ const data = {
               "y": 335.00033569336,
               "z": 243697.30689676
             },
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "SHORAD"
           },
           "Palmyra_1_Reg4Factory-1": {
-            "codename": "RIO",
+            "codename": "VENICE",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2353,27 +2864,31 @@ const data = {
               "y": 228.68086242676,
               "z": 278663.37683105
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "AMMODUMP"
           },
           "Palmyra_1_Reg4Factory-2": {
-            "codename": "PRAGUE",
+            "codename": "ATLANTA",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 35.962105858551,
-              "lon": 38.986941437404,
-              "x": 99879.528116862,
-              "y": 243.83892822266,
-              "z": 281623.4909668
+              "lat": 35.9639595112,
+              "lon": 38.983141653281,
+              "x": 100085.17683919,
+              "y": 239.04005432129,
+              "z": 281280.90836589
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
           "Palmyra_1_Reg4Factory-3": {
-            "codename": "ATHENS",
+            "codename": "TEHRAN",
             "cost": 3,
             "dead": false,
             "location": {
@@ -2383,44 +2898,50 @@ const data = {
               "y": 253.37284851074,
               "z": 286485.70458984
             },
+            "missiontype": "STRIKE",
+            "spawned": false,
             "status": 0,
             "strategic": true,
-            "type": "FACTORY"
+            "type": "FUELDUMP"
           },
-          "Palmyra_1_Reg4Sa2-3": {
-            "codename": "MAZDA",
+          "Palmyra_1_Reg4Sa2-1": {
+            "codename": "PONTIAC",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 35.790250300215,
-              "lon": 38.634566665795,
-              "x": 80880.138068449,
-              "y": 321.2385559082,
-              "z": 249778.29329939
+              "lat": 34.534951417181,
+              "lon": 37.584972085544,
+              "x": -57483.928309291,
+              "y": 573.76892089844,
+              "z": 152946.32391753
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
-          "Palmyra_1_Reg4Sa2-4": {
-            "codename": "LOTUS",
+          "Palmyra_1_Reg4Sa2-2": {
+            "codename": "TESLA",
             "cost": 3,
             "dead": false,
             "location": {
-              "lat": 35.759683638956,
-              "lon": 38.510010982714,
-              "x": 77539.080848055,
-              "y": 352.39202880859,
-              "z": 238505.69244463
+              "lat": 34.490716139616,
+              "lon": 37.62671229495,
+              "x": -62442.422105788,
+              "y": 535.11138916016,
+              "z": 156710.38951084
             },
+            "missiontype": "SEAD",
             "sitetype": "SA-2",
+            "spawned": false,
             "status": 0,
             "strategic": true,
             "type": "SAM"
           },
           "Palmyra_1_reg3aaa1": {
-            "codename": "CAIRO",
+            "codename": "HELSINKI",
             "cost": 5,
             "dead": false,
             "location": {
@@ -2430,12 +2951,14 @@ const data = {
               "y": 241.0283203125,
               "z": 286855.49035551
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Palmyra_1_reg3aaa2": {
-            "codename": "TOKYO",
+            "codename": "LAGOS",
             "cost": 5,
             "dead": false,
             "location": {
@@ -2445,12 +2968,14 @@ const data = {
               "y": 335.00033569336,
               "z": 243544.84058659
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Palmyra_1_reg3aaa3": {
-            "codename": "BERLIN",
+            "codename": "HANOI",
             "cost": 5,
             "dead": false,
             "location": {
@@ -2460,12 +2985,14 @@ const data = {
               "y": 403.90124511719,
               "z": 218557.88114598
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
           },
           "Palmyra_1_reg3aaa4": {
-            "codename": "LONDON",
+            "codename": "KURSK",
             "cost": 5,
             "dead": false,
             "location": {
@@ -2475,6 +3002,8 @@ const data = {
               "y": 548.00054931641,
               "z": 156904.67094396
             },
+            "missiontype": "BAI",
+            "spawned": false,
             "status": 0,
             "strategic": false,
             "type": "LOGISTICS"
@@ -2482,11 +3011,14 @@ const data = {
         },
         "Turkey": []
       },
+      "commander": {
+        "availablemissions": []
+      },
       "missions": [],
       "tickets": {
-        "current": 15,
-        "start": 300,
-        "text": "Critical"
+        "current": 760,
+        "start": 750,
+        "text": "Nominal"
       }
     },
     "2": {
@@ -2505,12 +3037,14 @@ const data = {
               "y": 18.946063995361,
               "z": -270072.28125
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Gazipasa": {
-            "codename": "PRAGUE",
+            "codename": "MUMBAI",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2520,6 +3054,8 @@ const data = {
               "y": 11.104940414429,
               "z": -320441.0625
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
@@ -2527,26 +3063,11 @@ const data = {
         },
         "Damascus": [],
         "Hama": [],
-        "Hatay": {
-          "Hatay": {
-            "codename": "MEMPHIS",
-            "cost": 20,
-            "dead": false,
-            "location": {
-              "lat": 36.371269972814,
-              "lon": 36.298090184913,
-              "x": 148653.765625,
-              "y": 77.175567626953,
-              "z": 40403.9453125
-            },
-            "status": 0,
-            "strategic": true,
-            "type": "AIRBASE"
-          }
-        },
+        "Hatay": [],
+        "Homs Refinery": [],
         "Israel": {
           "Naqoura": {
-            "codename": "MUMBAI",
+            "codename": "WARSAW",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2556,6 +3077,8 @@ const data = {
               "y": 115.27894592285,
               "z": -78642.609375
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
@@ -2565,7 +3088,7 @@ const data = {
         "Palmyra": [],
         "Turkey": {
           "Adana Sakirpasa": {
-            "codename": "PARIS",
+            "codename": "DUBLIN",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2575,57 +3098,65 @@ const data = {
               "y": 17.000017166138,
               "z": -47292.88671875
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "CV-59 Forrestal": {
-            "codename": "ATHENS",
+            "codename": "MILAN",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 35.889635603344,
-              "lon": 32.585580828459,
-              "x": 110897.6304712,
-              "y": 0.016897811740819,
-              "z": -296500.01860511
+              "lat": 35.889634821938,
+              "lon": 32.585576744914,
+              "x": 110897.56751321,
+              "y": 0.01700533440885,
+              "z": -296500.41602397
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "CVN-73 George Washington": {
-            "codename": "BEIJING",
+            "codename": "DRESDEN",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 35.774343313338,
-              "lon": 32.773152416656,
-              "x": 96985.158004631,
-              "y": 0.016300815435898,
-              "z": -280357.1104278
+              "lat": 35.774343630604,
+              "lon": 32.773154462428,
+              "x": 96985.180340391,
+              "y": 0.016020807899622,
+              "z": -280356.95139599
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "FARP Helena": {
-            "codename": "MUNICH",
+            "codename": "JAKARTA",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 36.7035699604,
-              "lon": 37.111042780003,
-              "x": 183785.96875,
-              "y": 629.93542480469,
-              "z": 114070.015625
+              "lat": 36.7029143769,
+              "lon": 37.11037775465,
+              "x": 183714.40625,
+              "y": 626.578125,
+              "z": 114009.171875
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "FARP Lancelot": {
-            "codename": "DETROIT",
+            "codename": "LISBON",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2635,12 +3166,14 @@ const data = {
               "y": 4.969174861908,
               "z": 25226.857421875
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Gaziantep": {
-            "codename": "PHOENIX",
+            "codename": "DENVER",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2650,12 +3183,14 @@ const data = {
               "y": 697.21142578125,
               "z": 146087.90625
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Gecitkale": {
-            "codename": "MILAN",
+            "codename": "OSLO",
             "cost": 20,
             "dead": false,
             "location": {
@@ -2665,89 +3200,105 @@ const data = {
               "y": 45.000045776367,
               "z": -199005.984375
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "Incirlik": {
-            "codename": "VIENNA",
+            "codename": "STOCKHOLM",
             "cost": 20,
             "dead": false,
             "location": {
               "lat": 36.994254281542,
               "lon": 35.412713065757,
               "x": 220387.578125,
-              "y": 47.570156097412,
+              "y": 47.783618927002,
               "z": -36463.7109375
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           },
           "LHA-4 Nassau": {
-            "codename": "MUMBAI",
+            "codename": "MESA",
             "cost": 20,
             "dead": false,
             "location": {
-              "lat": 35.355210010059,
-              "lon": 34.614169488629,
-              "x": 41407.661563194,
-              "y": -0.017346254779113,
-              "z": -115805.60340845
+              "lat": 35.355236950629,
+              "lon": 34.614188474426,
+              "x": 41410.573978452,
+              "y": -0.017787820870581,
+              "z": -115803.74341795
             },
+            "missiontype": "OCA",
+            "spawned": true,
             "status": 0,
             "strategic": true,
             "type": "AIRBASE"
           }
         }
       },
+      "commander": {
+        "availablemissions": {
+          "ANTISHIP": 4,
+          "ARMEDRECON": 16,
+          "BAI": 28,
+          "CAP": 5,
+          "CAS": 24,
+          "SEAD": 36,
+          "STRIKE": 32
+        }
+      },
       "missions": {
-        "5500": {
+        "5730": {
           "assigned": [{
             "aircraft": "A-10C",
             "group": "104th fs Maryland 1-1",
-            "iffmode3": "5500",
+            "iffmode3": "5730",
             "player": "kukiric"
           }],
-          "iffmode1": "53",
+          "iffmode1": "50",
           "state": "Active",
           "target": {
             "coalition": "1",
             "intel": 3,
             "location_degraded": {
-              "lat": 36.628000047773,
-              "lon": 37.051000030741,
-              "x": 175509.234375,
+              "lat": 35.920999980814,
+              "lon": 36.64099999986,
+              "x": 97891.6484375,
               "y": 0,
-              "z": 108535.7421875
+              "z": 69959.1875
             },
-            "name": "Aleppo_1_reg1CAS3",
+            "name": "Aleppo_1_Reg1Factory-3",
             "region": "Aleppo",
-            "status": 25
+            "status": 0
           },
-          "timeout": 64800,
-          "type": "CAS"
+          "timeout": 33331.5,
+          "type": "STRIKE"
         }
       },
       "tickets": {
-        "current": 150,
-        "start": 150,
+        "current": 190,
+        "start": 200,
         "text": "Nominal"
       }
     }
   },
-  "modeldate": "2016-6-21",
-  "modeltime": 0,
-  "abstime": 54000,
+  "date": "2022-03-18 16:12:32Z",
+  "modeldate": "1998-8-17",
+  "modeltime": 60,
   "players": {
-    "current": 2,
-    "max": 16,
+    "current": 0,
+    "max": 15
   },
-  "date": "2022-01-28 16:20:00Z",
-  "startdate": "2022-01-27 14:30:00Z",
   "sortie": "Flashpoint Levant",
+  "startdate": "2022-03-18 13:38:25Z",
   "theater": "Syria",
-  "version": "v0.11.0"
+  "version": "v0.9.4"
 };
 
 export type ExportData = typeof data;

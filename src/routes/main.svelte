@@ -64,6 +64,12 @@
 
 <section>
     <h1>Missions</h1>
+    <div class="mono spaced">
+        <strong>Available</strong>
+        {#each data.availableMissions as { type, count }}
+            <div>{padType(`${type}:`, 12)} {count}</div>
+        {/each}
+    </div>
     {#each data.missions as mission}
         <div class="mono spaced">
             <strong class="friendly">{mission.type}</strong>
