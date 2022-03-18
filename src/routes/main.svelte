@@ -49,7 +49,7 @@
         Campaign Started: {new Date(data.startDate).toLocaleString()}
     </div>
     <div class="mono">
-        DCS Local Time: {new Date(currentWorldDate).toLocaleString()}
+        DCS Local Time: {new Date(currentWorldDate).toLocaleString("default", { timeZone: "UTC" })}
     </div>
     <div class="mono">
         <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"].text}
