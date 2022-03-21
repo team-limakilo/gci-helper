@@ -164,6 +164,7 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
         headers: {
             "Cache-Control": "no-cache, must-revalidate",
             "Last-Modified": new Date(data.date).toUTCString(),
+            "Access-Control-Allow-Origin": "*",
         },
         body: {
             missions: getMissions(data, Coalition.Blue),
@@ -179,6 +180,7 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
             absTime: data.abstime,
             worldDate: getDCSDateTime(data.modeldate, data.abstime).toISOString(),
             startDate: data.startdate,
+            dcsVersion: data.dcs_version,
             players: data.players,
             pageTitle: customTitle,
             toJSON() {

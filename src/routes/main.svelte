@@ -157,6 +157,6 @@
     <div class="left dim">
         Last Update: {new Date(data.date).toLocaleString()}
     </div>
-    <div class="right dim">Server DCT Version: {version}</div>
+    <div class="right dim">DCS Version: {data.dcsVersion}, DCT Version: {version}</div>
     <br />
 </footer>

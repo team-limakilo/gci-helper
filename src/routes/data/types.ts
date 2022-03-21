@@ -16,6 +16,7 @@ export interface ClientData extends ToJSON {
     absTime: number;
     startDate: string;
     worldDate: string;
+    dcsVersion: string;
     players: { current: number, max: number },
     pageTitle?: string;
 }
