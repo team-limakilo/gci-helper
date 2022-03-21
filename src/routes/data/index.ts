@@ -178,11 +178,13 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
             version: data.version,
             date: data.date,
             absTime: data.abstime,
+            modelTime: data.modeltime,
             worldDate: getDCSDateTime(data.modeldate, data.abstime).toISOString(),
             startDate: data.startdate,
             dcsVersion: data.dcs_version,
             players: data.players,
             pageTitle: customTitle,
+            restartPeriod: data.period,
             toJSON() {
                 return this;
             },

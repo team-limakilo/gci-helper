@@ -14,10 +14,12 @@ export interface ClientData extends ToJSON {
     version: string;
     date: string;
     absTime: number;
+    modelTime: number;
     startDate: string;
     worldDate: string;
     dcsVersion: string;
     players: { current: number, max: number },
+    restartPeriod: number;
     pageTitle?: string;
 }
 

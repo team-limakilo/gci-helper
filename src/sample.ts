@@ -3288,10 +3288,11 @@ const data = {
       }
     }
   },
+  "period": 7200,
   "dcs_version": "2.7.11.21408",
   "date": "2022-03-18 16:12:32Z",
   "modeldate": "1998-8-17",
-  "modeltime": 60,
+  "modeltime": 180,
   "players": {
     "current": 2,
     "max": 15

@@ -3,8 +3,9 @@
     import { ClientData, Coalition } from "./data/types";
     export let data: ClientData;
 
-    let currentWorldDate: number;
-    let missionTimers: { [key: string]: string } = {};
+    let restartTimeLeft: number;
+    let currentWorldTime: number;
+    let missionTimers: { [key: string]: number } = {};
 
     function padTime(str: any, len: number) {
         return str.toString().padStart(len, "0");
@@ -14,21 +15,26 @@
         return str.toString().padEnd(len, "\xA0");
     }
 
+    function formatTime(totalSeconds: number) {
+        if (totalSeconds <= 0) return "0:00:00";
+        const hours = String(Math.floor(totalSeconds / 3600));
+        const minutes = padTime(Math.floor((totalSeconds / 60) % 60), 2);
+        const seconds = padTime(Math.floor(totalSeconds % 60), 2);
+        return `${hours}:${minutes}:${seconds}`;
+    }
+
     function updateTimers() {
-        const worldDate = new Date(data.worldDate).getTime();
         const updateDate = new Date(data.date).getTime();
-        const updateAge = Date.now() - updateDate;
-        currentWorldDate = worldDate + updateAge;
+        const updateAge = (Date.now() - updateDate) / 1000;
+        restartTimeLeft =
+            data.restartPeriod > 0
+                ? 1 + data.restartPeriod - data.modelTime - updateAge
+                : null;
+        currentWorldTime = data.absTime + updateAge;
         missionTimers = {};
         for (const mission of data.missions) {
-            const secondsLeft = Math.max(
-                0,
-                mission.timeout - data.absTime - updateAge / 1000
-            );
-            const hours = String(Math.floor(secondsLeft / 3600));
-            const minutes = padTime(Math.floor((secondsLeft / 60) % 60), 2);
-            const seconds = padTime(Math.floor(secondsLeft % 60), 2);
-            missionTimers[mission.id] = `${hours}:${minutes}:${seconds}`;
+            missionTimers[mission.id] =
+                mission.timeout - data.absTime - updateAge;
         }
     }
 
@@ -49,14 +55,19 @@
         Campaign Started: {new Date(data.startDate).toLocaleString()}
     </div>
     <div class="mono">
-        DCS Local Time: {new Date(currentWorldDate).toLocaleString("default", { timeZone: "UTC" })}
-    </div>
-    <div class="mono">
         <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"].text}
     </div>
     <div class="mono">
         <span class="enemy">REDFOR</span> Tickets: {data.tickets["1"].text}
     </div>
+    <div class="mono">
+        In-Game Time: {formatTime(currentWorldTime)}
+    </div>
+    {#if data.restartPeriod > 0}
+        <div class="mono">
+            Next Restart: {formatTime(restartTimeLeft)}
+        </div>
+    {/if}
     <div class="mono">
         Players: {data.players.current - 1}/{data.players.max - 1}
     </div>
@@ -76,7 +87,9 @@
         <div class="mono spaced">
             <strong class="friendly">{mission.type}</strong>
             <span class="dim">
-                M1({mission.mode1}) - Time Left: {missionTimers[mission.id]}
+                M1({mission.mode1}) - Time Left: {formatTime(
+                    missionTimers[mission.id]
+                )}
             </span>
             <br />
             Region: {mission.region}
@@ -157,6 +170,8 @@
     <div class="left dim">
         Last Update: {new Date(data.date).toLocaleString()}
     </div>
-    <div class="right dim">DCS Version: {data.dcsVersion}, DCT Version: {version}</div>
+    <div class="right dim">
+        DCS Version: {data.dcsVersion}, DCT Version: {version}
+    </div>
     <br />
 </footer>
