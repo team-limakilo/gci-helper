@@ -69,7 +69,11 @@ function getAssets(data: ExportData, coalition: Coalition) {
     return extract(data.coalitions[coalition].assets, false, (region, assets) => ({
         name: region,
         assets: extract(assets,
-            (_, asset: ExportDataAsset) => !asset.dead && asset.strategic && asset.type !== "SAM",
+            (_, asset: ExportDataAsset) =>
+                !asset.dead &&
+                !asset.ignore &&
+                asset.strategic &&
+                asset.type !== "SAM",
             (name, asset: ExportDataAsset) => ({
                 codename: asset.type === "AIRBASE" ? name : asset.codename,
                 type: asset.type,

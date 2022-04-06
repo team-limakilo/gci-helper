@@ -2048,6 +2048,7 @@ const data = {
             "spawned": false,
             "status": 0,
             "strategic": true,
+            "ignore": false,
             "type": "SAM"
           },
           "Hama_1_Reg3Sa2-2": {
