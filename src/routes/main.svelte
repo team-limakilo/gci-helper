@@ -39,6 +39,16 @@
         }
     }
 
+    function ticketsHint(text: string) {
+        const hint = {
+            Critical: "Less than 25%",
+            Marginal: "25% to 75%",
+            Nominal: "75% to 125%",
+            Excellent: "More than 125%",
+        };
+        return hint[text];
+    }
+
     onMount(() => {
         updateTimers();
         const interval = setInterval(updateTimers, 1000);
@@ -46,8 +56,13 @@
     });
 
     let version: string;
+    let redTickets: string;
+    let blueTickets: string;
+
     $: version =
         data.version.length > 20 ? data.version.substring(0, 8) : data.version;
+    $: redTickets = data.tickets["1"].text;
+    $: blueTickets = data.tickets["2"].text;
 </script>
 
 <section>
@@ -56,10 +71,12 @@
         Campaign Started: {new Date(data.startDate).toLocaleString()}
     </div>
     <div class="mono">
-        <span class="friendly">BLUFOR</span> Tickets: {data.tickets["2"].text}
+        <span class="friendly">BLUFOR</span> Tickets:
+        <span class="hint" title={ticketsHint(blueTickets)}>{blueTickets}</span>
     </div>
     <div class="mono">
-        <span class="enemy">REDFOR</span> Tickets: {data.tickets["1"].text}
+        <span class="enemy">REDFOR</span> Tickets:
+        <span class="hint" title={ticketsHint(redTickets)}>{redTickets}</span>
     </div>
     <div class="mono">
         In-Game Time: {formatTime(currentWorldTime)}
@@ -105,7 +122,7 @@
             Pilots:
             {#each mission.assigned as assigned, index (assigned.group)}
                 {#if index !== 0},{/if}
-                <span class="player" title="Aircraft: {assigned.aircraft}">
+                <span class="hint" title="Aircraft: {assigned.aircraft}">
                     {assigned.player}
                 </span>
             {/each}

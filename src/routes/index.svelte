@@ -117,8 +117,9 @@
     .neutral {
         color: #ff8;
     }
-    .player {
+    .hint {
         text-decoration: underline dotted;
+        text-underline-offset: 4px;
         cursor: help;
     }
     .left {
