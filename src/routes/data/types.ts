@@ -21,6 +21,7 @@ export interface ClientData extends ToJSON {
     players: { current: number, max: number },
     restartPeriod: number;
     pageTitle?: string;
+    tugOfWar: number;
 }
 
 export enum Coalition {

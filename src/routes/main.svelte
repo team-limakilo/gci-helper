@@ -71,6 +71,11 @@
         Campaign Started: {new Date(data.startDate).toLocaleString()}
     </div>
     <div class="mono">
+        Tug of War: <div class="tickets">
+            <div class="bar" style={`width: ${data.tugOfWar * 100}%`}></div>
+        </div>
+    </div>
+    <div class="mono">
         <span class="friendly">BLUFOR</span> Tickets:
         <span class="hint" title={ticketsHint(blueTickets)}>{blueTickets}</span>
     </div>
@@ -78,6 +83,7 @@
         <span class="enemy">REDFOR</span> Tickets:
         <span class="hint" title={ticketsHint(redTickets)}>{redTickets}</span>
     </div>
+    <br />
     <div class="mono">
         In-Game Time: {formatTime(currentWorldTime)}
     </div>

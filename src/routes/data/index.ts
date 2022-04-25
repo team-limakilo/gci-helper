@@ -117,7 +117,7 @@ function getAvailableMissions(data: ExportData, coalition: Coalition) {
 }
 
 function getTickets(data: ExportData) {
-    const tickets = {}
+    const tickets = {};
     if (data.coalitions[1].tickets.text) {
         tickets[1] = { text: data.coalitions[1].tickets.text };
     }
@@ -127,6 +127,12 @@ function getTickets(data: ExportData) {
     if (Object.keys(tickets).length > 0) {
         return tickets;
     }
+}
+
+function getTugOfWar(data: ExportData) {
+    const blueRatio = data.coalitions[2].tickets.current / data.coalitions[2].tickets.start;
+    const redRatio = data.coalitions[1].tickets.current / data.coalitions[1].tickets.start;
+    return 0.5 - (redRatio - blueRatio) / 2;
 }
 
 const exportDataPath = process.env["EXPORT_DATA_PATH"];
@@ -192,6 +198,7 @@ export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientDa
             players: data.players,
             pageTitle: customTitle,
             restartPeriod: data.period,
+            tugOfWar: getTugOfWar(data),
             toJSON() {
                 return this;
             },

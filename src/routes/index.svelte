@@ -122,6 +122,23 @@
         text-underline-offset: 4px;
         cursor: help;
     }
+    .tickets {
+        position: relative;
+        display: inline-block;
+        background-color: #c33;
+        border-radius: 2px;
+        height: 0.6em;
+        width: 256px;
+    }
+    .tickets > .bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: #27d;
+        border-radius: 2px 0 0 2px;
+        border-right: 1px dotted white;
+    }
     .left {
         float: left;
     }
