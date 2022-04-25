@@ -55,7 +55,10 @@ function getSAMs(data: ExportData, coalition: Coalition) {
     return extract(data.coalitions[coalition].assets, false, (region, assets) => ({
         name: region,
         assets: extract(assets,
-            (_, asset: ExportDataAsset) => !asset.dead && asset.type === "SAM",
+            (_, asset: ExportDataAsset) =>
+                !asset.dead &&
+                !asset.ignore &&
+                asset.type === "SAM",
             (_, asset: ExportDataAsset) => ({
                 sitetype: asset.sitetype ?? "Unknown",
                 codename: asset.codename,
