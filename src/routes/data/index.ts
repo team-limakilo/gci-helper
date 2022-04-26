@@ -130,9 +130,9 @@ function getTickets(data: ExportData) {
 }
 
 function getTugOfWar(data: ExportData) {
-    const blueRatio = data.coalitions[2].tickets.current / data.coalitions[2].tickets.start;
-    const redRatio = data.coalitions[1].tickets.current / data.coalitions[1].tickets.start;
-    return 0.5 - (redRatio - blueRatio) / 2;
+    const blueRatio = Math.min(data.coalitions[2].tickets.current / data.coalitions[2].tickets.start, 1);
+    const redRatio = Math.min(data.coalitions[1].tickets.current / data.coalitions[1].tickets.start, 1);
+    return 0.5 - (redRatio - blueRatio) / (redRatio + blueRatio) / 2;
 }
 
 const exportDataPath = process.env["EXPORT_DATA_PATH"];
