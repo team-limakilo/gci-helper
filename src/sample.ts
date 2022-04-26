@@ -3017,8 +3017,8 @@ const data = {
       },
       "missions": [],
       "tickets": {
-        "current": 760,
-        "start": 750,
+        "current": 460,
+        "start": 500,
         "text": "Nominal"
       }
     },
@@ -3283,9 +3283,9 @@ const data = {
         }
       },
       "tickets": {
-        "current": 190,
+        "current": 112.5,
         "start": 200,
-        "text": "Nominal"
+        "text": "Marginal"
       }
     }
   },

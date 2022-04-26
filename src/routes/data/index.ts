@@ -132,7 +132,8 @@ function getTickets(data: ExportData) {
 function getTugOfWar(data: ExportData) {
     const blueRatio = Math.min(data.coalitions[2].tickets.current / data.coalitions[2].tickets.start, 1);
     const redRatio = Math.min(data.coalitions[1].tickets.current / data.coalitions[1].tickets.start, 1);
-    return 0.5 - (redRatio - blueRatio) / (redRatio + blueRatio) / 2;
+    const ratio = 0.5 - (redRatio - blueRatio) / (redRatio + blueRatio) / 2;
+    return Math.round(ratio * 100) / 100;
 }
 
 const exportDataPath = process.env["EXPORT_DATA_PATH"];
