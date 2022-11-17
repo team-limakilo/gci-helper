@@ -1,12 +1,13 @@
-FROM node:16-alpine
+FROM node:18-alpine
 
 COPY src src
-COPY yarn.lock .
 COPY package.json .
+COPY package-lock.json .
 COPY svelte.config.js .
+COPY vite.config.ts .
 COPY tsconfig.json .
 
-RUN yarn install
-RUN yarn build
+RUN npm ci
+RUN npm run build
 
 CMD ["node", "build/index.js"]
