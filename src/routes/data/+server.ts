@@ -144,9 +144,11 @@ const startDate = new Date();
 
 async function getExportData(): Promise<ExportData> {
     if (exportDataPath != null && exportDataPath.length > 0) {
+        // Read from file
         const data = await fs.readFile(exportDataPath, { encoding: "utf-8" });
         return JSON.parse(data);
     } else if (exportDataEndpoint != null && exportDataEndpoint.length > 0) {
+        // Read from external API
         const data = await axios.get(exportDataEndpoint).then((response) => response.data);
         if (exportDataSubkey != null && exportDataSubkey.length > 0) {
             return data[exportDataSubkey];
@@ -154,7 +156,8 @@ async function getExportData(): Promise<ExportData> {
             return data;
         }
     } else {
-        sampleData.date = startDate.toJSON();
+        // Serve default data file
+        sampleData.date = startDate?.toJSON();
         return sampleData;
     }
 }
