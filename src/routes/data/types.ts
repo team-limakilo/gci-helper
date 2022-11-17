@@ -1,13 +1,12 @@
-import type { ToJSON } from "@sveltejs/kit/types/helper";
 import type { ExportData } from "../../sample";
-export type { ExportData } from "../../sample";
+export type { ExportData };
 
-export interface ClientData extends ToJSON {
+export interface ClientData {
     missions: Mission[];
     airbases: Asset[];
     enemySAMs: { name: string, assets: Asset[] }[];
     enemyAssets: { name: string, assets: Asset[] }[];
-    tickets: { [coalition: string]: { text?: string }};
+    tickets: { [coalition: string]: { text?: string } };
     availableMissions: { type: string, count: number }[];
     theater: string;
     sortie: string;
@@ -18,7 +17,7 @@ export interface ClientData extends ToJSON {
     startDate: string;
     worldDate: string;
     dcsVersion: string;
-    players: { current: number, max: number },
+    players: { current: number, max: number };
     restartPeriod: number;
     pageTitle?: string;
     tugOfWar: number;

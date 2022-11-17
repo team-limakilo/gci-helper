@@ -4,7 +4,7 @@
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
     import type { ClientData } from "./data/types";
-    import Main from "./main.svelte";
+    import Main from "./components/main.svelte";
     dayjs.extend(relativeTime);
 
     let interval: NodeJS.Timer;
@@ -53,7 +53,10 @@
 
 <svelte:head>
     {#if data != null}
-        <title>{data.pageTitle || `Campaign Status - ${data.sortie || data.theater}`}</title>
+        <title
+            >{data.pageTitle ||
+                `Campaign Status - ${data.sortie || data.theater}`}</title
+        >
     {/if}
 </svelte:head>
 

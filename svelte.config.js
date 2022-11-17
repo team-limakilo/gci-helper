@@ -13,7 +13,6 @@ const config = {
 			base: process.env.BASE_URL,
 		},
 		adapter: process.env.VITE_NETLIFY ? netlifyAdapter() : nodeAdapter(),
-		target: "#svelte",
 	},
 };
 

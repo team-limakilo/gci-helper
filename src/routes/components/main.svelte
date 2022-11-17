@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { ClientData, Coalition } from "./data/types";
+    import { ClientData, Coalition } from "../data/types";
     export let data: ClientData;
 
     let restartTimeLeft: number;
@@ -72,7 +72,7 @@
     </div>
     <div class="mono">
         Tug of War: <div class="tickets">
-            <div class="bar" style={`width: ${data.tugOfWar * 100}%`}></div>
+            <div class="bar" style={`width: ${data.tugOfWar * 100}%`} />
         </div>
     </div>
     <div class="mono">

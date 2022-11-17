@@ -1,9 +1,9 @@
-import type { EndpointOutput, IncomingRequest } from "@sveltejs/kit";
+import { json, redirect, RequestEvent, RequestHandler } from "@sveltejs/kit";
 import axios from "axios";
 import crypto from "crypto";
 import fs from "fs/promises";
 import sampleData from "../../sample";
-import type { Asset, ClientData, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
+import type { Asset, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
 
 const SALT = crypto.pseudoRandomBytes(4).toString("hex");
@@ -164,45 +164,41 @@ function getDCSDateTime(isoDate: string, absTime: number): Date {
     return new Date(date);
 }
 
-export async function get(req: IncomingRequest): Promise<EndpointOutput<ClientData>> {
+export async function GET(event: RequestEvent): Promise<Response> {
     const data = await getExportData();
-    // Return cached response if not newer than the last
-    const clientDate = new Date(req.headers["if-modified-since"]);
+
+    // Check if cached response is fresh enough
+    const clientDate = new Date(event.request.headers["if-modified-since"]);
     if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
-        return {
-            status: 304,
-        };
+        return redirect(304, '');
     }
+
+    event.setHeaders({
+        "Cache-Control": "no-cache, must-revalidate",
+        "Last-Modified": new Date(data.date).toUTCString(),
+        "Access-Control-Allow-Origin": "*",
+    });
+
     // Otherwise, build a new response
-    return {
-        headers: {
-            "Cache-Control": "no-cache, must-revalidate",
-            "Last-Modified": new Date(data.date).toUTCString(),
-            "Access-Control-Allow-Origin": "*",
-        },
-        body: {
-            missions: getMissions(data, Coalition.Blue),
-            availableMissions: getAvailableMissions(data, Coalition.Blue),
-            enemySAMs: getSAMs(data, Coalition.Red),
-            enemyAssets: getAssets(data, Coalition.Red),
-            airbases: getAirbases(data),
-            tickets: getTickets(data),
-            theater: data.theater,
-            sortie: data.sortie,
-            version: data.version,
-            date: data.date,
-            absTime: data.abstime,
-            modelTime: data.modeltime,
-            worldDate: getDCSDateTime(data.modeldate, data.abstime).toISOString(),
-            startDate: data.startdate,
-            dcsVersion: data.dcs_version,
-            players: data.players,
-            pageTitle: customTitle,
-            restartPeriod: data.period,
-            tugOfWar: getTugOfWar(data),
-            toJSON() {
-                return this;
-            },
-        },
-    };
+    return json({
+        missions: getMissions(data, Coalition.Blue),
+        availableMissions: getAvailableMissions(data, Coalition.Blue),
+        enemySAMs: getSAMs(data, Coalition.Red),
+        enemyAssets: getAssets(data, Coalition.Red),
+        airbases: getAirbases(data),
+        tickets: getTickets(data),
+        theater: data.theater,
+        sortie: data.sortie,
+        version: data.version,
+        date: data.date,
+        absTime: data.abstime,
+        modelTime: data.modeltime,
+        worldDate: getDCSDateTime(data.modeldate, data.abstime).toISOString(),
+        startDate: data.startdate,
+        dcsVersion: data.dcs_version,
+        players: data.players,
+        pageTitle: customTitle,
+        restartPeriod: data.period,
+        tugOfWar: getTugOfWar(data)
+    });
 }
