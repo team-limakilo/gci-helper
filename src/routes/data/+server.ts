@@ -1,8 +1,8 @@
-import { json, redirect, RequestEvent, RequestHandler } from "@sveltejs/kit";
+import { json, redirect, RequestEvent } from "@sveltejs/kit";
 import axios from "axios";
 import crypto from "crypto";
 import fs from "fs/promises";
-import sampleData from "../../sample";
+import getSampleData from "../../sample";
 import type { Asset, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
 
@@ -140,7 +140,6 @@ const exportDataPath = process.env["EXPORT_DATA_PATH"];
 const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
 const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
 const customTitle = process.env["CUSTOM_TITLE"];
-const startDate = new Date();
 
 async function getExportData(): Promise<ExportData> {
     if (exportDataPath != null && exportDataPath.length > 0) {
@@ -157,8 +156,7 @@ async function getExportData(): Promise<ExportData> {
         }
     } else {
         // Serve default data file
-        sampleData.date = startDate?.toJSON();
-        return sampleData;
+        return getSampleData();
     }
 }
 

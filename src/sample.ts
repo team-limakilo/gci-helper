@@ -1,4 +1,4 @@
-const data = {
+const getSampleData = () => ({
   "abstime": 22560,
   "coalitions": {
     "0": {
@@ -3291,9 +3291,9 @@ const data = {
   },
   "period": 7200,
   "dcs_version": "2.7.11.21408",
-  "date": "2022-03-18 16:12:32Z",
+  "date": new Date().toJSON(),
   "modeldate": "1998-8-17",
-  "modeltime": 180,
+  "modeltime": process.uptime(),
   "players": {
     "current": 2,
     "max": 15
@@ -3302,7 +3302,7 @@ const data = {
   "startdate": "2022-03-18 13:38:25Z",
   "theater": "Syria",
   "version": "v0.9.4"
-};
+});
 
-export type ExportData = typeof data;
-export default data;
+export type ExportData = ReturnType<typeof getSampleData>;
+export default getSampleData;
