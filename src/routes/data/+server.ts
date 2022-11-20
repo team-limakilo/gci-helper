@@ -1,176 +1,13 @@
 import { json, redirect, RequestEvent } from "@sveltejs/kit";
-import axios from "axios";
-import crypto from "crypto";
-import fs from "fs/promises";
-import getSampleData from "../../sample";
-import type { Asset, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
+import { customTitle, getAirbases, getAssets, getAvailableMissions, getDCSDateTime, getExportData, getMissions, getSAMs, getTickets, getTugOfWar } from "./methods";
 import { Coalition } from "./types";
-
-const SALT = crypto.pseudoRandomBytes(4).toString("hex");
-
-function byKey<T>(key: keyof T) {
-    return (a: T, b: T) => {
-        return a[key] > b[key] ? 1 : a[key] === b[key] ? 0 : -1;
-    }
-}
-
-function extract<T, R>(obj: T, filter: ((id: string, props: T[keyof T]) => boolean) | false, fn: (id: string, props: T[keyof T]) => R): R[] {
-    let values = filter
-        ? Object.entries(obj).filter(([id, props]) => filter(id, props))
-        : Object.entries(obj);
-    return values
-        .sort(([a], [b]) => a > b ? 1 : a === b ? 0 : -1)
-        .map(([id, props]) => fn(id, props));
-}
-
-function target(data: ExportData, { target }: { target: MissionTarget }): Asset {
-    const asset: ExportDataAsset = data.coalitions[target.coalition].assets[target.region][target.name];
-    return {
-        sitetype: asset?.sitetype != "EWR" ? asset?.sitetype : undefined,
-        codename: asset.codename,
-        status: asset.status,
-        type: asset.type,
-    }
-}
-
-function getAirbases(data: ExportData, coalitions: Coalition[] = []) {
-    if (coalitions.length === 0) {
-        coalitions = [Coalition.Blue, Coalition.Neutral, Coalition.Red];
-    }
-    let output: Asset[] = [];
-    for (const coalition of coalitions) {
-        const coalitionAirbases = extract(data.coalitions[coalition].assets, false, (region, assets) =>
-            extract(assets, (_, asset: any) => !asset.dead && asset.type === "AIRBASE", (name, _) => ({
-                coalition,
-                region,
-                name,
-            }))
-        );
-        output = output.concat(coalitionAirbases.flat().sort(byKey("name")));
-    }
-    return output;
-}
-
-function getSAMs(data: ExportData, coalition: Coalition) {
-    return extract(data.coalitions[coalition].assets, false, (region, assets) => ({
-        name: region,
-        assets: extract(assets,
-            (_, asset: ExportDataAsset) =>
-                !asset.dead &&
-                !asset.ignore &&
-                asset.type === "SAM",
-            (_, asset: ExportDataAsset) => ({
-                sitetype: asset.sitetype ?? "Unknown",
-                codename: asset.codename,
-            }))
-            .sort(byKey("codename"))
-            .sort(byKey("sitetype"))
-    }));
-}
-
-function getAssets(data: ExportData, coalition: Coalition) {
-    return extract(data.coalitions[coalition].assets, false, (region, assets) => ({
-        name: region,
-        assets: extract(assets,
-            (_, asset: ExportDataAsset) =>
-                !asset.dead &&
-                !asset.ignore &&
-                asset.strategic &&
-                asset.type !== "SAM",
-            (name, asset: ExportDataAsset) => ({
-                codename: asset.type === "AIRBASE" ? name : asset.codename,
-                type: asset.type,
-            }))
-            .sort(byKey("codename"))
-            .sort(byKey("type"))
-    }));
-}
-
-function assignedPilots(mission: ExportDataMission) {
-    return mission.assigned
-        .filter((assigned) => assigned.player != null)
-        .map(({ group, player, aircraft }) => ({ group, player, aircraft }));
-}
-
-function getMissions(data: ExportData, coalition: Coalition) {
-    return extract(data.coalitions[coalition].missions,
-        (_, mission: ExportDataMission) => mission.assigned.filter((assigned) => assigned.player != null).length > 0,
-        (id, mission: ExportDataMission) => ({
-            id: crypto.createHash("sha1").update(`${SALT}${id}`).digest("hex").substring(0, 8),
-            region: mission.target.region,
-            target: target(data, mission),
-            assigned: assignedPilots(mission),
-            type: mission.type,
-            mode1: mission.iffmode1,
-            timeout: mission.timeout,
-        }))
-        .sort(byKey("target"))
-        .sort(byKey("type"));
-}
-
-function getAvailableMissions(data: ExportData, coalition: Coalition) {
-    if (data.coalitions[coalition].commander) {
-        return Object.entries(data.coalitions[coalition].commander.availablemissions)
-            .map(([type, count]) => ({ type, count }))
-            .sort(byKey("type"));
-    }
-}
-
-function getTickets(data: ExportData) {
-    const tickets = {};
-    if (data.coalitions[1].tickets.text) {
-        tickets[1] = { text: data.coalitions[1].tickets.text };
-    }
-    if (data.coalitions[2].tickets.text) {
-        tickets[2] = { text: data.coalitions[2].tickets.text };
-    }
-    if (Object.keys(tickets).length > 0) {
-        return tickets;
-    }
-}
-
-function getTugOfWar(data: ExportData) {
-    const blueRatio = Math.min(data.coalitions[2].tickets.current / data.coalitions[2].tickets.start, 1);
-    const redRatio = Math.min(data.coalitions[1].tickets.current / data.coalitions[1].tickets.start, 1);
-    const ratio = 0.5 - (redRatio - blueRatio) / (redRatio + blueRatio) / 2;
-    return Math.round(ratio * 100) / 100;
-}
-
-const exportDataPath = process.env["EXPORT_DATA_PATH"];
-const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
-const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
-const customTitle = process.env["CUSTOM_TITLE"];
-
-async function getExportData(): Promise<ExportData> {
-    if (exportDataPath != null && exportDataPath.length > 0) {
-        // Read from file
-        const data = await fs.readFile(exportDataPath, { encoding: "utf-8" });
-        return JSON.parse(data);
-    } else if (exportDataEndpoint != null && exportDataEndpoint.length > 0) {
-        // Read from external API
-        const data = await axios.get(exportDataEndpoint).then((response) => response.data);
-        if (exportDataSubkey != null && exportDataSubkey.length > 0) {
-            return data[exportDataSubkey];
-        } else {
-            return data;
-        }
-    } else {
-        // Serve default data file
-        return getSampleData();
-    }
-}
-
-function getDCSDateTime(isoDate: string, absTime: number): Date {
-    const date = new Date(isoDate).getTime() + absTime * 1000;
-    return new Date(date);
-}
 
 export async function GET(event: RequestEvent): Promise<Response> {
     const data = await getExportData();
 
     // Check if cached response is fresh enough
-    const clientDate = new Date(event.request.headers["if-modified-since"]);
-    if (!isNaN(clientDate.valueOf()) && new Date(data.date) <= clientDate) {
+    const clientCachedDate = new Date(event.request.headers["if-modified-since"]);
+    if (!isNaN(clientCachedDate.valueOf()) && new Date(data.date) <= clientCachedDate) {
         return redirect(304, '');
     }
 
@@ -180,7 +17,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
         "Access-Control-Allow-Origin": "*",
     });
 
-    // Otherwise, build a new response
+    // Then build a new response
     return json({
         missions: getMissions(data, Coalition.Blue),
         availableMissions: getAvailableMissions(data, Coalition.Blue),
