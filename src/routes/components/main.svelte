@@ -11,7 +11,7 @@
         return str.toString().padStart(len, "0");
     }
 
-    function padType(str: any, len: number) {
+    function rightPad(str: any, len: number) {
         return str.toString().padEnd(len, "\xA0");
     }
 
@@ -67,33 +67,43 @@
 
 <section>
     <h1>Overview</h1>
-    <div class="mono">
-        Campaign Started: {new Date(data.startDate).toLocaleString()}
-    </div>
-    <div class="mono">
-        Tug of War: <div class="tickets">
-            <div class="bar" style={`width: ${data.tugOfWar * 100}%`} />
+    <div class="grid">
+        <div>
+            <div class="mono">
+                Campaign Started: {new Date(data.startDate).toLocaleString()}
+            </div>
+            <div class="mono">
+                Tug of War: <div class="tickets">
+                    <div class="bar" style={`width: ${data.tugOfWar * 100}%`} />
+                </div>
+            </div>
+            <div class="mono">
+                <span class="friendly">BLUFOR</span> Tickets:
+                <span class="hint" title={ticketsHint(blueTickets)}
+                    >{blueTickets}</span
+                >
+            </div>
+            <div class="mono">
+                <span class="enemy">REDFOR</span> Tickets:
+                <span class="hint" title={ticketsHint(redTickets)}
+                    >{redTickets}</span
+                >
+            </div>
         </div>
-    </div>
-    <div class="mono">
-        <span class="friendly">BLUFOR</span> Tickets:
-        <span class="hint" title={ticketsHint(blueTickets)}>{blueTickets}</span>
-    </div>
-    <div class="mono">
-        <span class="enemy">REDFOR</span> Tickets:
-        <span class="hint" title={ticketsHint(redTickets)}>{redTickets}</span>
-    </div>
-    <br />
-    <div class="mono">
-        In-Game Time: {formatTime(currentWorldTime)}
-    </div>
-    {#if data.restartPeriod > 0}
-        <div class="mono">
-            Next Restart: {formatTime(restartTimeLeft)}
+        <div>
+            <br />
+            <div class="mono">
+                In-Game Time: {formatTime(currentWorldTime)}
+            </div>
+            {#if data.restartPeriod > 0}
+                <div class="mono">
+                    Next Restart: {formatTime(restartTimeLeft)}
+                </div>
+            {/if}
+            <div class="mono">
+                Players: {data.players.current - 1}/{data.players.max - 1}
+            </div>
         </div>
-    {/if}
-    <div class="mono">
-        Players: {data.players.current - 1}/{data.players.max - 1}
     </div>
 </section>
 
@@ -102,92 +112,119 @@
     <div class="mono spaced">
         <strong>Available</strong>
         {#each data.availableMissions as { type, count }}
-            <div>{padType(`${type}:`, 12)} {count}</div>
+            <div>{rightPad(`${type}:`, 12)} {count}</div>
         {:else}
             <div>None</div>
         {/each}
     </div>
-    {#each data.missions as mission}
-        <div class="mono spaced">
-            <strong class="friendly">{mission.type}</strong>
-            <span class="dim">
-                M1({mission.mode1}) - Time Left: {formatTime(
-                    missionTimers[mission.id]
-                )}
-            </span>
-            <br />
-            Region: {mission.region}
-            {#if mission.target}
-                <br />
-                Target: {mission.target.codename} ({mission.target.type})
-                {#if mission.target.sitetype}
-                    [{mission.target.sitetype}]
-                {/if}
-            {/if}
-            <br />
-            Pilots:
-            {#each mission.assigned as assigned, index (assigned.group)}
-                {#if index !== 0},{/if}
-                <span class="hint" title="Aircraft: {assigned.aircraft}">
-                    {assigned.player}
+    <!-- Mission list -->
+    <div class="grid spaced">
+        {#each data.missions as mission}
+            <div class="mono">
+                <strong class="friendly">{mission.type}</strong>
+                <span class="dim">
+                    M1({mission.mode1}) - Time Left: {formatTime(
+                        missionTimers[mission.id]
+                    )}
                 </span>
-            {/each}
-            {#if mission.target}
                 <br />
-                Status: Active ({mission.target.status}% complete)
-            {:else}
-                Status: Active
-            {/if}
-        </div>
-    {/each}
+                Region: {mission.region}
+                {#if mission.target}
+                    <br />
+                    Target: {mission.target.codename} ({mission.target.type})
+                    {#if mission.target.sitetype}
+                        [{mission.target.sitetype}]
+                    {/if}
+                {/if}
+                <br />
+                Pilots:
+                {#each mission.assigned as assigned, index (assigned.group)}
+                    {#if index !== 0},{/if}
+                    <span class="hint" title="Aircraft: {assigned.aircraft}">
+                        {assigned.player}
+                    </span>
+                {/each}
+                {#if mission.target}
+                    <br />
+                    Status: Active ({mission.target.status}% complete)
+                {:else}
+                    Status: Active
+                {/if}
+            </div>
+        {/each}
+    </div>
 </section>
 
 <section>
     <h1>Airbases</h1>
-    {#each data.airbases as airbase}
-        <div class="mono">
-            {#if airbase.coalition == Coalition.Blue}
-                <span class="friendly">{padType("Friendly", 8)}</span>
-                {airbase.name}
-            {:else if airbase.coalition == Coalition.Red}
-                <span class="enemy">{padType("Hostile", 8)}</span>
-                {airbase.name}
-            {:else}
-                <span class="neutral">{padType("Neutral", 8)}</span>
-                {airbase.name}
-            {/if}
+    <div class="grid">
+        <div>
+            {#each data.airbases as airbase}
+                <div class="mono">
+                    {#if airbase.coalition == Coalition.Blue}
+                        <span class="friendly">{rightPad("Friendly", 8)}</span>
+                        {airbase.name}
+                    {/if}
+                </div>
+            {/each}
         </div>
-    {/each}
+        <div>
+            {#each data.airbases as airbase}
+                <div class="mono">
+                    {#if airbase.coalition == Coalition.Neutral}
+                        <span class="neutral">{rightPad("Neutral", 8)}</span>
+                        {airbase.name}
+                    {/if}
+                </div>
+            {/each}
+            {#each data.airbases as airbase}
+                <div class="mono">
+                    {#if airbase.coalition == Coalition.Red}
+                        <span class="enemy">{rightPad("Hostile", 8)}</span>
+                        {airbase.name}
+                    {/if}
+                </div>
+            {/each}
+        </div>
+    </div>
 </section>
 
 <section>
     <h1>SAM Threats</h1>
-    {#each data.enemySAMs as region}
-        <h2>{region.name}</h2>
-        {#each region.assets as asset}
-            <div class="mono">
-                <span class="enemy">{padType(asset.sitetype, 5)}</span>
-                ({asset.codename})
+    <div class="grid">
+        {#each data.enemySAMs as region}
+            <div>
+                <h2>{region.name}</h2>
+                {#each region.assets as asset}
+                    <div class="mono">
+                        <span class="enemy">{rightPad(asset.sitetype, 5)}</span>
+                        ({asset.codename})
+                    </div>
+                {:else}
+                    <div class="mono">Clear</div>
+                {/each}
             </div>
-        {:else}
-            <div class="mono">Clear</div>
         {/each}
-    {/each}
+    </div>
 </section>
 
 <section>
     <h1>Enemy Assets</h1>
-    {#each data.enemyAssets as region}
-        <h2>{region.name}</h2>
-        {#each region.assets as asset}
-            <div class="mono">
-                <span class="enemy">{padType(asset.type, 10)}</span>
-                ({asset.codename})
+    <div class="grid">
+        {#each data.enemyAssets as region}
+            <div>
+                <h2>{region.name}</h2>
+                {#each region.assets as asset}
+                    <div class="mono">
+                        <span class="enemy">{rightPad(asset.type, 10)}</span>
+                        ({asset.codename})
+                    </div>
+                {:else}
+                    <div class="mono">No Assets</div>
+                {/each}
             </div>
-        {:else}
-            <div class="mono">No Assets</div>
         {/each}
-    {/each}
+    </div>
 </section>
 
 <footer>

@@ -105,6 +105,24 @@
         visibility: visible;
         top: 1em;
     }
+    @media screen and (min-width: 1080px) {
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-flow: row dense;
+        }
+        .grid > * {
+            overflow: auto;
+        }
+        .grid.spaced {
+            gap: 1em;
+        }
+    }
+    @media (max-width: 1079px) {
+        .grid.spaced > * {
+            margin-top: 1em;
+        }
+    }
     .mono {
         font-family: "Courier New", Courier, monospace;
     }

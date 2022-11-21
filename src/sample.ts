@@ -247,7 +247,7 @@ const getSampleData = () => ({
             },
             "missiontype": "STRIKE",
             "spawned": false,
-            "status": 0,
+            "status": 25,
             "strategic": true,
             "type": "AMMODUMP"
           },
@@ -3279,6 +3279,32 @@ const getSampleData = () => ({
             "status": 0
           },
           "timeout": 33331.5,
+          "type": "STRIKE"
+        },
+        "5740": {
+          "assigned": [{
+            "aircraft": "M-2000C",
+            "group": "104th fs Maryland 1-2",
+            "iffmode3": "5740",
+            "player": "Leltch"
+          }],
+          "iffmode1": "50",
+          "state": "Active",
+          "target": {
+            "coalition": "1",
+            "intel": 3,
+            "location_degraded": {
+              "lat": 33.920999980814,
+              "lon": 35.64099999986,
+              "x": 77891.6484375,
+              "y": 0,
+              "z": 59959.1875
+            },
+            "name": "Aleppo_1_Reg1Factory-2",
+            "region": "Aleppo",
+            "status": 25
+          },
+          "timeout": 30360,
           "type": "STRIKE"
         }
       },
