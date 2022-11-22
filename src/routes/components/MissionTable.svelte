@@ -61,6 +61,10 @@
                     </tr>
                 {/if}
             {/each}
+        {:else}
+        <tr class="first message">
+            <td colspan="999">No active missions</td>
+        </tr>
         {/each}
     </tbody>
 </table>
@@ -88,10 +92,18 @@
     tr.first {
         border-top: 1px solid #444;
     }
+    tr:last-child {
+        border-bottom: 1px solid #999;
+    }
     tr:not(.first) td {
         padding-top: 0;
     }
     .name {
         width: 25%;
+    }
+    .message td {
+        text-align: center;
+        font-size: 1.5em;
+        padding: 8px 0;
     }
 </style>
