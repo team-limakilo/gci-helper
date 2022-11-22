@@ -158,8 +158,8 @@
         font-size: 10pt;
         margin: 4em 0 1em 0;
     }
-    /* Desktop */
-    @media screen and (min-width: 1080px) {
+    /* Desktop layout */
+    @media (min-width: 1080px) or (orientation: landscape) {
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -175,8 +175,8 @@
             display: none;
         }
     }
-    /* Mobile */
-    @media (max-width: 1079px) {
+    /* Mobile layout */
+    @media (max-width: 1079px) and (orientation: portrait) {
         .grid.spaced > * {
             margin-top: 1em;
         }
