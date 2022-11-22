@@ -13,7 +13,6 @@
             <th>Region</th>
             <th>Target</th>
             <th>Status</th>
-            <th>IFF</th>
             <th>Time Left</th>
             <th>Pilot</th>
             <th>Aircraft</th>
@@ -42,7 +41,6 @@
                                 Active
                             {/if}
                         </td>
-                        <td>{mission.mode1}</td>
                         <td>{formatTime(missionTimers[mission.id])}</td>
                         <td style="width: 25%">
                             {assigned.player || assigned.group}
@@ -51,7 +49,6 @@
                     </tr>
                 {:else}
                     <tr>
-                        <td />
                         <td />
                         <td />
                         <td />

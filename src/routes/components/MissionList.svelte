@@ -10,11 +10,7 @@
     {#each missions as mission}
         <div class="mono spaced">
             <strong class="friendly">{mission.type}</strong>
-            <span class="dim">
-                M1({mission.mode1}) - Time Left: {formatTime(
-                    missionTimers[mission.id]
-                )}
-            </span>
+            <span class="dim">Time Left: {formatTime(missionTimers[mission.id])}</span>
             <br />
             Region: {mission.region}
             {#if mission.target}
