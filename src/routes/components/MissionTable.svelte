@@ -42,7 +42,7 @@
                             {/if}
                         </td>
                         <td>{formatTime(missionTimers[mission.id])}</td>
-                        <td style="width: 25%">
+                        <td class="name">
                             {assigned.player || assigned.group}
                         </td>
                         <td>{assigned.aircraft}</td>
@@ -54,7 +54,7 @@
                         <td />
                         <td />
                         <td />
-                        <td style="width: 25%">
+                        <td class="name">
                             {assigned.player || assigned.group}
                         </td>
                         <td>{assigned.aircraft}</td>
@@ -75,6 +75,8 @@
     td {
         text-align: left;
         padding: 2px 4px;
+        word-break: break-word;
+        vertical-align: text-top;
     }
     th {
         border-bottom: 1px solid #999;
@@ -85,5 +87,8 @@
     }
     tr.first {
         border-top: 1px solid #444;
+    }
+    .name {
+        width: 25%;
     }
 </style>
