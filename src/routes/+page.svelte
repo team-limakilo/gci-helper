@@ -4,7 +4,7 @@
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
     import type { ClientData } from "./data/types";
-    import Main from "./components/main.svelte";
+    import Main from "./components/Main.svelte";
     dayjs.extend(relativeTime);
 
     let interval: NodeJS.Timer;
@@ -105,26 +105,11 @@
         visibility: visible;
         top: 1em;
     }
-    @media screen and (min-width: 1080px) {
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-flow: row dense;
-        }
-        .grid > * {
-            overflow: auto;
-        }
-        .grid.spaced {
-            gap: 1em;
-        }
-    }
-    @media (max-width: 1079px) {
-        .grid.spaced > * {
-            margin-top: 1em;
-        }
-    }
     .mono {
         font-family: "Courier New", Courier, monospace;
+    }
+    .bold {
+        font-weight: bold;
     }
     .spaced + .spaced {
         margin-top: 1em;
@@ -172,5 +157,31 @@
     footer {
         font-size: 10pt;
         margin: 4em 0 1em 0;
+    }
+    /* Desktop */
+    @media screen and (min-width: 1080px) {
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-flow: row dense;
+        }
+        .grid > * {
+            overflow: auto;
+        }
+        .grid.spaced {
+            gap: 1em;
+        }
+        .mobile {
+            display: none;
+        }
+    }
+    /* Mobile */
+    @media (max-width: 1079px) {
+        .grid.spaced > * {
+            margin-top: 1em;
+        }
+        .desktop {
+            display: none;
+        }
     }
 </style>

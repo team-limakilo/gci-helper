@@ -1,28 +1,14 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { formatTime, rightPad, ticketsHint } from "../../utils";
     import { ClientData, Coalition } from "../data/types";
+    import MissionList from "./MissionList.svelte";
+    import MissionTable from "./MissionTable.svelte";
     export let data: ClientData;
 
     let restartTimeLeft: number;
     let currentWorldTime: number;
     let missionTimers: { [key: string]: number } = {};
-
-    function padTime(str: any, len: number) {
-        return str.toString().padStart(len, "0");
-    }
-
-    function rightPad(str: any, len: number) {
-        return str.toString().padEnd(len, "\xA0");
-    }
-
-    function formatTime(totalSeconds: number) {
-        if (totalSeconds <= 0) return "0:00:00";
-        totalSeconds = totalSeconds % (24 * 60 * 60);
-        const hours = String(Math.floor(totalSeconds / 3600));
-        const minutes = padTime(Math.floor((totalSeconds / 60) % 60), 2);
-        const seconds = padTime(Math.floor(totalSeconds % 60), 2);
-        return `${hours}:${minutes}:${seconds}`;
-    }
 
     function updateTimers() {
         const updateDate = new Date(data.date).getTime();
@@ -37,16 +23,6 @@
             missionTimers[mission.id] =
                 mission.timeout - data.absTime - updateAge;
         }
-    }
-
-    function ticketsHint(text: string) {
-        const hint = {
-            Critical: "Less than 25%",
-            Marginal: "25% to 75%",
-            Nominal: "75% to 125%",
-            Excellent: "More than 125%",
-        };
-        return hint[text];
     }
 
     onMount(() => {
@@ -117,42 +93,13 @@
             <div>None</div>
         {/each}
     </div>
-    <!-- Mission list -->
-    <div class="grid spaced">
-        {#each data.missions as mission}
-            <div class="mono">
-                <strong class="friendly">{mission.type}</strong>
-                <span class="dim">
-                    M1({mission.mode1}) - Time Left: {formatTime(
-                        missionTimers[mission.id]
-                    )}
-                </span>
-                <br />
-                Region: {mission.region}
-                {#if mission.target}
-                    <br />
-                    Target: {mission.target.codename} ({mission.target.type})
-                    {#if mission.target.sitetype}
-                        [{mission.target.sitetype}]
-                    {/if}
-                {/if}
-                <br />
-                Pilots:
-                {#each mission.assigned as assigned, index (assigned.group)}
-                    {#if index !== 0},{/if}
-                    <span class="hint" title="Aircraft: {assigned.aircraft}">
-                        {assigned.player}
-                    </span>
-                {/each}
-                {#if mission.target}
-                    <br />
-                    Status: Active ({mission.target.status}% complete)
-                {:else}
-                    Status: Active
-                {/if}
-            </div>
-        {/each}
-    </div>
+    <br />
+    <MissionTable
+        className="desktop"
+        missions={data.missions}
+        {missionTimers}
+    />
+    <MissionList className="mobile" missions={data.missions} {missionTimers} />
 </section>
 
 <section>

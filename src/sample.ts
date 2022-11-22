@@ -3,7 +3,42 @@ const getSampleData = () => ({
   "coalitions": {
     "0": {
       "assets": {
-        "Aleppo": [],
+        "Aleppo": {
+          "Aleppo": {
+            "codename": "KURSK",
+            "cost": 10,
+            "dead": false,
+            "location": {
+              "lat": 36.182211524331,
+              "lon": 37.210383232385,
+              "x": 125776.703125,
+              "y": 382.19104003906,
+              "z": 121870.953125
+            },
+            "missiontype": "OCA",
+            "spawned": true,
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
+          "Minakh": {
+            "codename": "ATLANTA",
+            "cost": 10,
+            "dead": false,
+            "location": {
+              "lat": 36.522812218953,
+              "lon": 37.033622455645,
+              "x": 163870.921875,
+              "y": 492.00051879883,
+              "z": 106743.0390625
+            },
+            "missiontype": "OCA",
+            "spawned": true,
+            "status": 0,
+            "strategic": true,
+            "type": "AIRBASE"
+          },
+        },
         "Coast": [],
         "Cyprus": [],
         "Damascus": {
@@ -64,23 +99,6 @@ const getSampleData = () => ({
     "1": {
       "assets": {
         "Aleppo": {
-          "Aleppo": {
-            "codename": "KURSK",
-            "cost": 10,
-            "dead": false,
-            "location": {
-              "lat": 36.182211524331,
-              "lon": 37.210383232385,
-              "x": 125776.703125,
-              "y": 382.19104003906,
-              "z": 121870.953125
-            },
-            "missiontype": "OCA",
-            "spawned": true,
-            "status": 0,
-            "strategic": true,
-            "type": "AIRBASE"
-          },
           "Aleppo_0_airspace": {
             "codename": "SHENZEN",
             "cost": 0,
@@ -928,23 +946,6 @@ const getSampleData = () => ({
               "x": 126034.1171875,
               "y": 366.00036621094,
               "z": 154262.765625
-            },
-            "missiontype": "OCA",
-            "spawned": true,
-            "status": 0,
-            "strategic": true,
-            "type": "AIRBASE"
-          },
-          "Minakh": {
-            "codename": "ATLANTA",
-            "cost": 10,
-            "dead": false,
-            "location": {
-              "lat": 36.522812218953,
-              "lon": 37.033622455645,
-              "x": 163870.921875,
-              "y": 492.00051879883,
-              "z": 106743.0390625
             },
             "missiontype": "OCA",
             "spawned": true,
@@ -3284,9 +3285,14 @@ const getSampleData = () => ({
         "5740": {
           "assigned": [{
             "aircraft": "M-2000C",
-            "group": "104th fs Maryland 1-2",
+            "group": "2/5 chasse 1-1",
             "iffmode3": "5740",
-            "player": "Leltch"
+            "player": "Leltch",
+          }, {
+            "aircraft": "M-2000C",
+            "group": "2/5 chasse 1-2",
+            "iffmode3": "5741",
+            "player": "Arctic Fox"
           }],
           "iffmode1": "50",
           "state": "Active",
