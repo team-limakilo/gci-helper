@@ -6,8 +6,8 @@
     export let missionTimers: { [key: string]: number };
 </script>
 
-<table class={className}>
-    <thead class="mono">
+<table class={"mono " + className}>
+    <thead>
         <tr>
             <th>Type</th>
             <th>Region</th>
@@ -18,7 +18,7 @@
             <th>Aircraft</th>
         </tr>
     </thead>
-    <tbody class="mono">
+    <tbody>
         {#each missions as mission}
             {#each mission.assigned as assigned, index}
                 {#if index == 0}
@@ -74,7 +74,7 @@
     th,
     td {
         text-align: left;
-        padding: 2px 4px;
+        padding: 4px;
         word-break: break-word;
         vertical-align: text-top;
     }
@@ -87,6 +87,9 @@
     }
     tr.first {
         border-top: 1px solid #444;
+    }
+    tr:not(.first) td {
+        padding-top: 0;
     }
     .name {
         width: 25%;

@@ -159,7 +159,8 @@
         margin: 4em 0 1em 0;
     }
     /* Desktop layout */
-    @media (min-width: 1080px) or (orientation: landscape) {
+    @media (min-width: 1080px),
+        (min-width: 660px) and (orientation: landscape) {
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -174,9 +175,26 @@
         .mobile {
             display: none;
         }
+
+        /* Shrink table text on small phones */
+        @media (max-width: 1079px) {
+            table {
+                font-size: 0.9em;
+            }
+        }
+        @media (max-width: 799px) {
+            table {
+                font-size: 0.8em;
+            }
+        }
+        @media (max-width: 699px) {
+            table {
+                letter-spacing: -0.5px;
+            }
+        }
     }
     /* Mobile layout */
-    @media (max-width: 1079px) and (orientation: portrait) {
+    @media (max-width: 659px), (max-width: 1079px) and (orientation: portrait) {
         .grid.spaced > * {
             margin-top: 1em;
         }
