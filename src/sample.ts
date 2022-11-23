@@ -3327,7 +3327,7 @@ const getSampleData = () => ({
   "modeldate": "1998-8-17",
   "modeltime": process.uptime(),
   "players": {
-    "current": 2,
+    "current": 4,
     "max": 15,
     "list": [{
       "name": "kukiric",
