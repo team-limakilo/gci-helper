@@ -35,11 +35,15 @@ export function formatPlayerList(players: PlayerDetails[]) {
             continue;
         }
         if (!byCoalition[player.side]) {
-            byCoalition[player.side] = `${coalitionName(player.side, true)} PLAYERS\n`;
+            byCoalition[player.side] = `${coalitionName(player.side, true)} Players\n`;
         }
         byCoalition[player.side] += ` ${player.name}\n`;
     }
-    return Object.values(byCoalition).join("\n");
+    if (Object.keys(byCoalition).length > 0) {
+        return Object.values(byCoalition).join("\n");
+    } else {
+        return "No players in server";
+    }
 }
 
 export function formatTime(totalSeconds: number) {
