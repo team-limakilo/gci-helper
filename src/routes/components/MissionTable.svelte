@@ -93,6 +93,9 @@
         border-top: 1px solid #444;
     }
     tr:last-child {
+        border-bottom: 1px solid #444;
+    }
+    tr:last-child.message {
         border-bottom: 1px solid #999;
     }
     tr:not(.first) td {
@@ -103,7 +106,7 @@
     }
     .message td {
         text-align: center;
-        font-size: 1.5em;
+        font-size: 1.3em;
         padding: 8px 0;
     }
 </style>
