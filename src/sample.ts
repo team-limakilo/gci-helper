@@ -3330,6 +3330,12 @@ const getSampleData = () => ({
     "current": 4,
     "max": 15,
     "list": [{
+      "id": "1",
+      "name": "LK Admin",
+      "side": "0",
+      "slot": "",
+    }, {
+      "id": "2",
       "name": "kukiric",
       "side": "2",
       "slot": "100",

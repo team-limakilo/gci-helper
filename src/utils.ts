@@ -31,6 +31,9 @@ export function coalitionName(coalition: string | number, suffix: boolean = fals
 export function formatPlayerList(players: PlayerDetails[]) {
     const byCoalition: { [key: string]: string } = {};
     for (let player of players) {
+        if (player.host) {
+            continue;
+        }
         if (!byCoalition[player.side]) {
             byCoalition[player.side] = `${coalitionName(player.side, true)} PLAYERS\n`;
         }

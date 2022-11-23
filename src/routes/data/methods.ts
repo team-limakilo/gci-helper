@@ -139,6 +139,7 @@ export function getPlayers(data: ExportData) {
             name: player.name,
             side: player.side?.toString(),
             slot: player.slot?.toString(),
+            host: player.id === "1" || undefined,
         })),
         current: data.players.current,
         max: data.players.max,
