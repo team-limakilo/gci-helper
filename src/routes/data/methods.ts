@@ -133,6 +133,18 @@ export function getTickets(data: ExportData) {
     }
 }
 
+export function getPlayers(data: ExportData) {
+    return {
+        list: data.players.list?.map((player) => ({
+            name: player.name,
+            side: player.side?.toString(),
+            slot: player.slot?.toString(),
+        })),
+        current: data.players.current,
+        max: data.players.max,
+    };
+}
+
 export function getTugOfWar(data: ExportData) {
     const blueRatio = Math.min(data.coalitions[2].tickets.current / data.coalitions[2].tickets.start, 1);
     const redRatio = Math.min(data.coalitions[1].tickets.current / data.coalitions[1].tickets.start, 1);

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { formatTime, rightPad, ticketsHint } from "../../utils";
+    import { formatPlayerList, formatTime, rightPad, ticketsHint } from "../../utils";
     import { ClientData, Coalition } from "../data/types";
     import MissionList from "./MissionList.svelte";
     import MissionTable from "./MissionTable.svelte";
@@ -77,7 +77,14 @@
                 </div>
             {/if}
             <div class="mono">
-                Players: {data.players.current - 1}/{data.players.max - 1}
+                Players:
+                {#if data.players.list}
+                    <span class="hint" title={formatPlayerList(data.players.list)}>
+                        {data.players.current - 1}/{data.players.max - 1}
+                    </span>
+                {:else}
+                    {data.players.current - 1}/{data.players.max - 1}
+                {/if}
             </div>
         </div>
     </div>

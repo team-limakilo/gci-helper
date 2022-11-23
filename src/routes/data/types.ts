@@ -17,7 +17,7 @@ export interface ClientData {
     startDate: string;
     worldDate: string;
     dcsVersion: string;
-    players: { current: number, max: number };
+    players: { current: number, max: number, list?: PlayerDetails[] };
     restartPeriod: number;
     pageTitle?: string;
     tugOfWar: number;
@@ -46,6 +46,12 @@ export interface Mission {
     assigned: { aircraft: string, group: string, player: string }[];
     timeout: number;
     mode1: string;
+}
+
+export interface PlayerDetails {
+    name: string;
+    side: string;
+    slot: string;
 }
 
 export type ExportDataAsset = ExportData["coalitions"]["1"]["assets"]["Hama"]["Hama_1_Reg3Sa2-1"];

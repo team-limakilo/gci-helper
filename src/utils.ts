@@ -1,3 +1,5 @@
+import type { PlayerDetails } from "./routes/data/types";
+
 export function padTime(str: any, len: number) {
     return str.toString().padStart(len, "0");
 }
@@ -16,11 +18,32 @@ export function ticketsHint(text: string) {
     return hint[text];
 }
 
+export function coalitionName(coalition: string | number, suffix: boolean = false) {
+    coalition = coalition.toString();
+    switch (coalition) {
+        case "0": return "Neutral";
+        case "1": return suffix ? "REDFOR" : "Red";
+        case "2": return suffix ? "BLUFOR" : "Blue";
+        default: return "Unknown";
+    }
+}
+
+export function formatPlayerList(players: PlayerDetails[]) {
+    const byCoalition: { [key: string]: string } = {};
+    for (let player of players) {
+        if (!byCoalition[player.side]) {
+            byCoalition[player.side] = `${coalitionName(player.side, true)} PLAYERS\n`;
+        }
+        byCoalition[player.side] += ` ${player.name}\n`;
+    }
+    return Object.values(byCoalition).join("\n");
+}
+
 export function formatTime(totalSeconds: number) {
     if (totalSeconds <= 0) return "0:00:00";
     totalSeconds = totalSeconds % (24 * 60 * 60);
     const hours = String(Math.floor(totalSeconds / 3600));
     const minutes = padTime(Math.floor((totalSeconds / 60) % 60), 2);
     const seconds = padTime(Math.floor(totalSeconds % 60), 2);
-    return `${hours}:${minutes}:${seconds}`;
+    return `${hours}:${minutes}:${seconds} `;
 }

@@ -3328,7 +3328,20 @@ const getSampleData = () => ({
   "modeltime": process.uptime(),
   "players": {
     "current": 2,
-    "max": 15
+    "max": 15,
+    "list": [{
+      "name": "kukiric",
+      "side": "2",
+      "slot": "100",
+    }, {
+      "name": "Leltch",
+      "side": "2",
+      "slot": "101",
+    }, {
+      "name": "Arctic Fox",
+      "side": "2",
+      "slot": "102",
+    }]
   },
   "sortie": "Flashpoint Levant",
   "startdate": "2022-03-18 13:38:25Z",
