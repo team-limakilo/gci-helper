@@ -3330,23 +3330,23 @@ const getSampleData = () => ({
     "current": 4,
     "max": 15,
     "list": [{
-      "id": "1",
+      "id": 1,
       "name": "LK Admin",
-      "side": "0",
+      "side": 0,
       "slot": "",
     }, {
       "id": "2",
       "name": "kukiric",
-      "side": "2",
-      "slot": "100",
+      "side": 2,
+      "slot": 100,
     }, {
       "name": "Leltch",
-      "side": "2",
-      "slot": "101",
+      "side": 2,
+      "slot": 101,
     }, {
       "name": "Arctic Fox",
-      "side": "2",
-      "slot": "102",
+      "side": 2,
+      "slot": 102,
     }]
   },
   "sortie": "Flashpoint Levant",
