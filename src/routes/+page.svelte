@@ -181,10 +181,18 @@
             table {
                 font-size: 0.9em;
             }
+            th,
+            td {
+                padding: 2px 6px !important;
+                min-width: 30px;
+            }
         }
         @media (max-width: 799px) {
             table {
-                font-size: 0.8em;
+                font-size: 0.85em;
+            }
+            .min-small {
+                display: none;
             }
         }
         @media (max-width: 699px) {

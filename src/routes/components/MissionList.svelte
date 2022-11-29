@@ -1,6 +1,8 @@
 <script lang="ts">
     import { formatTime } from "../../utils";
+    import { prettyAircraftName } from "../data/format";
     import type { Mission } from "../data/types";
+
     export let className: string = "";
     export let missions: Mission[];
     export let missionTimers: { [key: string]: number };
@@ -10,7 +12,9 @@
     {#each missions as mission}
         <div class="mono spaced">
             <strong class="friendly">{mission.type}</strong>
-            <span class="dim">Time Left: {formatTime(missionTimers[mission.id])}</span>
+            <span class="dim">
+                Time Left: {formatTime(missionTimers[mission.id])}
+            </span>
             <br />
             Region: {mission.region}
             {#if mission.target}
@@ -24,7 +28,10 @@
             Pilots:
             {#each mission.assigned as assigned, index (assigned.group)}
                 {#if index !== 0},{/if}
-                <span class="hint" title="Aircraft: {assigned.aircraft}">
+                <span
+                    class="hint"
+                    title="Aircraft: {prettyAircraftName(assigned.aircraft)}"
+                >
                     {assigned.player}
                 </span>
             {/each}

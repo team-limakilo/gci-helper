@@ -1,6 +1,8 @@
 <script lang="ts">
     import { formatTime } from "../../utils";
+    import { prettyAircraftName } from "../data/format";
     import type { Mission } from "../data/types";
+
     export let className: string = "";
     export let missions: Mission[];
     export let missionTimers: { [key: string]: number };
@@ -12,7 +14,7 @@
             <th>Type</th>
             <th>Region</th>
             <th>Target</th>
-            <th>Status</th>
+            <th>BDA</th>
             <th>Time Left</th>
             <th>Pilot</th>
             <th>Aircraft</th>
@@ -23,29 +25,31 @@
             {#each mission.assigned as assigned, index}
                 {#if index == 0}
                     <tr class="first">
-                        <td class="friendly bold">{mission.type}</td>
-                        <td>{mission.region}</td>
+                        <td class="friendly bold nobreak">{mission.type}</td>
+                        <td class="nobreak">{mission.region}</td>
                         <td>
                             {#if mission.target}
-                                {mission.target.codename} ({mission.target
-                                    .type})
+                                {mission.target.codename}
+                                <span class="min-small">({mission.target.type})</span>
                                 {#if mission.target.sitetype}
                                     [{mission.target.sitetype}]
                                 {/if}
                             {/if}
                         </td>
-                        <td>
+                        <td class="numbers">
                             {#if mission.target}
-                                {mission.target.status}% complete
+                                {mission.target.status}%
                             {:else}
                                 Active
                             {/if}
                         </td>
-                        <td>{formatTime(missionTimers[mission.id])}</td>
+                        <td class="numbers">
+                            {formatTime(missionTimers[mission.id])}
+                        </td>
                         <td class="name">
                             {assigned.player || assigned.group}
                         </td>
-                        <td>{assigned.aircraft}</td>
+                        <td>{prettyAircraftName(assigned.aircraft)}</td>
                     </tr>
                 {:else}
                     <tr>
@@ -57,14 +61,14 @@
                         <td class="name">
                             {assigned.player || assigned.group}
                         </td>
-                        <td>{assigned.aircraft}</td>
+                        <td>{prettyAircraftName(assigned.aircraft)}</td>
                     </tr>
                 {/if}
             {/each}
         {:else}
-        <tr class="first message">
-            <td colspan="999">No active missions</td>
-        </tr>
+            <tr class="first message">
+                <td colspan="999">No active missions</td>
+            </tr>
         {/each}
     </tbody>
 </table>
@@ -78,7 +82,7 @@
     th,
     td {
         text-align: left;
-        padding: 4px;
+        padding: 4px 6px;
         word-break: break-word;
         vertical-align: text-top;
     }
@@ -103,6 +107,14 @@
     }
     .name {
         width: 25%;
+    }
+    .numbers {
+        text-align: right;
+        word-break: keep-all;
+    }
+    .nobreak {
+        overflow: hidden;
+        word-break: keep-all;
     }
     .message td {
         text-align: center;
