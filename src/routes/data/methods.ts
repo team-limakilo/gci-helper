@@ -40,7 +40,7 @@ function target(data: ExportData, { target }: { target: MissionTarget }): Asset 
 function assignedPilots(mission: ExportDataMission) {
     return mission.assigned
         .filter((assigned) => assigned.player != null)
-        .map(({ group, player, aircraft }) => ({ group, player, aircraft }));
+        .map(({ group, player, type: aircraft }) => ({ group, player, aircraft }));
 }
 
 export function getAirbases(data: ExportData, coalitions: Coalition[] = []) {

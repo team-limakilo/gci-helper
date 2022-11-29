@@ -3258,7 +3258,7 @@ const getSampleData = () => ({
       "missions": {
         "5730": {
           "assigned": [{
-            "aircraft": "A-10C",
+            "type": "A-10C",
             "group": "104th fs Maryland 1-1",
             "iffmode3": "5730",
             "player": "kukiric"
@@ -3284,12 +3284,12 @@ const getSampleData = () => ({
         },
         "5740": {
           "assigned": [{
-            "aircraft": "M-2000C",
+            "type": "M-2000C",
             "group": "2/5 chasse 1-1",
             "iffmode3": "5740",
             "player": "Leltch",
           }, {
-            "aircraft": "M-2000C",
+            "type": "M-2000C",
             "group": "2/5 chasse 1-2",
             "iffmode3": "5741",
             "player": "Arctic Fox"
