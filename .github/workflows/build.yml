@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v*
+
+env:
+  BASE_URL: /status
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run NPM build
+        run: npm ci && NODE_ENV=production npm run build
+
+      - name: Upload files
+        uses: actions/upload-artifact@v3
+        with:
+          retention-days: 90
+          name: gci-helper
+          path: build
