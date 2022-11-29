@@ -14,8 +14,8 @@
             <th>Type</th>
             <th>Region</th>
             <th>Target</th>
-            <th>BDA</th>
-            <th>Time Left</th>
+            <th class="right">BDA</th>
+            <th class="right">Time Left</th>
             <th>Pilot</th>
             <th>Aircraft</th>
         </tr>
@@ -36,14 +36,14 @@
                                 {/if}
                             {/if}
                         </td>
-                        <td class="numbers">
+                        <td class="right nobreak">
                             {#if mission.target}
                                 {mission.target.status}%
                             {:else}
                                 Active
                             {/if}
                         </td>
-                        <td class="numbers">
+                        <td class="right nobreak">
                             {formatTime(missionTimers[mission.id])}
                         </td>
                         <td class="name">
@@ -108,9 +108,9 @@
     .name {
         width: 25%;
     }
-    .numbers {
+    .right {
+        float: unset;
         text-align: right;
-        word-break: keep-all;
     }
     .nobreak {
         overflow: hidden;
