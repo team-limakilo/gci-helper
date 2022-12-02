@@ -1,21 +1,31 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
     export let text: string;
     export let time: number;
     let node: HTMLElement;
 
+    function show(target: Element) {
+        const transform = getComputedStyle(target).transform ?? "";
+        return {
+            delay: 0,
+            duration: 250,
+            css: (value: number) => {
+                const offsetY = `${1 - value}em`;
+                return `opacity: ${value}; transform: ${transform} translateY(${offsetY})`;
+            },
+        };
+    }
+
     setTimeout(() => {
         window.toasts.update((toasts: ToastData[]) => {
-            if (toasts.find((toast) => toast.time === time)) {
-                return [];
-            } else {
+            if (!toasts.find((toast) => toast.time === time)) {
                 return toasts;
             }
+            return [];
         });
     }, 3500);
 </script>
 
-<div bind:this={node} transition:fade class="mono">{text}</div>
+<div bind:this={node} transition:show class="mono">{text}</div>
 
 <style>
     div {
