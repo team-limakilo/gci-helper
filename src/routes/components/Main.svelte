@@ -1,7 +1,13 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { formatPlayerList, formatTime, rightPad, ticketsHint } from "../../utils";
+    import {
+        formatPlayerList,
+        formatTime,
+        rightPad,
+        ticketsHint,
+    } from "../../utils";
     import { ClientData, Coalition } from "../data/types";
+    import Hint from "./Hint.svelte";
     import MissionList from "./MissionList.svelte";
     import MissionTable from "./MissionTable.svelte";
     export let data: ClientData;
@@ -55,15 +61,15 @@
             </div>
             <div class="mono">
                 <span class="friendly">BLUFOR</span> Tickets:
-                <span class="hint" title={ticketsHint(blueTickets)}
-                    >{blueTickets}</span
-                >
+                <Hint title={ticketsHint(blueTickets)}>
+                    {blueTickets}
+                </Hint>
             </div>
             <div class="mono">
                 <span class="enemy">REDFOR</span> Tickets:
-                <span class="hint" title={ticketsHint(redTickets)}
-                    >{redTickets}</span
-                >
+                <Hint title={ticketsHint(redTickets)}>
+                    {redTickets}
+                </Hint>
             </div>
         </div>
         <div>
@@ -79,9 +85,9 @@
             <div class="mono">
                 Players:
                 {#if data.players.list}
-                    <span class="hint" title={formatPlayerList(data.players.list)}>
+                    <Hint title={formatPlayerList(data.players.list)}>
                         {data.players.current - 1}/{data.players.max - 1}
-                    </span>
+                    </Hint>
                 {:else}
                     {data.players.current - 1}/{data.players.max - 1}
                 {/if}

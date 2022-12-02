@@ -2,6 +2,7 @@
     import { formatTime } from "../../utils";
     import { prettyAircraftName } from "../data/format";
     import type { Mission } from "../data/types";
+    import Hint from "./Hint.svelte";
 
     export let className: string = "";
     export let missions: Mission[];
@@ -28,12 +29,9 @@
             Pilots:
             {#each mission.assigned as assigned, index (assigned.group)}
                 {#if index !== 0},{/if}
-                <span
-                    class="hint"
-                    title="Aircraft: {prettyAircraftName(assigned.aircraft)}"
-                >
+                <Hint title="Aircraft: {prettyAircraftName(assigned.aircraft)}">
                     {assigned.player}
-                </span>
+                </Hint>
             {/each}
             {#if mission.target}
                 <br />

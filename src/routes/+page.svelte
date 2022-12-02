@@ -3,12 +3,16 @@
     import dayjs from "dayjs";
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
-    import type { ClientData } from "./data/types";
+    import { writable } from "svelte/store";
     import Main from "./components/Main.svelte";
+    import Toast from "./components/Toast.svelte";
+    import type { ClientData } from "./data/types";
+
     dayjs.extend(relativeTime);
 
     let interval: NodeJS.Timer;
     let data: ClientData;
+    let toasts: ToastData[] = [];
     let error = "";
 
     async function updateData() {
@@ -46,6 +50,8 @@
 
     onMount(() => {
         updateData();
+        window.toasts = writable([]);
+        window.toasts.subscribe((value: ToastData[]) => (toasts = value));
         interval = setInterval(updateData, 10 * 1000);
         return () => clearInterval(interval);
     });
@@ -69,6 +75,10 @@
         <h1>Loading...</h1>
     {/if}
 </main>
+
+{#each toasts as toast (toast.time)}
+    <Toast text={toast.text} time={toast.time} />
+{/each}
 
 <style global>
     body {
