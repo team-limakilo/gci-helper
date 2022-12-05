@@ -61,13 +61,13 @@
             </div>
             <div class="mono">
                 <span class="friendly">BLUFOR</span> Tickets:
-                <Hint title={ticketsHint(blueTickets)}>
+                <Hint title={ticketsHint(blueTickets)} context={blueTickets}>
                     {blueTickets}
                 </Hint>
             </div>
             <div class="mono">
                 <span class="enemy">REDFOR</span> Tickets:
-                <Hint title={ticketsHint(redTickets)}>
+                <Hint title={ticketsHint(redTickets)} context={redTickets}>
                     {redTickets}
                 </Hint>
             </div>

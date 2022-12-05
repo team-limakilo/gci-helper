@@ -1,5 +1,6 @@
 <script lang="ts">
     export let title: string;
+    export let context: string = "";
 
     let touchId = null;
     let touchX = 0;
@@ -29,7 +30,8 @@
                 touch.clientY
             );
             if (target == event.target) {
-                window.toasts.set([{ text: title, time: event.timeStamp }]);
+                const message = context ? `${context}\n${title}` : title;
+                window.toasts.set([{ text: message, time: event.timeStamp }]);
             }
         }
     }

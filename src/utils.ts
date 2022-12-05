@@ -35,7 +35,7 @@ export function formatPlayerList(players: PlayerDetails[]) {
             continue;
         }
         if (!byCoalition[player.side]) {
-            byCoalition[player.side] = `${coalitionName(player.side, true)} Players\n`;
+            byCoalition[player.side] = `${coalitionName(player.side, true)} Players:\n`;
         }
         byCoalition[player.side] += ` ${player.name}\n`;
     }

@@ -3,6 +3,15 @@
     export let time: number;
     let node: HTMLElement;
 
+    let duration = 3500;
+    if (text.length > 35) {
+        if (text.length < 85) {
+            duration = 3500 + (text.length - 35) * 30;
+        } else {
+            duration = 5000;
+        }
+    }
+
     function show(target: Element) {
         const transform = getComputedStyle(target).transform ?? "";
         return {
@@ -22,22 +31,24 @@
             }
             return [];
         });
-    }, 3500);
+    }, duration);
 </script>
 
-<div bind:this={node} transition:show class="mono">{text}</div>
+<div bind:this={node} transition:show class="">{text}</div>
 
 <style>
     div {
         pointer-events: none;
-        background: rgba(22, 29, 49, 0.86);
+        background: rgba(28, 35, 55, 0.86);
         color: white;
-        padding: 0.5em 1em;
+        padding: 0.75em 1em;
+        border: 1px solid rgb(71, 71, 71);
         border-radius: 12px;
         white-space: pre;
         position: fixed;
         transform: translateX(-50%);
-        bottom: 1.5em;
+        backdrop-filter: blur(2px);
+        bottom: 1.25em;
         left: 50%;
     }
     @media (min-height: 1000px) {

@@ -29,7 +29,10 @@
             Pilots:
             {#each mission.assigned as assigned, index (assigned.group)}
                 {#if index !== 0},{/if}
-                <Hint title="Aircraft: {prettyAircraftName(assigned.aircraft)}">
+                <Hint
+                    title="Aircraft: {prettyAircraftName(assigned.aircraft)}"
+                    context={assigned.player}
+                >
                     {assigned.player}
                 </Hint>
             {/each}
