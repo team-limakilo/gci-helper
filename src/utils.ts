@@ -30,7 +30,8 @@ export function coalitionName(coalition: string | number, suffix: boolean = fals
 
 export function formatPlayerList(players: PlayerDetails[]) {
     const byCoalition: { [key: string]: string } = {};
-    for (let player of players) {
+    const sortedPlayers = players.sort((a, b) => a.name > b.name ? 1 : -1);
+    for (let player of sortedPlayers) {
         if (player.host) {
             continue;
         }
