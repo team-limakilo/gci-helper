@@ -1,3 +1,9 @@
+function getSteppedDate(seconds: number) {
+  const milliseconds = seconds * 1000;
+  const date = Math.floor(Date.now() / milliseconds) * milliseconds;
+  return new Date(date);
+}
+
 const getSampleData = () => ({
   "abstime": 22560,
   "coalitions": {
@@ -3323,7 +3329,7 @@ const getSampleData = () => ({
   },
   "period": 7200,
   "dcs_version": "2.7.11.21408",
-  "date": new Date().toJSON(),
+  "date": getSteppedDate(30),
   "modeldate": "1998-8-17",
   "modeltime": process.uptime(),
   "players": {

@@ -6,9 +6,9 @@ export async function GET(event: RequestEvent): Promise<Response> {
     const data = await getExportData();
 
     // Check if cached response is fresh enough
-    const clientCachedDate = new Date(event.request.headers["if-modified-since"]);
+    const clientCachedDate = new Date(event.request.headers.get("if-modified-since"));
     if (!isNaN(clientCachedDate.valueOf()) && new Date(data.date) <= clientCachedDate) {
-        return redirect(304, '');
+        throw redirect(304, '');
     }
 
     event.setHeaders({
