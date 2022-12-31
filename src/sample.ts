@@ -3328,7 +3328,7 @@ const getSampleData = () => ({
     }
   },
   "period": 7200,
-  "dcs_version": "2.7.11.21408",
+  "dcs_version": "2.8.1.34667",
   "date": getSteppedDate(30),
   "modeldate": "1998-8-17",
   "modeltime": process.uptime(),
@@ -3358,7 +3358,7 @@ const getSampleData = () => ({
   "sortie": "Flashpoint Levant",
   "startdate": "2022-03-18 13:38:25Z",
   "theater": "Syria",
-  "version": "v0.9.4"
+  "version": "47df0ac810b7bacb06cae77355625ff7017aaf09"
 });
 
 export type ExportData = ReturnType<typeof getSampleData>;

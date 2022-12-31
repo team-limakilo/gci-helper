@@ -10,7 +10,11 @@
     import Hint from "./Hint.svelte";
     import MissionList from "./MissionList.svelte";
     import MissionTable from "./MissionTable.svelte";
+    import VersionLink from "./VersionLink.svelte";
     export let data: ClientData;
+
+    const DCS_VERSION_PATH = import.meta.env.VITE_DCS_VERSION_PATH;
+    const DCT_VERSION_PATH = import.meta.env.VITE_DCT_VERSION_PATH;
 
     let restartTimeLeft: number;
     let currentWorldTime: number;
@@ -37,12 +41,9 @@
         return () => clearInterval(interval);
     });
 
-    let version: string;
     let redTickets: string;
     let blueTickets: string;
 
-    $: version =
-        data.version.length > 20 ? data.version.substring(0, 8) : data.version;
     $: redTickets = data.tickets["1"].text;
     $: blueTickets = data.tickets["2"].text;
 </script>
@@ -192,7 +193,15 @@
         Last Update: {new Date(data.date).toLocaleString()}
     </div>
     <div class="right dim">
-        DCS Version: {data.dcsVersion}, DCT Version: {version}
+        DCS Version: <VersionLink
+            base={DCS_VERSION_PATH}
+            version={data.dcsVersion}
+            trailingSlash={true}
+        />, DCT Version: <VersionLink
+            base={DCT_VERSION_PATH}
+            version={data.version}
+            trim={8}
+        />
     </div>
     <br />
 </footer>

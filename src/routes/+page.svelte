@@ -161,7 +161,7 @@
     .right {
         float: right;
     }
-    .dim {
+    .dim, .dim a {
         color: #777;
     }
     footer {
