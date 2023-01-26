@@ -1,6 +1,6 @@
 <script lang="ts">
-    export let base: string;
     export let version: string;
+    export let base: string = "";
     export let trim = Infinity;
     export let trailingSlash = false;
 </script>

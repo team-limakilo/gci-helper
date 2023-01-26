@@ -13,7 +13,6 @@
     import VersionLink from "./VersionLink.svelte";
     export let data: ClientData;
 
-    const DCS_VERSION_PATH = import.meta.env.VITE_DCS_VERSION_PATH;
     const DCT_VERSION_PATH = import.meta.env.VITE_DCT_VERSION_PATH;
 
     let restartTimeLeft: number;
@@ -194,7 +193,6 @@
     </div>
     <div class="right dim">
         DCS Version: <VersionLink
-            base={DCS_VERSION_PATH}
             version={data.dcsVersion}
             trailingSlash={true}
         />, DCT Version: <VersionLink

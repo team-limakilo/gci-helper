@@ -1,5 +1,4 @@
 import { json, redirect, RequestEvent } from "@sveltejs/kit";
-import { getResolvableDCSVersion } from "../../utils";
 import { customTitle, getAirbases, getAssets, getAvailableMissions, getDCSDateTime, getExportData, getMissions, getPlayers, getSAMs, getTickets, getTugOfWar } from "./methods";
 import { Coalition } from "./types";
 
@@ -34,7 +33,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
         modelTime: data.modeltime,
         worldDate: getDCSDateTime(data.modeldate, data.abstime).toISOString(),
         startDate: data.startdate,
-        dcsVersion: await getResolvableDCSVersion(data.dcs_version),
+        dcsVersion: data.dcs_version,
         players: getPlayers(data),
         pageTitle: customTitle,
         restartPeriod: data.period,
