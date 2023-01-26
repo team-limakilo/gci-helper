@@ -9,6 +9,7 @@ on:
 
 env:
   BASE_URL: /status
+  VITE_DCT_VERSION_PATH: https://github.com/team-limakilo/dct/commits
 
 jobs:
   build:
