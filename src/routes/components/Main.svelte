@@ -45,6 +45,14 @@
 
     $: redTickets = data.tickets["1"].text;
     $: blueTickets = data.tickets["2"].text;
+
+    const missionTypes = ['ANTISHIP', 'ARMEDRECON', 'BAI', 'CAP', 'CAS', 'OCA', 'SEAD', 'STRIKE'];
+    const availableMissions = missionTypes.map( t => {
+        const found = data.availableMissions.find(m => {
+            return m.type === t
+        });
+        return found || {count:0, type: t}
+    })
 </script>
 
 <section>
@@ -123,7 +131,7 @@
 <section>
     <h2>Available missions</h2>
     <div class="row missions">
-        {#each data.availableMissions as { type, count }}
+        {#each availableMissions as { type, count }}
             <div class="card">
                 <h3 class="uppercase">{type}</h3>
                 <div>{count}</div>

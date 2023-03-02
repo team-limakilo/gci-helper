@@ -42,13 +42,12 @@
             <p class="dim">Pilot{#if mission.assigned.length > 1}s{/if}</p>
             <div class="flex-column">
             {#each mission.assigned as assigned, index (assigned.group)}
-                <p>{assigned.player}</p>
+                <div>
+                    <p>{assigned.player}</p>
+                    <small class="dim">{prettyAircraftName(assigned.aircraft)}</small>
+                </div>
             {/each}
             </div>
-        </li>
-        <li>
-            <p class="dim">Aircraft</p>
-            <p>Syria</p>
         </li>
     </ul>
     {/each}
@@ -76,5 +75,9 @@
     .flex-column {
         display: flex;
         flex-direction: column;
+    }
+
+    .flex-column div + div {
+        margin-top: 6px;
     }
 </style>

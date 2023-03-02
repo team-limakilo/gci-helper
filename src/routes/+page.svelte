@@ -137,7 +137,7 @@
         color: #C8C8C8;
         margin-bottom: 4px;
     }
-    p, span {
+    p, span, small {
         font-weight: 400;
     }
     .extra {
@@ -183,7 +183,7 @@
         }
     }
 
-    @media ( max-width: 375px ) {
+    @media ( max-width: 575px ) {
         .card {
             flex: 1 0 100%
         }
