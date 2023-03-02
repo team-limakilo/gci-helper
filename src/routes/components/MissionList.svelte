@@ -9,39 +9,72 @@
     export let missionTimers: { [key: string]: number };
 </script>
 
-<div class={className}>
+<div class="hide-desktop">
     {#each missions as mission}
-        <div class="mono spaced">
-            <strong class="friendly">{mission.type}</strong>
-            <span class="dim">
-                Time Left: {formatTime(missionTimers[mission.id])}
-            </span>
-            <br />
-            Region: {mission.region}
+    <ul>
+        <li>
+            <p class="dim">Type</p>
+            <p><b>{mission.type}</b></p>
+        </li>
+        <li>
+            <p class="dim">Region</p>
+            <p>{mission.region}</p>
+        </li>
+        <li>
+            <p class="dim">Target</p>
             {#if mission.target}
-                <br />
-                Target: {mission.target.codename} ({mission.target.type})
-                {#if mission.target.sitetype}
-                    [{mission.target.sitetype}]
-                {/if}
+                <p>{mission.target.codename}</p>
             {/if}
-            <br />
-            Pilots:
-            {#each mission.assigned as assigned, index (assigned.group)}
-                {#if index !== 0},{/if}
-                <Hint
-                    title="Aircraft: {prettyAircraftName(assigned.aircraft)}"
-                    context={assigned.player}
-                >
-                    {assigned.player}
-                </Hint>
-            {/each}
+        </li>
+        <li>
+            <p class="dim">BDA</p>
             {#if mission.target}
-                <br />
-                Status: Active ({mission.target.status}% complete)
+                <p>{mission.target.status}%</p>
             {:else}
-                Status: Active
+                <p>Active</p>
             {/if}
-        </div>
+        </li>
+        <li>
+            <p class="dim">Time Left</p>
+            <p>{formatTime(missionTimers[mission.id])}</p>
+        </li>
+        <li>
+            <p class="dim">Pilot{#if mission.assigned.length > 1}s{/if}</p>
+            <div class="flex-column">
+            {#each mission.assigned as assigned, index (assigned.group)}
+                <p>{assigned.player}</p>
+            {/each}
+            </div>
+        </li>
+        <li>
+            <p class="dim">Aircraft</p>
+            <p>Syria</p>
+        </li>
+    </ul>
     {/each}
 </div>
+
+<style>
+    ul {
+        list-style: none;
+        padding: 16px;
+        margin: 0;
+        margin-bottom: 16px;
+        background: #272A31;
+    }
+
+    li {
+        display: flex;
+        border-radius: 4px;
+        margin-bottom: 4px;
+    }
+
+    li p:first-child {
+        min-width: 120px;
+    }
+    
+    .flex-column {
+        display: flex;
+        flex-direction: column;
+    }
+</style>

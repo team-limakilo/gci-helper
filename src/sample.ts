@@ -3355,7 +3355,7 @@ const getSampleData = () => ({
       "slot": 102,
     }]
   },
-  "sortie": "Flashpoint Levant",
+  "sortie": "BATTLE OF LEBANON",
   "startdate": "2022-03-18 13:38:25Z",
   "theater": "Syria",
   "version": "47df0ac810b7bacb06cae77355625ff7017aaf09"

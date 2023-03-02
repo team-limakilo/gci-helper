@@ -48,158 +48,112 @@
 </script>
 
 <section>
-    <h1>Overview</h1>
-    <div class="grid">
-        <div>
-            <div class="mono">
-                Campaign Started: {new Date(data.startDate).toLocaleString()}
-            </div>
-            <div class="mono">
-                Tug of War: <div class="tickets">
-                    <div class="bar" style={`width: ${data.tugOfWar * 100}%`} />
-                </div>
-            </div>
-            <div class="mono">
-                <span class="friendly">BLUFOR</span> Tickets:
-                <Hint title={ticketsHint(blueTickets)} context={blueTickets}>
-                    {blueTickets}
-                </Hint>
-            </div>
-            <div class="mono">
-                <span class="enemy">REDFOR</span> Tickets:
-                <Hint title={ticketsHint(redTickets)} context={redTickets}>
-                    {redTickets}
-                </Hint>
-            </div>
+    <h1>{data.sortie}</h1>
+    <p class="uppercase extra">{data.theater}</p>
+</section>
+
+<section>
+    <h2>Campaign overview</h2>
+    <div class="row">
+        <div class="card">
+            <h3>Campaign Started:</h3>
+            <div>{new Date(data.startDate).toLocaleString("uk")}</div>
         </div>
-        <div>
-            <br />
-            <div class="mono">
-                In-Game Time: {formatTime(currentWorldTime)}
-            </div>
-            {#if data.restartPeriod > 0}
-                <div class="mono">
-                    Next Restart: {formatTime(restartTimeLeft)}
-                </div>
-            {/if}
-            <div class="mono">
-                Players:
-                {#if data.players.list}
-                    <Hint title={formatPlayerList(data.players.list)}>
-                        {data.players.current - 1}/{data.players.max - 1}
-                    </Hint>
-                {:else}
-                    {data.players.current - 1}/{data.players.max - 1}
-                {/if}
+        <div class="card">
+            <h3>In-Game Time:</h3>
+            <div>{formatTime(currentWorldTime)}</div>
+        </div>
+        <div class="card">
+            <h3>Next Restart:</h3>
+            <div>{formatTime(restartTimeLeft)}</div>
+        </div>
+        <div class="card">
+            <h3>Players Online:</h3>
+            <div>
+                {data.players.current - 1}/{data.players.max - 1}
             </div>
         </div>
     </div>
 </section>
 
 <section>
-    <h1>Missions</h1>
-    <div class="mono spaced">
-        <strong>Available</strong>
+    <h2>Coalition strength</h2>
+    <div class="row coalition">
+        <div class="card">
+            <h3 class="blue">Blue Coalition:</h3>
+            <div>{data.tugOfWar * 100}% {blueTickets}</div>
+        </div>
+        <div class="card">
+            <h3 class="red">Red Coalition:</h3>
+            <div>{(1 - data.tugOfWar) * 100}% {redTickets}</div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Airbase Information</h2>
+    <div class="row">
+        <div class="card">
+            <h3 class="blue">Friendly Airbases:</h3>
+            {#each data.airbases as airbase}
+                {#if airbase.coalition == Coalition.Blue}
+                    <div>{airbase.name}</div>
+                {/if}
+            {/each}
+        </div>
+        <div class="card">
+            <h3 class="red">Hostile Airbases:</h3>
+            {#each data.airbases as airbase}
+                {#if airbase.coalition == Coalition.Red}
+                    <div>{airbase.name}</div>
+                {/if}
+            {/each}
+        </div>
+        <div class="card">
+            <h3 class="neutral">Neutral Airbases:</h3>
+            {#each data.airbases as airbase}
+                {#if airbase.coalition == Coalition.Neutral}
+                    <div>{airbase.name}</div>
+                {/if}
+            {/each}
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Available missions</h2>
+    <div class="row missions">
         {#each data.availableMissions as { type, count }}
-            <div>{rightPad(`${type}:`, 12)} {count}</div>
-        {:else}
-            <div>None</div>
+            <div class="card">
+                <h3 class="uppercase">{type}</h3>
+                <div>{count}</div>
+            </div>
         {/each}
     </div>
-    <br />
+</section>
+
+<section>
+    <h2>Active missions</h2>
     <MissionTable
-        className="desktop"
-        missions={data.missions}
-        {missionTimers}
+            className="desktop"
+            missions={data.missions}
+            {missionTimers}
     />
     <MissionList className="mobile" missions={data.missions} {missionTimers} />
 </section>
 
-<section>
-    <h1>Airbases</h1>
-    <div class="grid">
-        <div>
-            {#each data.airbases as airbase}
-                <div class="mono">
-                    {#if airbase.coalition == Coalition.Blue}
-                        <span class="friendly">{rightPad("Friendly", 8)}</span>
-                        {airbase.name}
-                    {/if}
-                </div>
-            {/each}
-        </div>
-        <div>
-            {#each data.airbases as airbase}
-                <div class="mono">
-                    {#if airbase.coalition == Coalition.Neutral}
-                        <span class="neutral">{rightPad("Neutral", 8)}</span>
-                        {airbase.name}
-                    {/if}
-                </div>
-            {/each}
-            {#each data.airbases as airbase}
-                <div class="mono">
-                    {#if airbase.coalition == Coalition.Red}
-                        <span class="enemy">{rightPad("Hostile", 8)}</span>
-                        {airbase.name}
-                    {/if}
-                </div>
-            {/each}
-        </div>
-    </div>
-</section>
-
-<section>
-    <h1>SAM Threats</h1>
-    <div class="grid">
-        {#each data.enemySAMs as region}
-            <div>
-                <h2>{region.name}</h2>
-                {#each region.assets as asset}
-                    <div class="mono">
-                        <span class="enemy">{rightPad(asset.sitetype, 5)}</span>
-                        ({asset.codename})
-                    </div>
-                {:else}
-                    <div class="mono">Clear</div>
-                {/each}
-            </div>
-        {/each}
-    </div>
-</section>
-
-<section>
-    <h1>Enemy Assets</h1>
-    <div class="grid">
-        {#each data.enemyAssets as region}
-            <div>
-                <h2>{region.name}</h2>
-                {#each region.assets as asset}
-                    <div class="mono">
-                        <span class="enemy">{rightPad(asset.type, 10)}</span>
-                        ({asset.codename})
-                    </div>
-                {:else}
-                    <div class="mono">No Assets</div>
-                {/each}
-            </div>
-        {/each}
-    </div>
-</section>
-
 <footer>
-    <div class="left dim">
-        Last Update: {new Date(data.date).toLocaleString()}
+    <div class="dim">
+        Last Update: {new Date(data.date).toLocaleString("uk")}
     </div>
-    <div class="right dim">
+    <div class="dim">
         DCS Version: <VersionLink
             version={data.dcsVersion}
             trailingSlash={true}
-        />, DCT Version: <VersionLink
+    />, DCT Version: <VersionLink
             base={DCT_VERSION_PATH}
             version={data.version}
             trim={8}
-        />
+    />
     </div>
-    <br />
 </footer>

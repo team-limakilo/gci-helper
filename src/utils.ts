@@ -48,9 +48,9 @@ export function formatPlayerList(players: PlayerDetails[]) {
 }
 
 export function formatTime(totalSeconds: number) {
-    if (totalSeconds <= 0) return "0:00:00";
+    if (totalSeconds <= 0) return "00:00:00";
     totalSeconds = totalSeconds % (24 * 60 * 60);
-    const hours = String(Math.floor(totalSeconds / 3600));
+    const hours = padTime(Math.floor(totalSeconds / 3600), 2);
     const minutes = padTime(Math.floor((totalSeconds / 60) % 60), 2);
     const seconds = padTime(Math.floor(totalSeconds % 60), 2);
     return `${hours}:${minutes}:${seconds}`;

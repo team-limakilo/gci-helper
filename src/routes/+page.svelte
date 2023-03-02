@@ -81,143 +81,138 @@
 {/each}
 
 <style global>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        color: #f0f0f0;
-        background: #0f0f0f;
-        line-height: 1.25;
-        max-width: 1024px;
-        padding: 0 1em;
-        margin: auto;
-    }
-    h1 {
-        border-bottom: 1px solid #aaa;
-        padding: 4px 0;
-        font-size: 24pt;
-    }
-    h2 {
-        font-size: 16pt;
-    }
-    .warning {
-        top: -3em;
-        position: fixed;
-        background: #a33;
-        visibility: hidden;
-        color: white;
-        padding: 0.5em;
-        width: calc(1024px - 1em);
-        max-width: calc(100% - 3rem);
-        transition: top 100ms linear;
-        border-radius: 8px;
-        text-align: center;
-    }
-    .warning.visible {
-        visibility: visible;
-        top: 1em;
-    }
-    .mono {
-        font-family: "Courier New", Courier, monospace;
-    }
-    .bold {
-        font-weight: bold;
-    }
-    .spaced + .spaced {
-        margin-top: 1em;
-    }
-    .friendly {
-        color: #5af;
-    }
-    .enemy {
-        color: #f55;
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
     }
     .neutral {
-        color: #ff8;
+        color: #FBCD55;
     }
-    .hint {
-        text-decoration: underline dotted;
-        text-underline-offset: 4px;
-        cursor: help;
+    .red {
+        color: #FB556C;
     }
-    .tickets {
-        position: relative;
-        display: inline-block;
-        background-color: #c33;
-        border-radius: 2px;
-        height: 0.6em;
-        width: 256px;
+    .blue {
+        color: #55ABFB;
     }
-    .tickets > .bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        background-color: #27d;
-        border-radius: 2px 0 0 2px;
-        border-right: 1px dotted white;
+    .dim {
+        color: #C8C8C8;
     }
-    .left {
-        float: left;
+    .uppercase {
+        text-transform: uppercase;
     }
-    .right {
-        float: right;
+    body {
+        font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+        color: #fff;
+        background: #222429;
+        line-height: 1.5;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        margin: 0;
     }
-    .dim, .dim a {
-        color: #777;
+    h1,h2,h3,h4,p {
+        margin: 0;
     }
-    footer {
-        font-size: 10pt;
-        margin: 4em 0 1em 0;
+    main {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 40px;
     }
-    /* Desktop layout */
-    @media (min-width: 1080px),
-        (min-width: 660px) and (orientation: landscape) {
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-flow: row dense;
+    h1 {
+        color: #FA253C;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 31px;
+        text-transform: uppercase;
+    }
+    h2 {
+        font-weight: 700;
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+    h3 {
+        font-weight: 400;
+        font-size: 14px;
+        color: #C8C8C8;
+        margin-bottom: 4px;
+    }
+    p, span {
+        font-weight: 400;
+    }
+    .extra {
+        font-size: 16px;
+    }
+    section {
+        margin-bottom: 40px;
+    }
+    .row {
+        gap: 16px;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: space-between;
+    }
+    .row + .row {
+        margin-top: 16px;
+    }
+    .card {
+        background: #272A31;
+        border-radius: 4px;
+        padding: 16px;
+        flex: 1 0 21%
+    }
+    footer, th, td {
+        font-weight: 400;
+        text-align: start;
+    }
+
+    @media ( max-width: 834px ) {
+        main {
+            padding: 40px 16px;
         }
-        .grid > * {
-            overflow: auto;
-        }
-        .grid.spaced {
-            gap: 1em;
-        }
-        .mobile {
-            display: none;
+        .card {
+            flex: 1 0 100%
         }
 
-        /* Shrink table text on small phones */
-        @media (max-width: 1079px) {
-            table {
-                font-size: 0.9em;
-            }
-            th,
-            td {
-                padding: 2px 6px !important;
-                min-width: 30px;
-            }
+        .coalition .card {
+            flex: 1 0 40%
         }
-        @media (max-width: 799px) {
-            table {
-                font-size: 0.85em;
-            }
-            .min-small {
-                display: none;
-            }
-        }
-        @media (max-width: 699px) {
-            table {
-                letter-spacing: -0.5px;
-            }
+
+        .missions .card {
+            flex: 1 0 21%
         }
     }
-    /* Mobile layout */
-    @media (max-width: 659px), (max-width: 1079px) and (orientation: portrait) {
-        .grid.spaced > * {
-            margin-top: 1em;
+
+    @media ( max-width: 375px ) {
+        .card {
+            flex: 1 0 100%
         }
-        .desktop {
+
+        .missions .card {
+            flex: 1 0 41%
+        }
+    }
+
+    @media (max-width: 670px) {
+        .hide-mobile {
             display: none;
         }
     }
+
+    @media (min-width: 670px) {
+        .hide-desktop {
+            display: none;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        main {
+            max-width: 1600px;
+        }
+
+        .missions .card {
+            flex: 1 0 10%
+        }
+    }
+
 </style>

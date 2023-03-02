@@ -22,8 +22,6 @@ export function prettyAircraftName(aircraft: string) {
         case "A-10C_2": return "A-10C Warthog";
         case "AH-64D_BLK_II": return "AH-64D Apache";
         case "UH-1H": return "UH-1H Huey";
-        case "Ka-50": return "Ka-50 Black Shark";
-        case "Ka-50_3": return "Ka-50 Black Shark";
         default: return aircraft;
     }
 }

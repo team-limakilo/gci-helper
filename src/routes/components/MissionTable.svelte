@@ -8,65 +8,51 @@
     export let missionTimers: { [key: string]: number };
 </script>
 
-<table class={"mono " + className}>
+<table class="hide-mobile">
     <thead>
         <tr>
-            <th>Type</th>
-            <th>Region</th>
-            <th>Target</th>
-            <th class="right">BDA</th>
-            <th class="right">Time Left</th>
-            <th>Pilot</th>
-            <th>Aircraft</th>
+            <th class="dim">Type</th>
+            <th class="dim">Region</th>
+            <th class="dim">Target</th>
+            <th class="dim">BDA</th>
+            <th class="dim">Time Left</th>
+            <th class="dim">Pilot</th>
+            <th class="dim">Aircraft</th>
         </tr>
     </thead>
     <tbody>
         {#each missions as mission}
-            {#each mission.assigned as assigned, index}
-                {#if index == 0}
-                    <tr class="first">
-                        <td class="friendly bold nobreak">{mission.type}</td>
-                        <td class="nobreak">{mission.region}</td>
-                        <td>
-                            {#if mission.target}
-                                {mission.target.codename}
-                                <span class="min-small">({mission.target.type})</span>
-                                {#if mission.target.sitetype}
-                                    [{mission.target.sitetype}]
-                                {/if}
-                            {/if}
-                        </td>
-                        <td class="right nobreak">
-                            {#if mission.target}
-                                {mission.target.status}%
-                            {:else}
-                                Active
-                            {/if}
-                        </td>
-                        <td class="right nobreak">
-                            {formatTime(missionTimers[mission.id])}
-                        </td>
-                        <td class="name">
-                            {assigned.player || assigned.group}
-                        </td>
-                        <td>{prettyAircraftName(assigned.aircraft)}</td>
-                    </tr>
-                {:else}
-                    <tr>
-                        <td />
-                        <td />
-                        <td />
-                        <td />
-                        <td />
-                        <td class="name">
-                            {assigned.player || assigned.group}
-                        </td>
-                        <td>{prettyAircraftName(assigned.aircraft)}</td>
-                    </tr>
-                {/if}
-            {/each}
+                <tr>
+                    <td><b>{mission.type}</b></td>
+                    <td>{mission.region}</td>
+                    <td>
+                        {#if mission.target}
+                            {mission.target.codename}
+                        {/if}
+                    </td>
+                    <td>
+                        {#if mission.target}
+                            {mission.target.status}%
+                        {:else}
+                            Active
+                        {/if}
+                    </td>
+                    <td>
+                        {formatTime(missionTimers[mission.id])}
+                    </td>
+                    <td>
+                        {#each mission.assigned as assigned, index}
+                            <div>{assigned.player || assigned.group}</div>
+                        {/each}
+                    </td>
+                    <td>
+                        {#each mission.assigned as assigned, index}
+                            <div>{prettyAircraftName(assigned.aircraft)}</div>
+                        {/each}
+                    </td>
+                </tr>
         {:else}
-            <tr class="first message">
+            <tr>
                 <td colspan="999">No active missions</td>
             </tr>
         {/each}
@@ -75,50 +61,25 @@
 
 <style>
     table {
-        border-collapse: collapse;
-        table-layout: auto;
         width: 100%;
+        border-collapse: collapse;
     }
-    th,
-    td {
-        text-align: left;
-        padding: 4px 6px;
-        word-break: break-word;
-        vertical-align: text-top;
+
+    tr {
+        border-bottom: 12px solid #222429;
     }
-    th {
-        border-bottom: 1px solid #999;
+
+    tbody tr {
+        background: #272A31;
+        border-radius: 4px;
     }
-    th:not(:last-child),
-    td:not(:last-child) {
-        border-right: 1px solid #999;
+
+    td, th {
+        padding: 16px;
+        vertical-align: top;
     }
-    tr.first {
-        border-top: 1px solid #444;
-    }
-    tr:last-child {
-        border-bottom: 1px solid #444;
-    }
-    tr:last-child.message {
-        border-bottom: 1px solid #999;
-    }
-    tr:not(.first) td {
-        padding-top: 0;
-    }
-    .name {
-        width: 25%;
-    }
-    .right {
-        float: unset;
-        text-align: right;
-    }
-    .nobreak {
-        overflow: hidden;
-        word-break: keep-all;
-    }
-    .message td {
-        text-align: center;
-        font-size: 1.3em;
-        padding: 8px 0;
+
+    td div + div {
+        margin-top: 16px;
     }
 </style>
