@@ -107,7 +107,7 @@
         background: #222429;
         line-height: 1.5;
         font-style: normal;
-        font-weight: 700;
+        font-weight: 400;
         font-size: 14px;
         margin: 0;
     }
@@ -136,9 +136,6 @@
         font-size: 14px;
         color: #C8C8C8;
         margin-bottom: 4px;
-    }
-    p, span, small {
-        font-weight: 400;
     }
     .extra {
         font-size: 16px;

@@ -51,6 +51,13 @@
         </li>
     </ul>
     {/each}
+    {#if !missions.length}
+        <ul>
+            <li>
+                <p class="dim">No active missions</p>
+            </li>
+        </ul>
+    {/if}
 </div>
 
 <style>

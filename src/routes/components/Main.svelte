@@ -99,6 +99,28 @@
 </section>
 
 <section>
+    <h2>Available missions</h2>
+    <div class="row missions">
+        {#each availableMissions as { type, count }}
+            <div class="card">
+                <h3 class="uppercase">{type}</h3>
+                <div>{count}</div>
+            </div>
+        {/each}
+    </div>
+</section>
+
+<section>
+    <h2>Active missions</h2>
+    <MissionTable
+            className="desktop"
+            missions={data.missions}
+            {missionTimers}
+    />
+    <MissionList className="mobile" missions={data.missions} {missionTimers} />
+</section>
+
+<section>
     <h2>Airbase Information</h2>
     <div class="row">
         <div class="card">
@@ -128,28 +150,6 @@
     </div>
 </section>
 
-<section>
-    <h2>Available missions</h2>
-    <div class="row missions">
-        {#each availableMissions as { type, count }}
-            <div class="card">
-                <h3 class="uppercase">{type}</h3>
-                <div>{count}</div>
-            </div>
-        {/each}
-    </div>
-</section>
-
-<section>
-    <h2>Active missions</h2>
-    <MissionTable
-            className="desktop"
-            missions={data.missions}
-            {missionTimers}
-    />
-    <MissionList className="mobile" missions={data.missions} {missionTimers} />
-</section>
-
 <footer>
     <div class="dim">
         Last Update: {new Date(data.date).toLocaleString("uk")}
@@ -158,10 +158,11 @@
         DCS Version: <VersionLink
             version={data.dcsVersion}
             trailingSlash={true}
-    />, DCT Version: <VersionLink
-            base={DCT_VERSION_PATH}
-            version={data.version}
-            trim={8}
     />
+<!--        , DCT Version: <VersionLink-->
+<!--            base={DCT_VERSION_PATH}-->
+<!--            version={data.version}-->
+<!--            trim={8}-->
+<!--    />-->
     </div>
 </footer>
