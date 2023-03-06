@@ -89,11 +89,11 @@
     <div class="row coalition">
         <div class="card">
             <h3 class="blue">Blue Coalition:</h3>
-            <div>{data.tugOfWar * 100}% {blueTickets}</div>
+            <div>{Math.round(data.tugOfWar * 100)}% {blueTickets}</div>
         </div>
         <div class="card">
             <h3 class="red">Red Coalition:</h3>
-            <div>{(1 - data.tugOfWar) * 100}% {redTickets}</div>
+            <div>{Math.round((1 - data.tugOfWar) * 100)}% {redTickets}</div>
         </div>
     </div>
 </section>
