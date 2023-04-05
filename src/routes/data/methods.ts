@@ -123,10 +123,16 @@ export function getAvailableMissions(data: ExportData, coalition: Coalition) {
 export function getTickets(data: ExportData) {
     const tickets = {};
     if (data.coalitions[1].tickets.text) {
-        tickets[1] = { text: data.coalitions[1].tickets.text };
+        tickets[1] = { 
+            text: data.coalitions[1].tickets.text,
+            number: data.coalitions[1].tickets.current
+        };
     }
     if (data.coalitions[2].tickets.text) {
-        tickets[2] = { text: data.coalitions[2].tickets.text };
+        tickets[2] = { 
+            text: data.coalitions[2].tickets.text,
+            number: data.coalitions[2].tickets.current
+        };
     }
     if (Object.keys(tickets).length > 0) {
         return tickets;
