@@ -47,8 +47,8 @@
 
     $: redTickets = data.tickets["1"].text;
     $: blueTickets = data.tickets["2"].text;
-    $: blueTicketsNumber = data.tickets["1"].number;
-    $: redTicketsNumber = data.tickets["2"].number;
+    $: redTicketsNumber = data.tickets["1"].number;
+    $: blueTicketsNumber = data.tickets["2"].number;
 
     const missionTypes = ['ANTISHIP', 'ARMEDRECON', 'BAI', 'CAP', 'CAS', 'OCA', 'SEAD', 'STRIKE'];
     const availableMissions = missionTypes.map( t => {
