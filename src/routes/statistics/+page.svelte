@@ -82,7 +82,10 @@
                 }, 0);
                 const totalAg = Object.keys(times).reduce((a, b) => {
                     if(times[b].kills && times[b].kills['Ground Units']?.total) {
-                        return a + times[b].kills['Ground Units'].total;
+                        a = a + times[b].kills['Ground Units'].total;
+                    }
+                    if(times[b].kills && times[b].kills['Buildings']?.total) {
+                        a = a + times[b].kills['Buildings'].total;
                     }
                     return a;
                 }, 0);
@@ -166,7 +169,7 @@
                 general.topAirframe.name = generalAirframe[0].name;
                 general.topAirframe.time = new Date(generalAirframe[0].time*1000).toISOString().slice(11, 19);
             }
-            pilotsFiltered = pilots;
+            pilotsFiltered = pilots.sort((a, b) => b.airframeSeconds - a.airframeSeconds);
         }
     }
 
