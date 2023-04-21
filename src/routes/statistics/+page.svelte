@@ -86,6 +86,17 @@
                     }
                     return a;
                 }, 0);
+                const totalLandings = Object.keys(times).reduce((a, b) => {
+                    if(times[b].kills && times[b].actions?.landing) {
+                        const landing = times[b].kills && times[b].actions?.landing;
+                        if (landing.landedWhileDamaged) {
+                            delete landing.landedWhileDamaged;
+                        }
+                        const total = Object.values(landing).reduce((a, b) => a + b, 0)
+                        return a + total;
+                    }
+                    return a;
+                }, 0);
                 const totalLoses = Object.keys(times).reduce((a, b) => {
                     let death = 0;
                     let crash = 0;
@@ -112,7 +123,8 @@
                     totalTime,
                     totalAa,
                     totalAg,
-                    totalLoses
+                    totalLoses,
+                    totalLandings
                 })
             });
             
@@ -129,6 +141,12 @@
                 });
                 general.topAg.name = generalAg[0].name;
                 general.topAg.kills = generalAg[0].totalAg;
+
+                const generalSorties = pilots.sort((a, b) => {
+                    return b.totalLandings - a.totalLandings;
+                });
+                general.topSorties.name = generalSorties[0].name;
+                general.topSorties.amount = generalSorties[0].totalLandings;
 
                 airframeTimes = {}
                 pilots.forEach(p => {
