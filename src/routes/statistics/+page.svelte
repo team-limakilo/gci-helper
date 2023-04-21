@@ -15,6 +15,7 @@
     let toasts: ToastData[] = [];
     let error = "";
     let pilots = [];
+    let pilotsFiltered = [];
     let airframeTimes = {}
     const general = {
         topAa: {
@@ -86,15 +87,25 @@
                     return a;
                 }, 0);
                 const totalLoses = Object.keys(times).reduce((a, b) => {
+                    let death = 0;
+                    let crash = 0;
+                    let eject = 0;
                     if(times[b].actions?.losses?.crash) {
-                        return a + times[b].actions.losses.crash;
+                        crash = times[b].actions.losses.crash;
                     }
-                    return a;
+                    if(times[b].actions?.losses?.pilotDeath) {
+                        death = times[b].actions.losses.pilotDeath;
+                    }
+                    if(times[b].actions?.losses?.eject) {
+                        eject = times[b].actions.losses.eject;
+                    }
+                    return a + Math.max(crash, death, eject);
                 }, 0);
 
                 const totalTime = new Date(totalTimeSeconds*1000).toISOString().slice(11, 19);
 
                 pilots.push({
+                    id: data.stats[p].id,
                     name,
                     airframe: airframe[0],
                     airframeSeconds: times[airframe[0]].inAir,
@@ -137,15 +148,28 @@
                 general.topAirframe.name = generalAirframe[0].name;
                 general.topAirframe.time = new Date(generalAirframe[0].time*1000).toISOString().slice(11, 19);
             }
+            pilotsFiltered = pilots;
         }
+    }
+
+
+    function onSelectPilot(e) {
+        
+        if (e.detail) {
+            pilotsFiltered = [];
+            e.detail.forEach(p => {
+                pilotsFiltered.push(p)
+            })
+        } else {
+            pilotsFiltered = pilots;
+        }
+        console.log(e.detail)
     }
 
     onMount(() => {
         updateData();
         window.toasts = writable([]);
         window.toasts.subscribe((value: ToastData[]) => (toasts = value));
-        interval = setInterval(updateData, 10 * 1000);
-        return () => clearInterval(interval);
     });
 </script>
 
@@ -231,8 +255,14 @@
         <div class="filter-row">
             <h2>Pilot Statistics</h2>
             <div class=filters>
-                <Select items={pilots} itemId="name" label="name" placeholder="All pilots" showChevron />
-                <Select items={Object.values(airframeTimes)} itemId="name" label="name" placeholder="All airframes" showChevron />
+                <Select items={pilots} 
+                 itemId="id" 
+                 label="name" 
+                 placeholder="All pilots" 
+                 multiple
+                 closeListOnChange={false}
+                 on:input={onSelectPilot}
+                 showChevron />
             </div>
         </div>
         <table class="hide-mobile">
@@ -247,7 +277,7 @@
                 </tr>
             </thead>
             <tbody>
-                {#each pilots as pilot}
+                {#each pilotsFiltered as pilot}
                         <tr>
                             <td><b>{pilot.name}</b></td>
                             <td>{pilot.totalTime}</td>
@@ -265,7 +295,7 @@
         </table>
 
         <div class="hide-desktop">
-            {#each pilots as pilot}
+            {#each pilotsFiltered as pilot}
             <ul>
                 <li>
                     <p class="dim">Pilot</p>
@@ -424,7 +454,7 @@
         border-radius: 0 !important;
     }
     .svelte-select {
-        height: 56px;
+        min-height: 56px !important;
         border-color: transparent !important;
     }
     .svelte-select-list {
@@ -435,6 +465,12 @@
     }
     .svelte-select-list .item:hover {
         background: #30333b !important;
+    }
+    .svelte-select .multi-item{
+        background: #43464d !important;
+        border-radius: 0 !important;
+        outline: none !important;
+        border-color: transparent !important;
     }
     ul {
         list-style: none;
@@ -466,17 +502,17 @@
     .filter-row {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
     .filters {
         box-sizing: border-box;
         display: flex;
-        max-width: 60%;
+        max-width: 500px;
         width: 100% !important;
         gap: 16px;
+        margin-bottom: 16px;
     }
-    .filters > div {
-        width: 49% !important;
-    }
+    
     @media ( max-width: 834px ) {
         main {
             padding: 40px 16px;
@@ -495,7 +531,6 @@
 
         .filter-row {
             flex-direction: column;
-            margin-bottom: 20px;
         }
         .filters {
             max-width: 100%;
