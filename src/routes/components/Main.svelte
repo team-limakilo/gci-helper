@@ -41,14 +41,18 @@
     });
 
     let redTickets: string;
+    let redTicketsNumber: number;
+    let redTicketsStartNumber: startnumber;
     let blueTickets: string;
     let blueTicketsNumber: number;
-    let redTicketsNumber: number;
+    let blueTicketsStartNumber: startnumber;
 
     $: redTickets = data.tickets["1"].text;
+    $: redTicketsNumber = data.tickets["1"].number;
+    $: redTicketsStartNumber = data.tickets["1"].startnumber;
     $: blueTickets = data.tickets["2"].text;
-    $: blueTicketsNumber = data.tickets["1"].number;
-    $: redTicketsNumber = data.tickets["2"].number;
+    $: blueTicketsNumber = data.tickets["2"].number;
+    $: blueTicketsStartNumber = data.tickets["2"].startnumber;
 
     const missionTypes = ['ANTISHIP', 'ARMEDRECON', 'BAI', 'CAP', 'CAS', 'OCA', 'SEAD', 'STRIKE'];
     const availableMissions = missionTypes.map( t => {
@@ -69,20 +73,20 @@
     <div class="row">
         <div class="card">
             <h3>Campaign Started:</h3>
-            <div>{new Date(data.startDate).toLocaleString("uk")}</div>
+            <div><b>{new Date(data.startDate).toLocaleString("uk")}</b></div>
         </div>
         <div class="card">
             <h3>In-Game Time:</h3>
-            <div>{formatTime(currentWorldTime)}</div>
+            <div><b>{formatTime(currentWorldTime)}</b></div>
         </div>
         <div class="card">
             <h3>Next Restart:</h3>
-            <div>{formatTime(restartTimeLeft)}</div>
+            <div><b>{formatTime(restartTimeLeft)}</b></div>
         </div>
         <div class="card">
             <h3>Players Online:</h3>
             <div>
-                {data.players.current - 1}/{data.players.max - 1}
+                <b>{data.players.current - 1}</b>/{data.players.max - 1}
             </div>
         </div>
     </div>
@@ -93,11 +97,11 @@
     <div class="row coalition">
         <div class="card">
             <h3 class="blue">Blue Coalition:</h3>
-            <div>{blueTicketsNumber} {blueTickets}</div>
+            <div><b>{blueTicketsNumber}</b>/{blueTicketsStartNumber} {blueTickets}</div>
         </div>
         <div class="card">
             <h3 class="red">Red Coalition:</h3>
-            <div>{redTicketsNumber} {redTickets}</div>
+            <div><b>{redTicketsNumber}</b>/{redTicketsStartNumber} {redTickets}</div>
         </div>
     </div>
 </section>
@@ -108,7 +112,7 @@
         {#each availableMissions as { type, count }}
             <div class="card">
                 <h3 class="uppercase">{type}</h3>
-                <div>{count}</div>
+                <div><b>{count}</b></div>
             </div>
         {/each}
     </div>

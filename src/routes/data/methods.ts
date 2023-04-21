@@ -125,13 +125,15 @@ export function getTickets(data: ExportData) {
     if (data.coalitions[1].tickets.text) {
         tickets[1] = { 
             text: data.coalitions[1].tickets.text,
-            number: data.coalitions[1].tickets.current
+            number: data.coalitions[1].tickets.current,
+            startnumber: data.coalitions[1].tickets.start
         };
     }
     if (data.coalitions[2].tickets.text) {
         tickets[2] = { 
             text: data.coalitions[2].tickets.text,
-            number: data.coalitions[2].tickets.current
+            number: data.coalitions[2].tickets.current,
+            startnumber: data.coalitions[2].tickets.start
         };
     }
     if (Object.keys(tickets).length > 0) {
