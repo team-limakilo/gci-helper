@@ -4,8 +4,8 @@
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
-    import Toast from "../components/Toast.svelte";
-    import type { ClientData } from "../data/types";
+    import Toast from "../../components/Toast.svelte";
+    import type { ClientData } from "../../data/types";
     import Select from 'svelte-select';
 
     dayjs.extend(relativeTime);
@@ -15,25 +15,18 @@
     let toasts: ToastData[] = [];
     let error = "";
     let pilots = [];
+    let airframes = [];
+    let filteredAirframes = [];
+    let pilotName = [];
     let pilotsFiltered = [];
-    let airframeTimes = {}
     const general = {
-        topAa: {
-            name: '',
-            kills: ''
-        },
-        topAg: {
-            name: '',
-            kills: ''
-        },
-        topAirframe: {
-            name: '',
-            time: ''
-        },
-        topSorties: {
-            name: '',
-            amount: ''
-        },
+        totalTime: 0,
+        totalAirframe: 0,
+        totalWeapon: 0,
+        totalSorties: 0,
+        totalAa: 0,
+        totalAg: 0,
+        totalLoses: 0,
     }
 
     async function updateData() {
@@ -61,128 +54,124 @@
         } else {
             error = "";
             data = result;
-            pilots = [];
+            airframes = [];
 
-            Object.keys(data.stats).forEach(p => {
-                if (!data.stats[p].times) return;
+            if (!data.stats['add7942a7f8b4a7aeae3ddb9794a4dbd'].times) return;
 
-                const times = data.stats[p].times;
-                const name = data.stats[p].names['1'];
-                const airframe = Object.keys(times).sort((a, b) => {
-                    return times[b].inAir - times[a].inAir;
-                })
-                const totalTimeSeconds = Object.keys(times).reduce((a, b) => {
-                    return a + times[b].inAir;
-                }, 0);
-                const totalAa = Object.keys(times).reduce((a, b) => {
-                    if(times[b].kills?.Planes?.total) {
-                        return a + times[b].kills.Planes.total;
+            const times = data.stats['add7942a7f8b4a7aeae3ddb9794a4dbd'].times;
+            pilotName = data.stats['add7942a7f8b4a7aeae3ddb9794a4dbd'].names['1'];
+
+            Object.keys(times).map((name) => {
+                const data = times[name];
+                data.totalTime = new Date(data.inAir*1000).toISOString().slice(11, 19);
+                data.ag = 0;
+                data.aa = 0;
+                data.weapon = '';
+                data.sorties = 0;
+                data.loses = 0;
+
+                if(data.kills && data.kills['Ground Units']?.total) {
+                    data.ag += data.kills['Ground Units'].total;
+                }
+
+                if(data.kills && data.kills['Buildings']?.total) {
+                    data.ag += data.kills['Buildings'].total;
+                }
+                
+                if(data.kills?.Planes?.total) {
+                    data.aa += data.kills.Planes.total;
+                }
+                
+                if(data.weapons) {
+                    data.weapon = Object.keys(data.weapons).sort((a, b) => {
+                        console.log(a, b)
+                        return data.weapons[b].shot - data.weapons[a].shot
+                    })[0];
+                }
+
+                if(data.kills && data.actions?.landing) {
+                    const landing = data.kills && data.actions?.landing;
+                    if (landing.landedWhileDamaged) {
+                        delete landing.landedWhileDamaged;
                     }
-                    return a;
-                }, 0);
-                const totalAg = Object.keys(times).reduce((a, b) => {
-                    if(times[b].kills && times[b].kills['Ground Units']?.total) {
-                        a = a + times[b].kills['Ground Units'].total;
-                    }
-                    if(times[b].kills && times[b].kills['Buildings']?.total) {
-                        a = a + times[b].kills['Buildings'].total;
-                    }
-                    return a;
-                }, 0);
-                const totalLandings = Object.keys(times).reduce((a, b) => {
-                    if(times[b].kills && times[b].actions?.landing) {
-                        const landing = times[b].kills && times[b].actions?.landing;
-                        if (landing.landedWhileDamaged) {
-                            delete landing.landedWhileDamaged;
-                        }
-                        const total = Object.values(landing).reduce((a, b) => a + b, 0)
-                        return a + total;
-                    }
-                    return a;
-                }, 0);
-                const totalLoses = Object.keys(times).reduce((a, b) => {
+                    data.sorties = Object.values(landing).reduce((a, b) => a + b, 0);
+                }
+
+                if (data.actions?.losses) {
                     let death = 0;
                     let crash = 0;
                     let eject = 0;
-                    if(times[b].actions?.losses?.crash) {
-                        crash = times[b].actions.losses.crash;
+                    if(data.actions?.losses?.crash) {
+                        crash = data.actions.losses.crash;
                     }
-                    if(times[b].actions?.losses?.pilotDeath) {
-                        death = times[b].actions.losses.pilotDeath;
+                    if(data.actions?.losses?.pilotDeath) {
+                        death = data.actions.losses.pilotDeath;
                     }
-                    if(times[b].actions?.losses?.eject) {
-                        eject = times[b].actions.losses.eject;
+                    if(data.actions?.losses?.eject) {
+                        eject = data.actions.losses.eject;
                     }
-                    return a + Math.max(crash, death, eject);
-                }, 0);
+                    data.loses = Math.max(crash, death, eject);
+                }
 
-                const totalTime = new Date(totalTimeSeconds*1000).toISOString().slice(11, 19);
-
-                pilots.push({
-                    id: data.stats[p].id,
+                airframes.push({
                     name,
-                    airframe: airframe[0],
-                    airframeSeconds: times[airframe[0]].inAir,
-                    totalTime,
-                    totalAa,
-                    totalAg,
-                    totalLoses,
-                    totalLandings
+                    ...data
                 })
             });
+
+            if (airframes.length) {
+              
+                general.totalTime = Object.keys(airframes).reduce((a, b) => {
+                    return a + airframes[b].inAir;
+                }, 0);
+                general.totalTime = new Date(general.totalTime*1000).toISOString().slice(11, 19);
             
-            if (pilots.length) {
+                general.totalAirframe = airframes.sort((a, b) => {
+                    return b.sorties - a.sorties;
+                })[0].name;
+                
+                general.totalSorties = airframes.reduce((a, b) => {
+                    return a + b.sorties;
+                }, 0);
+                general.totalAa = airframes.reduce((a, b) => {
+                    return a + b.aa;
+                }, 0);
+                general.totalAg = airframes.reduce((a, b) => {
+                    return a + b.ag;
+                }, 0);
+                general.totalLoses = airframes.reduce((a, b) => {
+                    return a + b.loses;
+                }, 0);
 
-                const generalAa = pilots.sort((a, b) => {
-                    return b.totalAa - a.totalAa;
-                });
-                general.topAa.name = generalAa[0].name;
-                general.topAa.kills = generalAa[0].totalAa;
-
-                const generalAg = pilots.sort((a, b) => {
-                    return b.totalAg - a.totalAg;
-                });
-                general.topAg.name = generalAg[0].name;
-                general.topAg.kills = generalAg[0].totalAg;
-
-                const generalSorties = pilots.sort((a, b) => {
-                    return b.totalLandings - a.totalLandings;
-                });
-                general.topSorties.name = generalSorties[0].name;
-                general.topSorties.amount = generalSorties[0].totalLandings;
-
-                airframeTimes = {}
-                pilots.forEach(p => {
-                    if (airframeTimes[p.airframe]) {
-                        airframeTimes[p.airframe].time += p.airframeSeconds;
+                const weaponsCounter = {};
+                airframes.map(frame => {
+                    if (weaponsCounter[frame.weapon]) {
+                        weaponsCounter[frame.weapon] += frame.weapon;
                     } else {
-                        airframeTimes[p.airframe] = {
-                            name: p.airframe,
-                            time: p.airframeSeconds,
-                        }
+                        weaponsCounter[frame.weapon] = 0;
                     }
                 });
-                const generalAirframe:any = Object.values(airframeTimes).sort((a:any, b:any) => {
-                    return b.time - a.time;
-                })
 
-                general.topAirframe.name = generalAirframe[0].name;
-                general.topAirframe.time = new Date(generalAirframe[0].time*1000).toISOString().slice(11, 19);
+                general.totalWeapon = Object.keys(weaponsCounter).sort((a, b) => {
+                    return weaponsCounter[b].sorties - weaponsCounter[a].sorties;
+                })[0];
+                
+
             }
-            pilotsFiltered = pilots.sort((a, b) => b.airframeSeconds - a.airframeSeconds);
+            filteredAirframes = airframes;
         }
     }
 
 
-    function onSelectPilot(e) {
+    function onSelectWeapon(e) {
         
         if (e.detail) {
-            pilotsFiltered = [];
-            e.detail.forEach(p => {
-                pilotsFiltered.push(p)
+            filteredAirframes = [];
+            e.detail.forEach(a => {
+                filteredAirframes.push(a)
             })
         } else {
-            pilotsFiltered = pilots;
+            filteredAirframes = airframes;
         }
     }
 
@@ -205,66 +194,79 @@
     {#if data != null}
 
     <section>
-        <h1>Battle of lebabon</h1>
-        <p class="uppercase extra">syria</p>
+        <h1>{pilotName}</h1>
     </section>
     
     <section>
-        <h2>Campaign Statistics</h2>
+        <h2>Pilot Statistics</h2>
         <div class="row">
             <div class="card">
                 <div class="card-row">
-                    <h3>Top Fighter Pilot</h3>
-                    <h3>A/A Kills</h3>
+                    <h3>Total Time Flown</h3>
                 </div>
                 <div class="card-row">
                     <div>
-                        {general.topAa.name}
-                    </div>
-                    <div>
-                        {general.topAa.kills}
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-row">
-                    <h3>Top Attacker Pilot</h3>
-                    <h3>A/G Kills</h3>
-                </div>
-                <div class="card-row">
-                    <div>
-                        {general.topAg.name}
-                    </div>
-                    <div>
-                        {general.topAg.kills}
+                        {general.totalTime}
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-row">
                     <h3>Most Used Airframe</h3>
-                    <h3>Time</h3>
                 </div>
                 <div class="card-row">
                     <div>
-                        {general.topAirframe.name}
+                        {general.totalAirframe}
                     </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-row">
+                    <h3>Most Used Weapon</h3>
+                </div>
+                <div class="card-row">
                     <div>
-                        {general.topAirframe.time}
+                        {general.totalWeapon}
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-row">
                     <h3>Completed Sorties</h3>
-                    <h3>Pilot</h3>
                 </div>
                 <div class="card-row">
                     <div>
-                        {general.topSorties.amount}
+                        {general.totalSorties}
                     </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-row">
+                    <h3>Total A/A Kills</h3>
+                </div>
+                <div class="card-row">
                     <div>
-                        {general.topSorties.name}
+                        {general.totalAa}
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-row">
+                    <h3>Total A/G Kills</h3>
+                </div>
+                <div class="card-row">
+                    <div>
+                        {general.totalAg}
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-row">
+                    <h3>Total Loses</h3>
+                </div>
+                <div class="card-row">
+                    <div>
+                        {general.totalLoses}
                     </div>
                 </div>
             </div>
@@ -273,38 +275,40 @@
     
     <section>
         <div class="filter-row">
-            <h2>Pilot Statistics</h2>
+            <h2>Airframe Statistics</h2>
             <div class=filters>
-                <Select items={pilots} 
+                <Select items={airframes} 
                  itemId="id" 
                  label="name" 
-                 placeholder="All pilots" 
+                 placeholder="All airframes" 
                  multiple
                  closeListOnChange={false}
-                 on:input={onSelectPilot}
+                 on:input={onSelectWeapon}
                  showChevron />
             </div>
         </div>
         <table class="hide-mobile">
             <thead>
                 <tr>
-                    <th class="dim">Pilot</th>
-                    <th class="dim">Total Time Flown</th>
                     <th class="dim">Airframe</th>
+                    <th class="dim">Total Time Flown</th>
                     <th class="dim">A/A Kills</th>
                     <th class="dim">A/G Kills</th>
+                    <th class="dim">Most Used Weapon</th>
+                    <th class="dim">Completed Sorties</th>
                     <th class="dim">Loses</th>
                 </tr>
             </thead>
             <tbody>
-                {#each pilotsFiltered as pilot}
+                {#each filteredAirframes as airframe}
                         <tr>
-                            <td><b>{pilot.name}</b></td>
-                            <td>{pilot.totalTime}</td>
-                            <td>{pilot.airframe}</td>
-                            <td>{pilot.totalAa}</td>
-                            <td>{pilot.totalAg}</td>
-                            <td>{pilot.totalLoses}</td>
+                            <td><b>{airframe.name}</b></td>
+                            <td>{airframe.totalTime}</td>
+                            <td>{airframe.aa}</td>
+                            <td>{airframe.ag}</td>
+                            <td>{airframe.weapon}</td>
+                            <td>{airframe.sorties}</td>
+                            <td>{airframe.loses}</td>
                         </tr>
                 {:else}
                     <tr>
@@ -437,7 +441,7 @@
         background: #272A31;
         border-radius: 4px;
         padding: 16px;
-        flex: 1 0 21%;
+        flex: 1 0 13%;
     }
     .card-row {
         display: flex;
@@ -531,6 +535,12 @@
         width: 100% !important;
         gap: 16px;
         margin-bottom: 16px;
+    }
+    
+    @media ( max-width: 1599px ) {
+        .card {
+            flex: 1 0 20%
+        }
     }
     
     @media ( max-width: 834px ) {
