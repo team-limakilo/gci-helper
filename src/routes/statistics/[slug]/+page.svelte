@@ -106,9 +106,13 @@
                 
                 if(data.weapons) {
                     data.weapon = Object.keys(data.weapons).sort((a, b) => {
-                        console.log(a, b)
                         return data.weapons[b].shot - data.weapons[a].shot
                     })[0];
+                    // if (weapon[0] === 'M-61' && weapon[1]) {
+                    //     data.weapon = weapon[1]
+                    // } else {
+                    //     data.weapon = weapon[0]
+                    // }
                 }
 
                 if(data.kills && data.actions?.landing) {
@@ -146,10 +150,10 @@
                 general.totalTime = Object.keys(airframes).reduce((a, b) => {
                     return a + airframes[b].inAir;
                 }, 0);
-                general.totalTime = formatTime(general.totalTime, true);
+                general.totalTime = formatTime(general.totalTime);
             
                 general.totalAirframe = airframes.sort((a, b) => {
-                    return b.sorties - a.sorties;
+                    return b.inAir - a.inAir;
                 })[0].name;
                 
                 general.totalSorties = airframes.reduce((a, b) => {
@@ -180,7 +184,7 @@
                 
 
             }
-            filteredAirframes = airframes;
+            filteredAirframes = airframes.sort((a, b) => b.inAir - a.inAir);
         }
     }
 
