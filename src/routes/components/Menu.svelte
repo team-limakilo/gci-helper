@@ -1,10 +1,13 @@
 <script lang="ts">
     //export let version: string;
     import logo from "../images/LOGO.png"
+    import close from "../images/close.png"
+    import menu from "../images/menu.png"
     import { onMount } from 'svelte';
 
     let lastsegment = ``;
     let beforelast = ``;
+    let menuOpen = false;
 
     onMount(() => {
         const segments = window.location.pathname.split("/");
@@ -12,9 +15,21 @@
         beforelast = segments.pop();
     });
 
+    function toggle() {
+        menuOpen = !menuOpen;
+    }
+
 </script>
 
-<aside>
+<div class="menu">
+    <div on:click={toggle}>
+        <img src={menu} alt="">
+    </div>
+</div>
+<aside class:open={menuOpen}>
+    <div class="close" on:click={toggle}>
+        <img src={close} alt="">
+    </div>
     <a class="logo">
         <div>
             <img src={logo} alt="">
@@ -25,11 +40,11 @@
     </a>
     <div class="nav">
         <nav>
-            <a href="/">Hello</a>
-            <a href="/status" class:active={lastsegment == 'status'}>Campaign overview</a>
-            <a href="https://drive.google.com/drive/folders/1--hm1m8S_gOkwbgNIW5FoEDAaLV13ey5" target="_blank">Tacview</a>
-            <a href="/gci" class:active={lastsegment == 'gci'}>Sneaker GCI</a>
-            <a href="/statistics" class:active={[lastsegment, beforelast].includes('statistics')}>Statistics</a>
+            <a href="/" on:click(toggle)>Hello</a>
+            <a href="/status" on:click(toggle) class:active={lastsegment == 'status'}>Campaign overview</a>
+            <a href="https://drive.google.com/drive/folders/1--hm1m8S_gOkwbgNIW5FoEDAaLV13ey5" on:click(toggle) target="_blank">Tacview</a>
+            <a href="/gci" on:click(toggle) class:active={lastsegment == 'gci'}>Sneaker GCI</a>
+            <a href="/statistics" on:click(toggle) class:active={[lastsegment, beforelast].includes('statistics')}>Statistics</a>
         </nav>
         <div class="discord">
             <a href="/discord" target="_blank">&#10140; Join our Discord</a>
@@ -88,5 +103,32 @@
     aside .discord a {
         margin-bottom: 0;
         font-weight: 700;
+    }
+    .menu, .close {
+        display: none;
+    }
+    @media (max-width: 1000px) {
+        aside {
+            display: none;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .menu {
+            display: block;
+        }
+
+        aside.open {
+            display: block;
+        }
+
+        .menu,
+        aside.open .close {
+            display: block;
+            position: absolute;
+            right: 21px;
+            top: 53px;
+            cursor: pointer;
+        }
     }
 </style>

@@ -198,13 +198,16 @@
         }
     }
 
-    @media (max-width: 670px) {
+    @media (max-width: 1000px) {
         .hide-mobile {
             display: none;
         }
+        main {
+            padding-left: 0;
+        }
     }
 
-    @media (min-width: 670px) {
+    @media (min-width: 1000px) {
         .hide-desktop {
             display: none;
         }
