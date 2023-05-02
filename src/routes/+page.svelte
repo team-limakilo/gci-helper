@@ -20,30 +20,11 @@ import Main from "./components/Main.svelte";
     </div>
 </main>
 
-<style>
-    h1 {
-        font-size: 4rem;
-        margin-bottom: 4rem;
-        text-align: center;
-        color: #FFFFFF; /* added this line to change the text color */
-    }
-    p {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        text-align: center;
-        color: #FFFFFF; /* added this line to change the text color */
-    }
-    .btn-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin-top: 2rem;
-    }
+<style global>
     .btn {
         display: inline-block;
         padding: 1rem 2rem;
-        margin: 1rem;
+        margin-top: 1rem;
         font-size: 1rem;
         font-weight: bold;
         text-align: center;
