@@ -1,62 +1,15 @@
-<script>
-import Menu from "./components/Menu.svelte";
-import Main from "./components/Main.svelte";
+<script lang="ts">
+import Menu from "../components/Menu.svelte";
 </script>
-
-
 
 <main>
     <Menu></Menu>
-    <div class="content">
-        <header>
-            <h1>Hello There 👋🏻</h1>
-            <p>Вітаємо у Kestrel's Nest — Першій Українській DCS спільноті!<br><br>Раді що ти приєднався/приєдналась до нас!<br>Наша спільнота об‘єднує поціновувачів авіації та симуляторів з України та Світу!</p>
-        </header>
-        <article>
-            <div class="btn-container">
-                <a href="/discord" target="_blank" class="btn">Наш Дискорд / Join Our Discord</a>
-            </div>
-        </article>
+    <div class="content-gci">
+        <iframe src="https://gci.kestrelsnest.co.ua/servers/NewHope" frameborder="0"></iframe>
     </div>
 </main>
 
-<style>
-    h1 {
-        font-size: 4rem;
-        margin-bottom: 4rem;
-        text-align: center;
-        color: #FFFFFF; /* added this line to change the text color */
-    }
-    p {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        text-align: center;
-        color: #FFFFFF; /* added this line to change the text color */
-    }
-    .btn-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin-top: 2rem;
-    }
-    .btn {
-        display: inline-block;
-        padding: 1rem 2rem;
-        margin: 1rem;
-        font-size: 1rem;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        color: #fff;
-        background-color: #272A31;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
-    .btn:hover {
-        background-color: #222429;
-    }
-
+<style global>
     *,
     *::before,
     *::after {
@@ -85,7 +38,11 @@ import Main from "./components/Main.svelte";
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
-        margin: 0;
+        margin: 0 !important;
+    }
+    iframe {
+        width: 100%;
+        height: 100vh;
     }
     h1,h2,h3,h4,p {
         margin: 0;
@@ -98,6 +55,9 @@ import Main from "./components/Main.svelte";
         max-width: 1120px;
         margin: 0 auto;
         padding: 40px;
+    }
+    .content-gci {
+
     }
     h1 {
         color: #FA253C;

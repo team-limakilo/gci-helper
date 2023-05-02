@@ -47,9 +47,11 @@ export function formatPlayerList(players: PlayerDetails[]) {
     }
 }
 
-export function formatTime(totalSeconds: number) {
+export function formatTime(totalSeconds: number, trueTime: boolean) {
     if (totalSeconds <= 0) return "00:00:00";
-    totalSeconds = totalSeconds % (24 * 60 * 60);
+    if (!trueTime) {
+        totalSeconds = totalSeconds % (24 * 60 * 60);
+    }
     const hours = padTime(Math.floor(totalSeconds / 3600), 2);
     const minutes = padTime(Math.floor((totalSeconds / 60) % 60), 2);
     const seconds = padTime(Math.floor(totalSeconds % 60), 2);

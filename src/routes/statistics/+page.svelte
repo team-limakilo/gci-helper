@@ -7,6 +7,8 @@
     import Toast from "../components/Toast.svelte";
     import type { ClientData } from "../data/types";
     import Select from 'svelte-select';
+    import Menu from "../components/Menu.svelte";
+    import {formatTime} from "../../utils";
 
     dayjs.extend(relativeTime);
 
@@ -67,16 +69,23 @@
                 if (!data.stats[p].times) return;
 
                 const times = data.stats[p].times;
-                const name = data.stats[p].names['1'];
+                const lastName = Object.keys(data.stats[p].names).length
+                const name = data.stats[p].names[ lastName + ''];
                 const airframe = Object.keys(times).sort((a, b) => {
                     return times[b].inAir - times[a].inAir;
                 })
                 const totalTimeSeconds = Object.keys(times).reduce((a, b) => {
-                    return a + times[b].inAir;
+                    if (times[b].inAir) {
+                        return a + times[b].inAir;
+                    }
+                    return a;
                 }, 0);
                 const totalAa = Object.keys(times).reduce((a, b) => {
                     if(times[b].kills?.Planes?.total) {
                         return a + times[b].kills.Planes.total;
+                    }
+                    if(times[b].kills?.Helicopters?.total) {
+                        return a + times[b].kills.Helicopters.total;
                     }
                     return a;
                 }, 0);
@@ -86,6 +95,9 @@
                     }
                     if(times[b].kills && times[b].kills['Buildings']?.total) {
                         a = a + times[b].kills['Buildings'].total;
+                    }
+                    if(times[b].kills && times[b].kills['Ships']?.total) {
+                        a = a + times[b].kills['Ships'].total;
                     }
                     return a;
                 }, 0);
@@ -116,7 +128,7 @@
                     return a + Math.max(crash, death, eject);
                 }, 0);
 
-                const totalTime = new Date(totalTimeSeconds*1000).toISOString().slice(11, 19);
+                const totalTime = formatTime(totalTimeSeconds, true);
 
                 pilots.push({
                     id: data.stats[p].id,
@@ -127,7 +139,8 @@
                     totalAa,
                     totalAg,
                     totalLoses,
-                    totalLandings
+                    totalLandings,
+                    totalTimeSeconds
                 })
             });
             
@@ -167,12 +180,20 @@
                 })
 
                 general.topAirframe.name = generalAirframe[0].name;
-                general.topAirframe.time = new Date(generalAirframe[0].time*1000).toISOString().slice(11, 19);
+                general.topAirframe.time = formatTime(generalAirframe[0].time, true);
             }
-            pilotsFiltered = pilots.sort((a, b) => b.airframeSeconds - a.airframeSeconds);
+            pilotsFiltered = pilots.sort((a, b) => b.totalTimeSeconds - a.totalTimeSeconds);
         }
     }
 
+    function timeConvert(n) {
+        var num = n;
+        var hours = (num / 60);
+        var rhours = Math.floor(hours);
+        var minutes = (hours - rhours) * 60;
+        var rminutes = Math.round(minutes);
+        return num + " minutes = " + rhours + " hour(s) and " + rminutes + " minute(s).";
+    }
 
     function onSelectPilot(e) {
         
@@ -184,6 +205,10 @@
         } else {
             pilotsFiltered = pilots;
         }
+    }
+
+    function onShowPilot(name) {
+        window.location = window.location.href + '/' + name;
     }
 
     onMount(() => {
@@ -200,8 +225,9 @@
 </svelte:head>
 
 <div class="warning {error.length > 0 ? 'visible' : ''}">{error}</div>
-
 <main>
+    <Menu></Menu>
+    <div class="content">
     {#if data != null}
 
     <section>
@@ -298,7 +324,7 @@
             </thead>
             <tbody>
                 {#each pilotsFiltered as pilot}
-                        <tr>
+                        <tr on:click={onShowPilot(pilot.name)}>
                             <td><b>{pilot.name}</b></td>
                             <td>{pilot.totalTime}</td>
                             <td>{pilot.airframe}</td>
@@ -316,7 +342,7 @@
 
         <div class="hide-desktop">
             {#each pilotsFiltered as pilot}
-            <ul>
+            <ul on:click={onShowPilot(pilot.name)}>
                 <li>
                     <p class="dim">Pilot</p>
                     <p>{pilot.name}</p>
@@ -355,8 +381,8 @@
     {:else if error == ""}
         <h1>Loading...</h1>
     {/if}
+</div>
 </main>
-
 {#each toasts as toast (toast.time)}
     <Toast text={toast.text} time={toast.time} />
 {/each}
@@ -396,6 +422,9 @@
         margin: 0;
     }
     main {
+        padding-left: 320px;
+    }
+    .content {
         max-width: 1340px;
         margin: 0 auto;
         padding: 40px;
@@ -454,6 +483,7 @@
 
     tr {
         border-bottom: 12px solid #222429;
+        cursor: pointer;
     }
 
     tbody tr {
@@ -498,6 +528,7 @@
         margin: 0;
         margin-bottom: 16px;
         background: #272A31;
+        cursor: pointer;
     }
 
     li {
@@ -534,7 +565,7 @@
     }
     
     @media ( max-width: 834px ) {
-        main {
+        .content {
             padding: 40px 16px;
         }
         .card {
@@ -592,7 +623,7 @@
     }
 
     @media (min-width: 1600px) {
-        main {
+        .content {
             max-width: 1600px;
         }
 

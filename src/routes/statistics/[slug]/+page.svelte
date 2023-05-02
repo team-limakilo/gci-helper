@@ -7,18 +7,21 @@
     import Toast from "../../components/Toast.svelte";
     import type { ClientData } from "../../data/types";
     import Select from 'svelte-select';
+    import Menu from "../../components/Menu.svelte";
+    import {formatTime} from "../../../utils.js";
 
+    export let data;
+    const slug = data.params.slug + '';
     dayjs.extend(relativeTime);
 
     let interval: NodeJS.Timer;
-    let data: any;
+    let pageData: any;
     let toasts: ToastData[] = [];
     let error = "";
     let pilots = [];
     let airframes = [];
     let filteredAirframes = [];
     let pilotName = [];
-    let pilotsFiltered = [];
     const general = {
         totalTime: 0,
         totalAirframe: 0,
@@ -52,18 +55,30 @@
         if (result instanceof Error) {
             error = `Error: ${result.message}`;
         } else {
+            console.log(data)
             error = "";
-            data = result;
+            pageData = result;
             airframes = [];
 
-            if (!data.stats['add7942a7f8b4a7aeae3ddb9794a4dbd'].times) return;
 
-            const times = data.stats['add7942a7f8b4a7aeae3ddb9794a4dbd'].times;
-            pilotName = data.stats['add7942a7f8b4a7aeae3ddb9794a4dbd'].names['1'];
+            const found = Object.values(pageData.stats).find(item => {
+                if (item.names) {
+                    const lastName = Object.keys(item.names).length
+                    return item.names[lastName] === slug
+                }
+                return false;
+            })
+
+            if (!found) return;
+
+            const times = found.times;
+            const lastName = Object.keys(found.names).length
+            pilotName = found.names[lastName];
 
             Object.keys(times).map((name) => {
                 const data = times[name];
-                data.totalTime = new Date(data.inAir*1000).toISOString().slice(11, 19);
+
+                data.totalTime = formatTime(data.inAir, true);
                 data.ag = 0;
                 data.aa = 0;
                 data.weapon = '';
@@ -77,9 +92,16 @@
                 if(data.kills && data.kills['Buildings']?.total) {
                     data.ag += data.kills['Buildings'].total;
                 }
+
+                if(data.kills && data.kills['Ships']?.total) {
+                    data.ag += data.kills['Ships'].total;
+                }
                 
                 if(data.kills?.Planes?.total) {
                     data.aa += data.kills.Planes.total;
+                }
+                if(data.kills?.Helicopters?.total) {
+                    data.aa += data.kills.Helicopters.total;
                 }
                 
                 if(data.weapons) {
@@ -124,7 +146,7 @@
                 general.totalTime = Object.keys(airframes).reduce((a, b) => {
                     return a + airframes[b].inAir;
                 }, 0);
-                general.totalTime = new Date(general.totalTime*1000).toISOString().slice(11, 19);
+                general.totalTime = formatTime(general.totalTime, true);
             
                 general.totalAirframe = airframes.sort((a, b) => {
                     return b.sorties - a.sorties;
@@ -191,116 +213,118 @@
 <div class="warning {error.length > 0 ? 'visible' : ''}">{error}</div>
 
 <main>
-    {#if data != null}
+    <Menu></Menu>
+    <div class="content">
+        {#if data != null}
 
-    <section>
-        <h1>{pilotName}</h1>
-    </section>
-    
-    <section>
-        <h2>Pilot Statistics</h2>
-        <div class="row">
-            <div class="card">
-                <div class="card-row">
-                    <h3>Total Time Flown</h3>
-                </div>
-                <div class="card-row">
-                    <div>
-                        {general.totalTime}
+            <section>
+                <h1>{pilotName}</h1>
+            </section>
+
+            <section>
+                <h2>Pilot Statistics</h2>
+                <div class="row">
+                    <div class="card">
+                        <div class="card-row">
+                            <h3>Total Time Flown</h3>
+                        </div>
+                        <div class="card-row">
+                            <div>
+                                {general.totalTime}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-row">
+                            <h3>Most Used Airframe</h3>
+                        </div>
+                        <div class="card-row">
+                            <div>
+                                {general.totalAirframe}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-row">
+                            <h3>Most Used Weapon</h3>
+                        </div>
+                        <div class="card-row">
+                            <div>
+                                {general.totalWeapon}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-row">
+                            <h3>Completed Sorties</h3>
+                        </div>
+                        <div class="card-row">
+                            <div>
+                                {general.totalSorties}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-row">
+                            <h3>Total A/A Kills</h3>
+                        </div>
+                        <div class="card-row">
+                            <div>
+                                {general.totalAa}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-row">
+                            <h3>Total A/G Kills</h3>
+                        </div>
+                        <div class="card-row">
+                            <div>
+                                {general.totalAg}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-row">
+                            <h3>Total Loses</h3>
+                        </div>
+                        <div class="card-row">
+                            <div>
+                                {general.totalLoses}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-row">
-                    <h3>Most Used Airframe</h3>
-                </div>
-                <div class="card-row">
-                    <div>
-                        {general.totalAirframe}
+            </section>
+
+            <section>
+                <div class="filter-row">
+                    <h2>Airframe Statistics</h2>
+                    <div class=filters>
+                        <!--                <Select items={airframes} -->
+                        <!--                 itemId="id" -->
+                        <!--                 label="name" -->
+                        <!--                 placeholder="All airframes" -->
+                        <!--                 multiple-->
+                        <!--                 closeListOnChange={false}-->
+                        <!--                 on:input={onSelectWeapon}-->
+                        <!--                 showChevron />-->
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-row">
-                    <h3>Most Used Weapon</h3>
-                </div>
-                <div class="card-row">
-                    <div>
-                        {general.totalWeapon}
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-row">
-                    <h3>Completed Sorties</h3>
-                </div>
-                <div class="card-row">
-                    <div>
-                        {general.totalSorties}
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-row">
-                    <h3>Total A/A Kills</h3>
-                </div>
-                <div class="card-row">
-                    <div>
-                        {general.totalAa}
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-row">
-                    <h3>Total A/G Kills</h3>
-                </div>
-                <div class="card-row">
-                    <div>
-                        {general.totalAg}
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-row">
-                    <h3>Total Loses</h3>
-                </div>
-                <div class="card-row">
-                    <div>
-                        {general.totalLoses}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section>
-        <div class="filter-row">
-            <h2>Airframe Statistics</h2>
-            <div class=filters>
-                <Select items={airframes} 
-                 itemId="id" 
-                 label="name" 
-                 placeholder="All airframes" 
-                 multiple
-                 closeListOnChange={false}
-                 on:input={onSelectWeapon}
-                 showChevron />
-            </div>
-        </div>
-        <table class="hide-mobile">
-            <thead>
-                <tr>
-                    <th class="dim">Airframe</th>
-                    <th class="dim">Total Time Flown</th>
-                    <th class="dim">A/A Kills</th>
-                    <th class="dim">A/G Kills</th>
-                    <th class="dim">Most Used Weapon</th>
-                    <th class="dim">Completed Sorties</th>
-                    <th class="dim">Loses</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#each filteredAirframes as airframe}
+                <table class="hide-mobile">
+                    <thead>
+                    <tr>
+                        <th class="dim">Airframe</th>
+                        <th class="dim">Total Time Flown</th>
+                        <th class="dim">A/A Kills</th>
+                        <th class="dim">A/G Kills</th>
+                        <th class="dim">Most Used Weapon</th>
+                        <th class="dim">Completed Sorties</th>
+                        <th class="dim">Loses</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {#each filteredAirframes as airframe}
                         <tr>
                             <td><b>{airframe.name}</b></td>
                             <td>{airframe.totalTime}</td>
@@ -310,55 +334,60 @@
                             <td>{airframe.sorties}</td>
                             <td>{airframe.loses}</td>
                         </tr>
-                {:else}
-                    <tr>
-                        <td colspan="999">No data</td>
-                    </tr>
-                {/each}
-            </tbody>
-        </table>
+                    {:else}
+                        <tr>
+                            <td colspan="999">No data</td>
+                        </tr>
+                    {/each}
+                    </tbody>
+                </table>
 
-        <div class="hide-desktop">
-            {#each pilotsFiltered as pilot}
-            <ul>
-                <li>
-                    <p class="dim">Pilot</p>
-                    <p>{pilot.name}</p>
-                </li>
-                <li>
-                    <p class="dim">Total Time Flown</p>
-                    <p>{pilot.totalTime}</p>
-                </li>
-                <li>
-                    <p class="dim">Airframe</p>
-                    <p>{pilot.airframe}</p>
-                </li>
-                <li>
-                    <p class="dim">A/A Kills</p>
-                    <p>{pilot.totalAa}</p>
-                </li>
-                <li>
-                    <p class="dim">A/G Kills</p>
-                    <p>{pilot.totalAg}</p>
-                </li>
-                <li>
-                    <p class="dim">Losses</p>
-                    <p>{pilot.totalLoses}</p>
-                </li>
-            </ul>
-            {/each}
-            {#if !pilots.length}
-                <ul>
-                    <li>
-                        <p class="dim">No data</p>
-                    </li>
-                </ul>
-            {/if}
-        </div>
-    </section>
-    {:else if error == ""}
-        <h1>Loading...</h1>
-    {/if}
+                <div class="hide-desktop">
+                    {#each filteredAirframes as airframe}
+                        <ul>
+                            <li>
+                                <p class="dim">Airframe</p>
+                                <p>{airframe.name}</p>
+                            </li>
+                            <li>
+                                <p class="dim">Total Time Flown</p>
+                                <p>{airframe.totalTime}</p>
+                            </li>
+                            <li>
+                                <p class="dim">A/A Kills</p>
+                                <p>{airframe.aa}</p>
+                            </li>
+                            <li>
+                                <p class="dim">A/G Kills</p>
+                                <p>{airframe.ag}</p>
+                            </li>
+                            <li>
+                                <p class="dim">Most Used Weapon</p>
+                                <p>{airframe.weapon}</p>
+                            </li>
+                            <li>
+                                <p class="dim">Completed Sorties</p>
+                                <p>{airframe.sorties}</p>
+                            </li>
+                            <li>
+                                <p class="dim">Loses</p>
+                                <p>{airframe.loses}</p>
+                            </li>
+                        </ul>
+                    {/each}
+                    {#if !pilots.length}
+                        <ul>
+                            <li>
+                                <p class="dim">No data</p>
+                            </li>
+                        </ul>
+                    {/if}
+                </div>
+            </section>
+        {:else if error == ""}
+            <h1>Loading...</h1>
+        {/if}
+    </div>
 </main>
 
 {#each toasts as toast (toast.time)}
@@ -400,9 +429,13 @@
         margin: 0;
     }
     main {
-        max-width: 1340px;
+        padding-left: 320px;
+    }
+    .content {
         margin: 0 auto;
         padding: 40px;
+        max-width: 1340px;
+        width: 100%;
     }
     h1 {
         color: #FA253C;
@@ -544,7 +577,7 @@
     }
     
     @media ( max-width: 834px ) {
-        main {
+        .content {
             padding: 40px 16px;
         }
         .card {
@@ -602,7 +635,7 @@
     }
 
     @media (min-width: 1600px) {
-        main {
+        .content {
             max-width: 1600px;
         }
 
