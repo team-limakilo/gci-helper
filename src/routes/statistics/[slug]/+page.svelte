@@ -81,7 +81,7 @@
                 data.totalTime = formatTime(data.inAir, true);
                 data.ag = 0;
                 data.aa = 0;
-                data.weapon = '';
+                data.weapon = 'none';
                 data.sorties = 0;
                 data.loses = 0;
 
@@ -106,7 +106,7 @@
                 
                 if(data.weapons) {
                     data.weapon = Object.keys(data.weapons).sort((a, b) => {
-                        return data.weapons[b].shot - data.weapons[a].shot
+                        return data.weapons[b].kills - data.weapons[a].kills
                     })[0];
                     // if (weapon[0] === 'M-61' && weapon[1]) {
                     //     data.weapon = weapon[1]
@@ -171,15 +171,19 @@
 
                 const weaponsCounter = {};
                 airframes.map(frame => {
-                    if (weaponsCounter[frame.weapon]) {
-                        weaponsCounter[frame.weapon] += frame.weapon;
-                    } else {
-                        weaponsCounter[frame.weapon] = 0;
+                    if (frame.weapons) {
+                        Object.keys(frame.weapons).map(w => {
+                            if (weaponsCounter[w]) {
+                                weaponsCounter[w] += frame.weapons[w].kills;
+                            } else {
+                                weaponsCounter[w] = frame.weapons[w].kills;
+                            }
+                        });
                     }
                 });
 
                 general.totalWeapon = Object.keys(weaponsCounter).sort((a, b) => {
-                    return weaponsCounter[b].sorties - weaponsCounter[a].sorties;
+                    return weaponsCounter[b] - weaponsCounter[a];
                 })[0];
                 
 
