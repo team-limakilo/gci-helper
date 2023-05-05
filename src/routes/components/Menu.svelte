@@ -40,11 +40,11 @@
     </a>
     <div class="nav">
         <nav>
-            <a href="/" on:click(toggle)>Hello</a>
+            <a href="/" on:click(toggle)>Home</a>
             <a href="/status" on:click(toggle) class:active={lastsegment == 'status'}>Campaign overview</a>
-            <a href="https://drive.google.com/drive/folders/1--hm1m8S_gOkwbgNIW5FoEDAaLV13ey5" on:click(toggle) target="_blank">Tacview</a>
-            <a href="/gci" on:click(toggle) class:active={lastsegment == 'gci'}>Sneaker GCI</a>
             <a href="/statistics" on:click(toggle) class:active={[lastsegment, beforelast].includes('statistics')}>Statistics</a>
+            <a href="/map" on:click(toggle) class:active={lastsegment == 'map'}>Mission Map</a>
+            <a href="https://drive.google.com/drive/folders/1--hm1m8S_gOkwbgNIW5FoEDAaLV13ey5" on:click(toggle) target="_blank">Tacview</a>
         </nav>
         <div class="discord">
             <a href="/discord" target="_blank">&#10140; Join our Discord</a>
