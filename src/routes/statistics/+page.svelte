@@ -40,8 +40,7 @@
 
     async function updateData() {
         async function fetchData(): Promise<ClientData | Error> {
-            const response = await fetch(`https://kestrelsnest.co.ua/stats`).catch((e) => {
-                console.log(e)
+            const response = await fetch(`${base}/stats`).catch(() => {
                 return new Error("Could not connect to server");
             });
             if (response instanceof Error) {
@@ -66,7 +65,7 @@
             pilots = [];
 
             Object.keys(data.stats).forEach(p => {
-                if (!data.stats[p].times) return;
+                if (!data.stats[p].times || !Object.keys(data.stats[p].times).length) return;
 
                 const times = data.stats[p].times;
                 const lastName = Object.keys(data.stats[p].names).length

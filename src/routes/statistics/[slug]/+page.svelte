@@ -34,8 +34,7 @@
 
     async function updateData() {
         async function fetchData(): Promise<ClientData | Error> {
-            const response = await fetch(`https://kestrelsnest.co.ua/stats`).catch((e) => {
-                console.log(e)
+            const response = await fetch(`${base}/stats`).catch(() => {
                 return new Error("Could not connect to server");
             });
             if (response instanceof Error) {
