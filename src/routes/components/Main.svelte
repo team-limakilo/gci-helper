@@ -12,7 +12,8 @@
     import MissionTable from "./MissionTable.svelte";
     import VersionLink from "./VersionLink.svelte";
     export let data: ClientData;
-
+    const playersBlue = data.players?.list?.filter(p => +p.side === 2) || [];
+    const playersRed = data.players?.list?.filter(p => +p.side === 1) || [];
     const DCT_VERSION_PATH = import.meta.env.VITE_DCT_VERSION_PATH;
 
     let restartTimeLeft: number;
@@ -93,6 +94,18 @@
 </section>
 
 <section>
+    <h2>Available missions</h2>
+    <div class="row missions">
+        {#each availableMissions as { type, count }}
+            <div class="card">
+                <h3 class="uppercase">{type}</h3>
+                <div><b>{count}</b></div>
+            </div>
+        {/each}
+    </div>
+</section>
+
+<section>
     <h2>Coalition strength</h2>
     <div class="row coalition">
         <div class="card">
@@ -107,18 +120,6 @@
 </section>
 
 <section>
-    <h2>Available missions</h2>
-    <div class="row missions">
-        {#each availableMissions as { type, count }}
-            <div class="card">
-                <h3 class="uppercase">{type}</h3>
-                <div><b>{count}</b></div>
-            </div>
-        {/each}
-    </div>
-</section>
-
-<section>
     <h2>Active missions</h2>
     <MissionTable
             className="desktop"
@@ -126,6 +127,34 @@
             {missionTimers}
     />
     <MissionList className="mobile" missions={data.missions} {missionTimers} />
+</section>
+
+<section>
+    <h2>Players Online <small>{data.players.current - 1}<span>/{data.players.max - 1}</span></small></h2>
+    <div class="row coalition">
+        <div class="card">
+            <h3 class="blue">Blue Coalition:</h3>
+            {#each playersBlue as player}
+                <div>
+                    {player.name}
+                </div>
+            {/each}
+            {#if !playersBlue.length}
+                <div>none</div>
+            {/if}
+        </div>
+        <div class="card">
+            <h3 class="red">Red Coalition:</h3>
+            {#each playersRed as player}
+                <div>
+                    {player}
+                </div>
+            {/each}
+            {#if !playersRed.length}
+                <div>none</div>
+            {/if}
+        </div>
+    </div>
 </section>
 
 <section>

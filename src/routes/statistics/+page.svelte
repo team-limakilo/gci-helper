@@ -166,7 +166,7 @@
                 airframeTimes = {}
                 pilots.forEach(p => {
                     if (airframeTimes[p.airframe]) {
-                        airframeTimes[p.airframe].time += p.airframeSeconds;
+                        airframeTimes[p.airframe].time += +p.airframeSeconds;
                     } else {
                         airframeTimes[p.airframe] = {
                             name: p.airframe,
@@ -488,6 +488,12 @@
     tbody tr {
         background: #272A31;
         border-radius: 4px;
+    }
+
+    tbody tr:hover {
+        background: #272a315e;
+        transition: .2s ease;
+
     }
 
     td, th {

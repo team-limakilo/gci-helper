@@ -145,6 +145,9 @@
         color: #C8C8C8;
         margin-bottom: 4px;
     }
+    h2 span{
+        font-weight: 400;
+    }
     .extra {
         font-size: 16px;
     }
