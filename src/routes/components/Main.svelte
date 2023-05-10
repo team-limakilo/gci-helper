@@ -6,7 +6,7 @@
         rightPad,
         ticketsHint,
     } from "../../utils";
-    import { ClientData, Coalition } from "../data/types";
+    import { type ClientData, Coalition } from "../data/types";
     import Hint from "./Hint.svelte";
     import MissionList from "./MissionList.svelte";
     import MissionTable from "./MissionTable.svelte";

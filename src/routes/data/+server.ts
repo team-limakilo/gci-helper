@@ -1,4 +1,4 @@
-import { json, redirect, RequestEvent } from "@sveltejs/kit";
+import { json, redirect, type RequestEvent } from "@sveltejs/kit";
 import { customTitle, getAirbases, getAssets, getAvailableMissions, getDCSDateTime, getExportData, getMissions, getPlayers, getSAMs, getTickets, getTugOfWar } from "./methods";
 import { Coalition } from "./types";
 
