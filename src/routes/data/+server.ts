@@ -1,6 +1,7 @@
 import { json, redirect, RequestEvent } from "@sveltejs/kit";
 import { customTitle, getAirbases, getAssets, getAvailableMissions, getDCSDateTime, getExportData, getMissions, getPlayers, getSAMs, getTickets, getTugOfWar } from "./methods";
 import { Coalition } from "./types";
+import axios from "axios";
 
 export async function GET(event: RequestEvent): Promise<Response> {
     const data = await getExportData();
@@ -10,12 +11,30 @@ export async function GET(event: RequestEvent): Promise<Response> {
     if (!isNaN(clientCachedDate.valueOf()) && new Date(data.date) <= clientCachedDate) {
         throw redirect(304, '');
     }
+    let weather = null;
+
+    try {
+        const resp = await axios.get('https://api.checkwx.com/metar/OLBA/decoded?x-api-key=' + process.env["WEATHER_API_KEY"]);
+        const w = resp.data.data[0]
+        weather = {
+            clouds: w.clouds[0].text,
+            temp: w.temperature.celsius,
+            visibility: w.visibility.meters,
+            wind: `${w.wind.degrees}/${w.wind.speed_kts}`,
+            qnh: w.barometer.hpa
+        };
+    } catch (e) {
+        console.log(e)
+    }
 
     event.setHeaders({
         "Cache-Control": "no-cache, must-revalidate",
         "Last-Modified": new Date(data.date).toUTCString(),
         "Access-Control-Allow-Origin": "*",
     });
+    const players = getPlayers(data);
+    const playersBlue = players?.list?.filter(p => +p.side === 2) || [];
+    const playersRed = players?.list?.filter(p => +p.side === 1) || [];
 
     // Then build a new response
     return json({
@@ -34,9 +53,12 @@ export async function GET(event: RequestEvent): Promise<Response> {
         worldDate: getDCSDateTime(data.modeldate, data.abstime).toISOString(),
         startDate: data.startdate,
         dcsVersion: data.dcs_version,
-        players: getPlayers(data),
         pageTitle: customTitle,
         restartPeriod: data.period,
-        tugOfWar: getTugOfWar(data)
+        tugOfWar: getTugOfWar(data),
+        players,
+        playersBlue,
+        playersRed,
+        weather
     });
 }

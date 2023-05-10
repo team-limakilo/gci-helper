@@ -12,8 +12,7 @@
     import MissionTable from "./MissionTable.svelte";
     import VersionLink from "./VersionLink.svelte";
     export let data: ClientData;
-    const playersBlue = data.players?.list?.filter(p => +p.side === 2) || [];
-    const playersRed = data.players?.list?.filter(p => +p.side === 1) || [];
+
     const DCT_VERSION_PATH = import.meta.env.VITE_DCT_VERSION_PATH;
 
     let restartTimeLeft: number;
@@ -64,9 +63,20 @@
     })
 </script>
 
-<section>
-    <h1>{data.sortie}</h1>
-    <p class="uppercase extra">{data.theater}</p>
+<section class="header">
+    <div class="">
+        <h1>{data.sortie}</h1>
+        <p class="uppercase extra">{data.theater}</p>
+    </div>
+    {#if data.weather}
+    <div class="weather">
+        <div>Clouds <b>{data.weather.clouds}</b></div>
+        <div>Temperature <b>{data.weather.temp} Celcius</b></div>
+        <div>Visibility <b>{data.weather.visibility} meters</b></div>
+        <div>QNH <b>{data.weather.qnh} Hpa</b></div>
+        <div>Wind <b>{data.weather.wind} Kts</b></div>
+    </div>
+    {/if}
 </section>
 
 <section>
@@ -134,23 +144,23 @@
     <div class="row coalition">
         <div class="card">
             <h3 class="blue">Blue Coalition:</h3>
-            {#each playersBlue as player}
+            {#each data.playersBlue as player}
                 <div>
                     {player.name}
                 </div>
             {/each}
-            {#if !playersBlue.length}
+            {#if !data.playersBlue.length}
                 <div>none</div>
             {/if}
         </div>
         <div class="card">
             <h3 class="red">Red Coalition:</h3>
-            {#each playersRed as player}
+            {#each data.playersRed as player}
                 <div>
                     {player}
                 </div>
             {/each}
-            {#if !playersRed.length}
+            {#if !data.playersRed.length}
                 <div>none</div>
             {/if}
         </div>

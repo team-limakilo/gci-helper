@@ -55,8 +55,6 @@
 <style>
 
     aside   {
-        width: 320px;
-        min-width: 320px;
         background: #272A31;
         padding: 40px 18px;
         height: 100vh;

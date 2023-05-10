@@ -119,7 +119,7 @@
         margin: 0;
     }
     main {
-        padding-left: 320px;
+        padding-left: 245px;
     }
 
     .content {
@@ -174,6 +174,23 @@
         text-align: start;
     }
 
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .weather {
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .weather b {
+        display: block;
+    }
+
     @media ( max-width: 834px ) {
         .content {
             padding: 40px 16px;
@@ -199,6 +216,15 @@
         .missions .card {
             flex: 1 0 41%
         }
+
+        .weather {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .weather b {
+            display: inline;
+        }
     }
 
     @media (max-width: 1000px) {
@@ -207,6 +233,18 @@
         }
         main {
             padding-left: 0;
+        }
+
+    }
+
+    @media ( max-width: 1250px ) {
+        .header {
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .weather {
+            gap: 10px;
         }
     }
 
@@ -223,6 +261,10 @@
 
         .missions .card {
             flex: 1 0 10%
+        }
+
+        .weather b {
+            display: inline;
         }
     }
 

@@ -72,7 +72,7 @@ import Main from "./components/Main.svelte";
         margin: 0;
     }
     main {
-        padding-left: 320px;
+        padding-left: 245px;
     }
 
     .content {

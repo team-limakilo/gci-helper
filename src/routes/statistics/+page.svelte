@@ -421,7 +421,7 @@
         margin: 0;
     }
     main {
-        padding-left: 320px;
+        padding-left: 245px;
     }
     .content {
         max-width: 1340px;

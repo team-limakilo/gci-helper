@@ -21,6 +21,9 @@ export interface ClientData {
     restartPeriod: number;
     pageTitle?: string;
     tugOfWar: number;
+    playersBlue: any;
+    playersRed: any;
+    weather: any;
 }
 
 export enum Coalition {
