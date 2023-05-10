@@ -35,7 +35,6 @@
     }
 
     onMount(() => {
-        updateTimers();
         const interval = setInterval(updateTimers, 1000);
         return () => clearInterval(interval);
     });
@@ -45,10 +44,18 @@
 
     $: redTickets = data.tickets["1"].text;
     $: blueTickets = data.tickets["2"].text;
+
+    updateTimers();
 </script>
 
 <section>
     <h1>Overview</h1>
+    <noscript>
+        <div class="mono warning">
+            {"<!>"} JavaScript is disabled in your browser, data will not be updated
+            automatically.
+        </div>
+    </noscript>
     <div class="grid">
         <div>
             <div class="mono">
@@ -73,7 +80,6 @@
             </div>
         </div>
         <div>
-            <br />
             <div class="mono">
                 In-Game Time: {formatTime(currentWorldTime)}
             </div>
@@ -92,6 +98,7 @@
                     {data.players.current - 1}/{data.players.max - 1}
                 {/if}
             </div>
+            <br />
         </div>
     </div>
 </section>

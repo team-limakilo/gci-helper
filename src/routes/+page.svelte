@@ -1,51 +1,22 @@
 <script lang="ts">
-    import { base } from "$app/paths";
-    import dayjs from "dayjs";
-    import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
+    import { getDataAndUserMessage } from "./common";
     import Main from "./components/Main.svelte";
     import Toast from "./components/Toast.svelte";
     import type { ClientData } from "./data/types";
 
-    dayjs.extend(relativeTime);
-
     let interval: NodeJS.Timer;
-    let data: ClientData;
     let toasts: ToastData[] = [];
-    let error = "";
 
-    async function updateData() {
-        async function fetchData(): Promise<ClientData | Error> {
-            const response = await fetch(`${base}/data`).catch(() => {
-                return new Error("Could not connect to server");
-            });
-            if (response instanceof Error) {
-                return response;
-            }
-            if (response.status >= 200 && response.status < 400) {
-                return response.json().catch((err) => {
-                    console.error(err);
-                    return new Error("Could not understand data from server");
-                });
-            } else {
-                return new Error("The server returned an error");
-            }
-        }
+    export let data: ClientData;
+    export let message = "";
 
-        const result = await fetchData();
-        if (result instanceof Error) {
-            error = `Error: ${result.message}`;
-        } else {
-            error = "";
-            data = result;
-
-            // Warn the user in case the server stops generating new data exports for a while
-            if (dayjs().diff(data.date, "minutes") >= 10) {
-                const ago = dayjs(data.date).fromNow();
-                error = `Warning: this data is from ${ago}`;
-            }
-        }
+    function updateData() {
+        getDataAndUserMessage().then((result) => {
+            data = result.data;
+            message = result.message;
+        });
     }
 
     onMount(() => {
@@ -59,19 +30,19 @@
 
 <svelte:head>
     {#if data != null}
-        <title
-            >{data.pageTitle ||
-                `Campaign Status - ${data.sortie || data.theater}`}</title
-        >
+        <title>
+            {data.pageTitle ||
+                `Campaign Status - ${data.sortie || data.theater}`}
+        </title>
     {/if}
 </svelte:head>
 
-<div class="warning {error.length > 0 ? 'visible' : ''}">{error}</div>
+<div class="alert {message.length > 0 ? 'visible' : ''}">{message}</div>
 
 <main>
     {#if data != null}
         <Main {data} />
-    {:else if error == ""}
+    {:else if message == ""}
         <h1>Loading...</h1>
     {/if}
 </main>
@@ -98,7 +69,7 @@
     h2 {
         font-size: 16pt;
     }
-    .warning {
+    .alert {
         top: -3em;
         position: fixed;
         background: #a33;
@@ -111,7 +82,7 @@
         border-radius: 8px;
         text-align: center;
     }
-    .warning.visible {
+    .alert.visible {
         visibility: visible;
         top: 1em;
     }
@@ -131,6 +102,9 @@
         color: #f55;
     }
     .neutral {
+        color: #ff8;
+    }
+    .warning {
         color: #ff8;
     }
     .hint {
@@ -161,7 +135,8 @@
     .right {
         float: right;
     }
-    .dim, .dim a {
+    .dim,
+    .dim a {
         color: #777;
     }
     footer {
