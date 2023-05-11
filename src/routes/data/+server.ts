@@ -1,7 +1,7 @@
 import { json, redirect, RequestEvent } from "@sveltejs/kit";
 import { customTitle, getAirbases, getAssets, getAvailableMissions, getDCSDateTime, getExportData, getMissions, getPlayers, getSAMs, getTickets, getTugOfWar } from "./methods";
 import { Coalition } from "./types";
-import axios from "axios";
+import fs from "fs";
 
 export async function GET(event: RequestEvent): Promise<Response> {
     const data = await getExportData();
@@ -14,14 +14,16 @@ export async function GET(event: RequestEvent): Promise<Response> {
     let weather = null;
 
     try {
-        const resp = await axios.get('https://api.checkwx.com/metar/OLBA/decoded?x-api-key=' + process.env["WEATHER_API_KEY"]);
-        const w = resp.data.data[0]
+        const jsonString = fs.readFileSync(process.env["METAR_DATA_PATH"]);
+        const resp = JSON.parse(jsonString);
+        const w = resp.data[0]
         weather = {
             clouds: w.clouds[0].text,
             temp: w.temperature.celsius,
             visibility: w.visibility.meters,
             wind: `${w.wind.degrees}/${w.wind.speed_kts}`,
-            qnh: w.barometer.hpa
+            qnh: w.barometer.hpa,
+            raw: w.raw_text
         };
     } catch (e) {
         console.log(e)

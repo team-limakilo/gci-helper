@@ -180,7 +180,6 @@
     }
 
     .weather {
-        font-size: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -189,6 +188,15 @@
 
     .weather b {
         display: block;
+    }
+
+    .metar {
+        font-size: 14px;
+    }
+
+    .metar .raw {
+        text-align: end;
+        margin-bottom: 10px;
     }
 
     @media ( max-width: 834px ) {
@@ -205,6 +213,10 @@
 
         .missions .card {
             flex: 1 0 21%
+        }
+
+        .metar .raw {
+            display: none;
         }
     }
 

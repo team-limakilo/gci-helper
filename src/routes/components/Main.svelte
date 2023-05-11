@@ -69,12 +69,17 @@
         <p class="uppercase extra">{data.theater}</p>
     </div>
     {#if data.weather}
-    <div class="weather">
-        <div>Clouds <b>{data.weather.clouds}</b></div>
-        <div>Temperature <b>{data.weather.temp} Celcius</b></div>
-        <div>Visibility <b>{data.weather.visibility} meters</b></div>
-        <div>QNH <b>{data.weather.qnh} Hpa</b></div>
-        <div>Wind <b>{data.weather.wind} Kts</b></div>
+    <div class="metar">
+        <div class="raw">
+            METAR: <b>{data.weather.raw}</b>
+        </div>
+        <div class="weather">
+            <div>Clouds: <b>{data.weather.clouds}</b></div>
+            <div>Temperature: <b>{data.weather.temp} Celcius</b></div>
+            <div>Visibility: <b>{data.weather.visibility} meters</b></div>
+            <div>QNH: <b>{data.weather.qnh} Hpa</b></div>
+            <div>Wind: <b>{data.weather.wind} Kts</b></div>
+        </div>
     </div>
     {/if}
 </section>
