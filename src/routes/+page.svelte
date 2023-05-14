@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
     import { getDataAndUserMessage } from "./common";
+    import LoadingSpinner from "./components/LoadingSpinner.svelte";
     import Main from "./components/Main.svelte";
     import Toast from "./components/Toast.svelte";
     import type { ClientData } from "./data/types";
@@ -37,7 +38,13 @@
     {/if}
 </svelte:head>
 
-<div class="alert {message.length > 0 ? 'visible' : ''}">{message}</div>
+<div class="alert {data.ended ? 'visible' : ''}" tabindex="-1">
+    The server is restarting, please wait... <LoadingSpinner />
+</div>
+
+<div class="alert error {message.length > 0 ? 'visible' : ''}" tabindex="-1">
+    {message}
+</div>
 
 <main>
     {#if data != null}
@@ -71,16 +78,21 @@
     }
     .alert {
         top: -3em;
+        left: 50%;
         position: fixed;
-        background: #a33;
-        visibility: hidden;
+        background: #252;
         color: white;
-        padding: 0.5em;
-        width: calc(1024px - 1em);
-        max-width: calc(100% - 3rem);
-        transition: top 100ms linear;
+        visibility: hidden;
+        padding: 0.5em 1.5em;
+        max-width: calc(100% - 5em);
+        transition: top 100ms linear, visibility 100ms;
+        transform: translateX(-50%);
         border-radius: 8px;
         text-align: center;
+        z-index: 1000;
+    }
+    .alert.error {
+        background: #a33;
     }
     .alert.visible {
         visibility: visible;
@@ -190,6 +202,11 @@
     @media (max-width: 659px), (max-width: 1079px) and (orientation: portrait) {
         .grid.spaced > * {
             margin-top: 1em;
+        }
+        .alert {
+            transform: unset;
+            left: unset;
+            width: 100%;
         }
         .desktop {
             display: none;

@@ -37,6 +37,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
         players: getPlayers(data),
         pageTitle: customTitle,
         restartPeriod: data.period,
-        tugOfWar: getTugOfWar(data)
+        tugOfWar: getTugOfWar(data),
+        ended: data.ended,
     });
 }

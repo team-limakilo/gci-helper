@@ -80,24 +80,30 @@
             </div>
         </div>
         <div>
-            <div class="mono">
-                In-Game Time: {formatTime(currentWorldTime)}
-            </div>
-            {#if data.restartPeriod > 0}
+            {#if data.ended}
+                <div class="mono">In-Game Time: N/A</div>
+                <div class="mono">Next Restart: {formatTime(0)}</div>
+                <div class="mono">Players: 0/{data.players.max - 1}</div>
+            {:else}
                 <div class="mono">
-                    Next Restart: {formatTime(restartTimeLeft)}
+                    In-Game Time: {formatTime(currentWorldTime)}
+                </div>
+                {#if data.restartPeriod > 0}
+                    <div class="mono">
+                        Next Restart: {formatTime(restartTimeLeft)}
+                    </div>
+                {/if}
+                <div class="mono">
+                    Players:
+                    {#if data.players.list}
+                        <Hint title={formatPlayerList(data.players.list)}>
+                            {data.players.current - 1}/{data.players.max - 1}
+                        </Hint>
+                    {:else}
+                        {data.players.current - 1}/{data.players.max - 1}
+                    {/if}
                 </div>
             {/if}
-            <div class="mono">
-                Players:
-                {#if data.players.list}
-                    <Hint title={formatPlayerList(data.players.list)}>
-                        {data.players.current - 1}/{data.players.max - 1}
-                    </Hint>
-                {:else}
-                    {data.players.current - 1}/{data.players.max - 1}
-                {/if}
-            </div>
             <br />
         </div>
     </div>

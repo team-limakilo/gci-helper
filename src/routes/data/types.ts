@@ -21,6 +21,7 @@ export interface ClientData {
     restartPeriod: number;
     pageTitle?: string;
     tugOfWar: number;
+    ended?: boolean;
 }
 
 export enum Coalition {
