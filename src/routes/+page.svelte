@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
     import { getDataAndUserMessage } from "./common";
@@ -38,8 +39,16 @@
     {/if}
 </svelte:head>
 
-<div class="alert {data.ended ? 'visible' : ''}" tabindex="-1">
-    The server is restarting, please wait... <LoadingSpinner />
+<div
+    id="alert-restarting"
+    class="alert {data.ended ? 'visible' : ''}"
+    tabindex="-1"
+>
+    {#if browser}
+        The server is restarting, please wait... <LoadingSpinner />
+    {:else}
+        The server is restarting, please try again later.
+    {/if}
 </div>
 
 <div class="alert error {message.length > 0 ? 'visible' : ''}" tabindex="-1">
