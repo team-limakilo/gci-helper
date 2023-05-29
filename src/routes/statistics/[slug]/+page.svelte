@@ -22,6 +22,7 @@
     let airframes = [];
     let filteredAirframes = [];
     let pilotName = [];
+    let showUnits = '';
     const general = {
         totalTime: 0,
         totalAirframe: 0,
@@ -54,7 +55,6 @@
         if (result instanceof Error) {
             error = `Error: ${result.message}`;
         } else {
-            console.log(data)
             error = "";
             pageData = result;
             airframes = [];
@@ -83,6 +83,12 @@
                 data.weapon = 'none';
                 data.sorties = 0;
                 data.loses = 0;
+                data.targets = Object.keys(data.kL?.objects || {}).map(k => {
+                    return {
+                        name: k,
+                        count: data.kL?.objects[k]
+                    };
+                }).sort(((a, b) => b.count - a.count));
 
                 if(data.kills && data.kills['Ground Units']?.total) {
                     data.ag += data.kills['Ground Units'].total;
@@ -189,6 +195,15 @@
             }
             filteredAirframes = airframes.sort((a, b) => b.inAir - a.inAir);
         }
+    }
+
+    function onToggle(name) {
+        if (showUnits === name) {
+            showUnits = '';
+        } else {
+            showUnits = name;
+        }
+        console.log(name)
     }
 
 
@@ -332,7 +347,7 @@
                     </thead>
                     <tbody>
                     {#each filteredAirframes as airframe}
-                        <tr>
+                        <tr class="airframe-row" on:click={() => onToggle(airframe.name)}>
                             <td><b>{airframe.name}</b></td>
                             <td>{airframe.totalTime}</td>
                             <td>{airframe.aa}</td>
@@ -341,6 +356,29 @@
                             <td>{airframe.sorties}</td>
                             <td>{airframe.loses}</td>
                         </tr>
+                        {#if showUnits === airframe.name}
+                            {#if airframe.targets.length}
+                                <tr class="target-row">
+                                    <td colspan="7">
+                                        <h3 class="target-title"><b>Units destroyed by {airframe.name}</b></h3>
+                                       
+                                        <div class="target-list">
+                                        {#each airframe.targets as t}
+                                            <div class="target-item">
+                                                <div>
+                                                    {t.name}: <span>{t.count}</span>
+                                                </div>
+                                            </div>
+                                        {/each}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {:else}
+                                <tr>
+                                    <td colspan="7">No kills</td>
+                                </tr>  
+                            {/if}
+                        {/if}
                     {:else}
                         <tr>
                             <td colspan="999">No data</td>
@@ -351,7 +389,7 @@
 
                 <div class="hide-desktop">
                     {#each filteredAirframes as airframe}
-                        <ul>
+                        <ul on:click={() => onToggle(airframe.name)}>
                             <li>
                                 <p class="dim">Airframe</p>
                                 <p>{airframe.name}</p>
@@ -381,6 +419,30 @@
                                 <p>{airframe.loses}</p>
                             </li>
                         </ul>
+
+                        {#if showUnits === airframe.name}
+                        <ul class="target-mobile">
+                            {#if airframe.targets.length}
+                                <li>
+                                    <h3 class="target-title"><b>Units destroyed by {airframe.name}</b></h3>
+                                
+                                    <div class="target-list">
+                                    {#each airframe.targets as t}
+                                        <div class="target-item">
+                                            <div>
+                                                {t.name}: <span>{t.count}</span>
+                                            </div>
+                                        </div>
+                                    {/each}
+                                    </div>
+                                </li>
+                            {:else}
+                                <li>
+                                    No kills
+                                </li>  
+                            {/if}
+                        </ul>
+                        {/if}
                     {/each}
                     {#if !pilots.length}
                         <ul>
@@ -496,8 +558,14 @@
         border-collapse: collapse;
     }
 
-    tr {
-        border-bottom: 12px solid #222429;
+    tr + tr {
+        border-top: 12px solid #222429;
+    }
+
+    .airframe-row:hover {
+        background: #272a315e;
+        transition: .2s ease;
+        cursor: pointer;
     }
 
     tbody tr {
@@ -540,8 +608,10 @@
         list-style: none;
         padding: 16px;
         margin: 0;
-        margin-bottom: 16px;
         background: #272A31;
+    }
+    ul + ul {
+        margin-top: 16px;
     }
 
     li {
@@ -575,6 +645,43 @@
         width: 100% !important;
         gap: 16px;
         margin-bottom: 16px;
+    }
+
+    /* .target-row {
+        border: none;
+    } */
+    /* .target-row td {
+        padding-top: 0;
+    } */
+
+    .target-list {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        max-width: 600px;
+    }
+
+    .target-item {
+        margin-top: 0;
+        color: #C8C8C8;
+        font-size: 14px;
+        flex: 1 0 40%;
+
+    }
+    .target-item div {
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .target-title {
+        margin-bottom: 16px;
+    }
+
+    .target-mobile {
+        margin-top: 0;
+    }
+    .target-mobile li {
+        display: list-item;
     }
     
     @media ( max-width: 1599px ) {
