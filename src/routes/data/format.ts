@@ -14,6 +14,7 @@ export function prettyAircraftName(aircraft: string) {
         case "F-14A-95-GR": return "F-14A Tomcat";
         case "F-14B": return "F-14B Tomcat";
         case "F-15C": return "F-15C Eagle";
+        case "F-15ESE": return "F-15E Strike Eagle";
         case "FA-18C_hornet": return "F/A-18C Hornet";
         case "F-16C_50": return "F-16C Viper";
         case "A-4E-C": return "A-4E Skyhawk";
