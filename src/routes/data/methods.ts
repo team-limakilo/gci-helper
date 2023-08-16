@@ -10,7 +10,21 @@ export const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
 export const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
 export const customTitle = process.env["CUSTOM_TITLE"];
 
-const SALT = crypto.pseudoRandomBytes(4).toString("hex");
+async function getSalt() {
+    const keyPath = "salt.txt";
+    try {
+        await fs.stat(keyPath);
+    } catch (err) {
+        if (err.code === "ENOENT") {
+            await fs.writeFile(keyPath, crypto.randomBytes(8).toString("base64"));
+        } else {
+            throw err;
+        }
+    }
+    return fs.readFile(keyPath, { encoding: "utf-8" });
+}
+
+const SALT = await getSalt();
 
 function byKey<T>(key: keyof T) {
     return (a: T, b: T) => {
