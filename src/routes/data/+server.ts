@@ -1,9 +1,15 @@
 import { json, redirect, type RequestEvent } from "@sveltejs/kit";
 import { customTitle, getAirbases, getAssets, getAvailableMissions, getDCSDateTime, getExportData, getMissions, getPlayers, getSAMs, getTickets, getTugOfWar } from "./methods";
-import { Coalition } from "./types";
+import { Coalition, type ExportData } from "./types";
+
+let data: ExportData;
 
 export async function GET(event: RequestEvent): Promise<Response> {
-    const data = await getExportData();
+    try {
+        data = await getExportData();
+    } catch (dataError) {
+        console.error("Failed to read latest data:", dataError);
+    }
 
     // Check if cached response is fresh enough
     const clientCachedDate = new Date(event.request.headers.get("if-modified-since"));
