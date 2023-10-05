@@ -1,3 +1,4 @@
+import { browser } from "$app/environment";
 import type { PlayerDetails } from "./routes/data/types";
 
 export function padTime(str: any, len: number) {
@@ -6,6 +7,12 @@ export function padTime(str: any, len: number) {
 
 export function rightPad(str: any, len: number) {
     return str.toString().padEnd(len, "\xA0");
+}
+
+export function userPrefersDarkMode() {
+    if (browser) {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
 }
 
 export function ticketsHint(text: string) {

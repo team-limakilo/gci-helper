@@ -7,6 +7,7 @@
     import Main from "./components/Main.svelte";
     import Toast from "./components/Toast.svelte";
     import type { ClientData } from "./data/types";
+    import { userPrefersDarkMode } from "../utils";
 
     let interval: NodeJS.Timer;
     let toasts: ToastData[] = [];
@@ -36,6 +37,9 @@
             {data.pageTitle ||
                 `Campaign Status - ${data.sortie || data.theater}`}
         </title>
+    {/if}
+    {#if userPrefersDarkMode()}
+        <link rel="icon" href="favicon-dark.ico">
     {/if}
 </svelte:head>
 
