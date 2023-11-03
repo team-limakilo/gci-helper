@@ -5,7 +5,7 @@ import parser from "luaparse";
 export async function GET(event: RequestEvent): Promise<Response> {
     const additionalData = {};
 
-    const res = await axios.get('https://kestrelsnest.co.ua/luastats');
+    const res = await axios.get('https://campaign.kestrelsnest.co.ua/luastats');
     const lua = res.data;
     let ast = await parser.parse(lua, {comments:false});
 

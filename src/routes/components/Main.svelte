@@ -162,7 +162,7 @@
             <h3 class="red">Red Coalition:</h3>
             {#each data.playersRed as player}
                 <div>
-                    {player}
+                    {player.name}
                 </div>
             {/each}
             {#if !data.playersRed.length}
