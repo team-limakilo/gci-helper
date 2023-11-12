@@ -77,7 +77,10 @@
         xaxis: {
             type: 'datetime',
             categories,
-            max: Date.now()
+            max: Date.now(),
+            labels: {
+                datetimeUTC: false,
+            },
         },
         title: {
             text: 'Players over time'
