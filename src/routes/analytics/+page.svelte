@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import Menu from "../components/Menu.svelte";
-    import ApexCharts from 'apexcharts'
     import groupBy from "core-js/actual/array/group-by";
     import { page } from '$app/stores';
 
@@ -429,7 +428,9 @@
         return list[code] || '404';
     }
 
-    onMount(() => {
+    onMount(async () => {
+
+        const ApexCharts = (await import('apexcharts')).default
 
         window.ApexCharts = ApexCharts;
 
