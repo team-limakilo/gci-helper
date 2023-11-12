@@ -1,17 +1,38 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import {onDestroy, onMount} from "svelte";
     import Menu from "../components/Menu.svelte";
     import groupBy from "core-js/actual/array/group-by";
     import { page } from '$app/stores';
 
     const groupedByTime = groupBy($page.data.traffic, ({time}) => time);
+    const groupedByCountry = groupBy($page.data.traffic, ({country}) => country);
     const keys = Object.keys(groupedByTime);
     const categories = keys.map(time => +time);
     const users = keys.map(time => {
         return groupedByTime[time].length
     });
 
-    const groupedByIp = groupBy($page.data.traffic, ({ip}) => ip);
+    // const series = Object.keys(groupedByCountry).map(c => {
+    //     const data = keys.map(time => {
+    //         return groupedByTime[time].filter(u => u.country === c).length
+    //     });
+    //     return {
+    //         name: getCountryName(c),
+    //         data
+    //     }
+    // });
+    // console.log(series)
+
+    // const lastTime = +keys[keys.length - 1];
+    //
+    // if (lastTime < (Date.now() - 11*60*1000)) {
+    //     categories.push(lastTime + 11*60*1000);
+    //     users.push(0);
+    //     categories.push(Date.now());
+    //     users.push(0);
+    // }
+
+    const groupedByIp = groupBy($page.data.traffic.filter(t=>t.ip), ({ip}) => ip);
     const IPs = Object.keys(groupedByIp);
     const uniqueUsers = IPs.map(ip => groupedByIp[ip][0]);
     const groupedUniqueCountries = groupBy(uniqueUsers, ({country}) => country);
@@ -20,11 +41,11 @@
             x: getCountryName(c),
             y: groupedUniqueCountries[c].length
         }
-    });
+    }).sort((a,b) => b.y-a.y);
 
     const options = {
         grid: {
-            show: false,
+            show: false
         },
         theme: {
             palette: 'palette1',
@@ -36,38 +57,33 @@
                 data: users
             }
         ],
-        title: {
-            text: 'Players over time',
-            align: 'left'
-        },
         chart: {
-            id: 'chart2',
-            type: 'line',
-            height: 230,
-            toolbar: {
-                autoSelected: 'zoom',
-                show: true
-            }
+            type: 'bar',
+            height: 350,
         },
-        stroke: {
-            width: 3,
-            curve: "straight"
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                endingShape: 'rounded'
+            },
         },
         dataLabels: {
             enabled: false
         },
-        fill: {
-            opacity: 1
-        },
-        markers: {
-            size: 0
+        stroke: {
+            show: false,
+            width: 3,
         },
         xaxis: {
+            type: 'datetime',
             categories,
-            type: "datetime",
-            labels: {
-                datetimeUTC: false,
-            }
+            max: Date.now()
+        },
+        title: {
+            text: 'Players over time'
+        },
+        fill: {
+            opacity: .8
         }
     };
 
@@ -179,6 +195,22 @@
             '#C0ADDB'
         ],
     };
+
+    onMount(async () => {
+        const ApexCharts = (await import('apexcharts')).default
+
+        window.ApexCharts = ApexCharts;
+
+        const chart = new ApexCharts(document.querySelector("#chart-line2"), options);
+        await chart.render();
+        //
+        // const chartLine = new ApexCharts(document.querySelector("#chart-line"), optionsLine);
+        // chartLine.render();
+
+        const chartPie = new ApexCharts(document.querySelector("#chart-pie"), optionsTreemap);
+        chartPie.render();
+
+    });
 
     function getCountryName(code) {
         const list = {
@@ -427,23 +459,6 @@
         };
         return list[code] || '404';
     }
-
-    onMount(async () => {
-
-        const ApexCharts = (await import('apexcharts')).default
-
-        window.ApexCharts = ApexCharts;
-
-        const chart = new ApexCharts(document.querySelector("#chart-line2"), options);
-        chart.render();
-
-        const chartLine = new ApexCharts(document.querySelector("#chart-line"), optionsLine);
-        chartLine.render();
-
-        const chartPie = new ApexCharts(document.querySelector("#chart-pie"), optionsTreemap);
-        chartPie.render();
-
-    });
 </script>
 
 <svelte:head>
