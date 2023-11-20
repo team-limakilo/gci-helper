@@ -150,16 +150,16 @@
     }
 
     onMount(async () => {
-        await handleData();
-        const ApexCharts = (await import('apexcharts')).default
-
-        window.ApexCharts = ApexCharts;
-
-        const chart = new ApexCharts(document.querySelector("#chart-line2"), options);
-        await chart.render();
-
-        const chartPie = new ApexCharts(document.querySelector("#chart-pie"), optionsTreemap);
-        chartPie.render();
+        // await handleData();
+        // const ApexCharts = (await import('apexcharts')).default
+        //
+        // window.ApexCharts = ApexCharts;
+        //
+        // const chart = new ApexCharts(document.querySelector("#chart-line2"), options);
+        // await chart.render();
+        //
+        // const chartPie = new ApexCharts(document.querySelector("#chart-pie"), optionsTreemap);
+        // chartPie.render();
 
     });
 
