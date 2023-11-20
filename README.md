@@ -1,9 +1,9 @@
-Build docker container: `docker build -t gci-helper .`
+npm run build
 
-Run container: `docker run --name "container-name" -e EXPORT_DATA_ENDPOINT="http://path.to.data/" -p 3000:3000 gci-helper`
+$env:NODE_ENV="production"`
 
-Optional environment variables:
+$env:EXPORT_DATA_PATH="шлях"
 
-* `CUSTOM_TITLE`: Page title (will be set after data is loaded)
-* `EXPORT_DATA_SUBKEY`: A sub-key in the JSON returned by the endpoint where the data resides (otherwise, assumes the data lives in the root of the object)
-* `EXPORT_DATA_PATH`: Overrides data endpoint, making the application fetch data from a path in the filesystem instead
+потім  node build/index.js
+
+ANALYTICS_DATA_PATH=D:\nestat\traffic.db

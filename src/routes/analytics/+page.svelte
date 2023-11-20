@@ -10,7 +10,7 @@
 
     async function handleData() {
         async function fetchData(): Promise<ClientData | Error> {
-            const response = await fetch(`${base}/analytics`).catch(() => {
+            const response = await fetch(`${base}/analytics-data`).catch(() => {
                 return new Error("Could not connect to server");
             });
             if (response instanceof Error) {
