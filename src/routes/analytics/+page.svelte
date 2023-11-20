@@ -148,7 +148,7 @@
             ],
         };
     }
-let interval;
+
     onMount(async () => {
         await handleData();
         const ApexCharts = (await import('apexcharts')).default
@@ -166,11 +166,10 @@ let interval;
     function getCountryName(code) {
         const list = {
             "AF" : "Afghanistan",
-            "AX" : "Åland Islands",
             "AL" : "Albania",
             "DZ" : "Algeria",
             "AS" : "American Samoa",
-            "AD" : "AndorrA",
+            "AD" : "Andora",
             "AO" : "Angola",
             "AI" : "Anguilla",
             "AQ" : "Antarctica",
@@ -266,7 +265,7 @@ let interval;
             "IS" : "Iceland",
             "IN" : "India",
             "ID" : "Indonesia",
-            "IR" : "Iran, Islamic Republic Of",
+            "IR" : "Iran",
             "IQ" : "Iraq",
             "IE" : "Ireland",
             "IM" : "Isle of Man",
@@ -279,11 +278,11 @@ let interval;
             "KZ" : "Kazakhstan",
             "KE" : "Kenya",
             "KI" : "Kiribati",
-            "KP" : "Korea, Democratic People Republic of",
-            "KR" : "Korea, Republic of",
+            "KP" : "Korea",
+            "KR" : "Korea",
             "KW" : "Kuwait",
             "KG" : "Kyrgyzstan",
-            "LA" : "Lao People Democratic Republic",
+            "LA" : "Lao",
             "LV" : "Latvia",
             "LB" : "Lebanon",
             "LS" : "Lesotho",
@@ -293,7 +292,7 @@ let interval;
             "LT" : "Lithuania",
             "LU" : "Luxembourg",
             "MO" : "Macao",
-            "MK" : "Macedonia, The Former Yugoslav Republic of",
+            "MK" : "Macedonia",
             "MG" : "Madagascar",
             "MW" : "Malawi",
             "MY" : "Malaysia",
