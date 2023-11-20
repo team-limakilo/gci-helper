@@ -1,11 +1,16 @@
 import { json, RequestEvent } from "@sveltejs/kit";
 import fs from "fs";
+import CryptoJs from 'crypto-js';
 
 export async function GET(event: RequestEvent): Promise<Response> {
+    let traffic = [];
 
-    const data = fs.readFileSync(process.env["ANALYTICS_DATA_PATH"],
-        { encoding: 'utf8', flag: 'r' });
-    const traffic = JSON.parse(`[${data.slice(0, -2)}]`);
+    try {
+        const data = fs.readFileSync(process.env["ANALYTICS_DATA_PATH"],
+            { encoding: 'utf8', flag: 'r' });
+        traffic = JSON.parse(`[${data.trim().slice(0, -1)}]`);
+        traffic = traffic.map(t => ({...t, ip: CryptoJs.MD5(t.ip).toString()}))
+    } catch(e) {}
 
     event.setHeaders({
         "Cache-Control": "max-age=60",

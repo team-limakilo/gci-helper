@@ -24,6 +24,7 @@
     "apexcharts": "^3.44.0",
     "axios": "^1.4.0",
     "core-js": "^3.33.2",
+    "crypto-js": "^4.2.0",
     "luaparse": "^0.3.1",
     "svelte-select": "^5.6.0"
   }
