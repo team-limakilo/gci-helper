@@ -1,214 +1,162 @@
 <script lang="ts">
-    import {onDestroy, onMount} from "svelte";
+    import {onMount} from "svelte";
     import Menu from "../components/Menu.svelte";
     import groupBy from "core-js/actual/array/group-by";
-    import { page } from '$app/stores';
+    import {ClientData} from "../data/types";
+    import {base} from "$app/paths";
 
-    const groupedByTime = groupBy($page.data.traffic, ({time}) => time);
-    const groupedByCountry = groupBy($page.data.traffic, ({country}) => country);
-    const keys = Object.keys(groupedByTime);
-    const categories = keys.map(time => +time);
-    const users = keys.map(time => {
-        return groupedByTime[time].length
-    });
+    let options;
+    let optionsTreemap;
 
-    // const series = Object.keys(groupedByCountry).map(c => {
-    //     const data = keys.map(time => {
-    //         return groupedByTime[time].filter(u => u.country === c).length
-    //     });
-    //     return {
-    //         name: getCountryName(c),
-    //         data
-    //     }
-    // });
-    // console.log(series)
-
-    // const lastTime = +keys[keys.length - 1];
-    //
-    // if (lastTime < (Date.now() - 11*60*1000)) {
-    //     categories.push(lastTime + 11*60*1000);
-    //     users.push(0);
-    //     categories.push(Date.now());
-    //     users.push(0);
-    // }
-
-    const groupedByIp = groupBy($page.data.traffic.filter(t=>t.ip), ({ip}) => ip);
-    const IPs = Object.keys(groupedByIp);
-    const uniqueUsers = IPs.map(ip => groupedByIp[ip][0]);
-    const groupedUniqueCountries = groupBy(uniqueUsers, ({country}) => country);
-    const countrySeries = Object.keys(groupedUniqueCountries).map(c => {
-        return {
-            x: getCountryName(c),
-            y: groupedUniqueCountries[c].length
-        }
-    }).sort((a,b) => b.y-a.y);
-
-    const options = {
-        grid: {
-            show: false
-        },
-        theme: {
-            palette: 'palette1',
-            mode: 'dark'
-        },
-        series: [
-            {
-                name: 'Users',
-                data: users
+    async function handleData() {
+        async function fetchData(): Promise<ClientData | Error> {
+            const response = await fetch(`${base}/analytics`).catch(() => {
+                return new Error("Could not connect to server");
+            });
+            if (response instanceof Error) {
+                return response;
             }
-        ],
-        chart: {
-            type: 'bar',
-            height: 350,
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                endingShape: 'rounded'
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: false,
-            width: 3,
-        },
-        xaxis: {
-            type: 'datetime',
-            categories,
-            max: Date.now(),
-            labels: {
-                datetimeUTC: false,
-            },
-        },
-        title: {
-            text: 'Players over time'
-        },
-        fill: {
-            opacity: .8
-        }
-    };
-
-    const optionsLine = {
-        grid: {
-            show: false,
-        },
-        theme: {
-            palette: 'palette10',
-            mode: 'dark'
-        },
-        series: [
-            {
-                name: 'Users',
-                data: users
+            if (response.status >= 200 && response.status < 400) {
+                return response.json().catch((err) => {
+                    console.error(err);
+                    return new Error("Could not understand data from server");
+                });
+            } else {
+                return new Error("The server returned an error");
             }
-        ],
-        chart: {
-            id: 'chart1',
-            height: 130,
-            type: 'area',
-            brush: {
-                target: 'chart2',
-                enabled: true
+        }
+
+        const {traffic} = await fetchData();
+
+        const groupedByTime = groupBy(traffic, ({time}) => time);
+        const keys = Object.keys(groupedByTime);
+        const categories = keys.map(time => +time);
+        const users = keys.map(time => {
+            return groupedByTime[time].length
+        });
+
+
+        const groupedByIp = groupBy(traffic.filter(t=>t.ip), ({ip}) => ip);
+        const IPs = Object.keys(groupedByIp);
+        const uniqueUsers = IPs.map(ip => groupedByIp[ip][0]);
+        const groupedUniqueCountries = groupBy(uniqueUsers, ({country}) => country);
+        const countrySeries = Object.keys(groupedUniqueCountries).map(c => {
+            return {
+                x: getCountryName(c),
+                y: groupedUniqueCountries[c].length
+            }
+        }).sort((a,b) => b.y-a.y);
+
+        options = {
+            grid: {
+                show: false
             },
-            selection: {
-                enabled: true,
-                xaxis: {
-                    min: new Date(Date.now() - 12*3600000).getTime(),
-                    max: categories[categories.length - 1]
-                },
-                fill: {
-                    color: '#fff',
-                    opacity: 0.1
+            theme: {
+                palette: 'palette1',
+                mode: 'dark'
+            },
+            series: [
+                {
+                    name: 'Users',
+                    data: users
+                }
+            ],
+            chart: {
+                type: 'area',
+                height: 350,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    endingShape: 'rounded'
                 },
             },
-        },
-        stroke: {
-            curve: "smooth"
-        },
-        fill: {
-            type: 'gradient',
-            gradient: {
-                opacityFrom: 0.91,
-                opacityTo: 0.1,
-            }
-        },
-        xaxis: {
-            categories,
-            labels: {
-                datetimeUTC: false,
-            },
-            type: "datetime",
-            tooltip: {
+            dataLabels: {
                 enabled: false
-            }
-        },
-        yaxis: {
-            tickAmount: 3
-        }
-    };
-
-    const optionsTreemap = {
-        series: [
-            {
-                data: countrySeries
-            }
-        ],
-        theme: {
-            palette: 'palette2',
-            mode: 'dark'
-        },
-        legend: {
-            show: false
-        },
-        chart: {
-            height: 350,
-            type: 'treemap'
-        },
-        title: {
-            text: 'Players by country'
-        },
-        plotOptions: {
-            treemap: {
-                distributed: true,
-                enableShades: false,
-                useFillColorAsStroke: true
-            }
-        },
-        dataLabels: {
-            enabled: true,
-            formatter: function(text, op) {
-                return [text, op.value]
             },
-            offsetY: -4
-        },
-        colors: [
-            '#1e43f6',
-            '#F7B844',
-            '#ADD8C7',
-            '#EC3C65',
-            '#CDD7B6',
-            '#C1F666',
-            '#D43F97',
-            '#1E5D8C',
-            '#421243',
-            '#7F94B0',
-            '#EF6537',
-            '#C0ADDB'
-        ],
-    };
+            stroke: {
+                show: false,
+                width: 2,
+                curve: 'smooth'
+            },
+            xaxis: {
+                type: 'datetime',
+                categories,
+                max: Date.now(),
+                labels: {
+                    datetimeUTC: false,
+                },
+            },
+            yaxis: {
+                min: 1
+            },
+            title: {
+                text: 'Players over time'
+            },
+            fill: {
+                opacity: .8
+            }
+        };
 
+        optionsTreemap = {
+            series: [
+                {
+                    data: countrySeries
+                }
+            ],
+            theme: {
+                palette: 'palette2',
+                mode: 'dark'
+            },
+            legend: {
+                show: false
+            },
+            chart: {
+                height: 350,
+                type: 'treemap'
+            },
+            title: {
+                text: 'Players by country'
+            },
+            plotOptions: {
+                treemap: {
+                    distributed: true,
+                    enableShades: false,
+                    useFillColorAsStroke: true
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function(text, op) {
+                    return [text, op.value]
+                },
+                offsetY: -4
+            },
+            colors: [
+                '#1e43f6',
+                '#F7B844',
+                '#ADD8C7',
+                '#EC3C65',
+                '#CDD7B6',
+                '#C1F666',
+                '#D43F97',
+                '#1E5D8C',
+                '#421243',
+                '#7F94B0',
+                '#EF6537',
+                '#C0ADDB'
+            ],
+        };
+    }
+let interval;
     onMount(async () => {
+        await handleData();
         const ApexCharts = (await import('apexcharts')).default
 
         window.ApexCharts = ApexCharts;
 
         const chart = new ApexCharts(document.querySelector("#chart-line2"), options);
         await chart.render();
-        //
-        // const chartLine = new ApexCharts(document.querySelector("#chart-line"), optionsLine);
-        // chartLine.render();
 
         const chartPie = new ApexCharts(document.querySelector("#chart-pie"), optionsTreemap);
         chartPie.render();
