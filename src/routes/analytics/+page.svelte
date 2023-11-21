@@ -1,15 +1,26 @@
 <script lang="ts">
     import {onMount} from "svelte";
     import Menu from "../components/Menu.svelte";
-    import groupBy from "core-js/actual/array/group-by";
-    import {ClientData} from "../data/types";
     import {base} from "$app/paths";
 
     let options;
     let optionsTreemap;
 
+    const groupBy = (values, keyFinder) => {
+        return values.reduce((a, b) => {
+            const key = typeof keyFinder === 'function' ? keyFinder(b) : b[keyFinder];
+            if(!a[key]){
+                a[key] = [b];
+            }else{
+                a[key] = [...a[key], b];
+            }
+
+            return a;
+        }, {});
+    };
+
     async function handleData() {
-        async function fetchData(): Promise<ClientData | Error> {
+        async function fetchData() {
             const response = await fetch(`${base}/analytics-data`).catch(() => {
                 return new Error("Could not connect to server");
             });
@@ -28,7 +39,7 @@
 
         const {traffic} = await fetchData();
 
-        const groupedByTime = groupBy(traffic, ({time}) => time);
+        const groupedByTime = groupBy(traffic, 'time');
         const keys = Object.keys(groupedByTime);
         const categories = keys.map(time => +time);
         const users = keys.map(time => {
@@ -36,7 +47,7 @@
         });
 
 
-        const groupedByIp = groupBy(traffic.filter(t=>t.ip), ({ip}) => ip);
+        const groupedByIp = groupBy(traffic.filter(t=>t.ip), 'ip');
         const IPs = Object.keys(groupedByIp);
         const uniqueUsers = IPs.map(ip => groupedByIp[ip][0]);
         const groupedUniqueCountries = groupBy(uniqueUsers, ({country}) => country);
@@ -150,16 +161,16 @@
     }
 
     onMount(async () => {
-        // await handleData();
-        // const ApexCharts = (await import('apexcharts')).default
-        //
-        // window.ApexCharts = ApexCharts;
-        //
-        // const chart = new ApexCharts(document.querySelector("#chart-line2"), options);
-        // await chart.render();
-        //
-        // const chartPie = new ApexCharts(document.querySelector("#chart-pie"), optionsTreemap);
-        // chartPie.render();
+        await handleData();
+        const ApexCharts = (await import('apexcharts')).default
+
+        window.ApexCharts = ApexCharts;
+
+        const chart = new ApexCharts(document.querySelector("#chart-line2"), options);
+        await chart.render();
+
+        const chartPie = new ApexCharts(document.querySelector("#chart-pie"), optionsTreemap);
+        chartPie.render();
 
     });
 
