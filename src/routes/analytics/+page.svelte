@@ -21,7 +21,7 @@
 
     async function handleData() {
         async function fetchData() {
-            const response = await fetch(`${base}/analytics-data`).catch(() => {
+            const response = await fetch(`${base}/analytics`).catch(() => {
                 return new Error("Could not connect to server");
             });
             if (response instanceof Error) {
@@ -47,16 +47,16 @@
         });
 
 
-        const groupedByIp = groupBy(traffic.filter(t=>t.ip), 'ip');
-        const IPs = Object.keys(groupedByIp);
-        const uniqueUsers = IPs.map(ip => groupedByIp[ip][0]);
-        const groupedUniqueCountries = groupBy(uniqueUsers, ({country}) => country);
-        const countrySeries = Object.keys(groupedUniqueCountries).map(c => {
+        const total = traffic.length;
+        const groupedUniqueCountries = groupBy(traffic, 'country')
+        const countries = Object.keys(groupedUniqueCountries).map(c => {
             return {
-                x: getCountryName(c),
-                y: groupedUniqueCountries[c].length
+                country: getCountryName(c),
+                users: ((groupedUniqueCountries[c].length/total).toFixed(4)*100).toFixed(2)
             }
-        }).sort((a,b) => b.y-a.y);
+        }).sort((a,b) => b.users - a.users);
+        const countryNames = countries.map(c => c.country);
+        const countrySeries = countries.map(c => c.users);
 
         options = {
             grid: {
@@ -112,9 +112,21 @@
         optionsTreemap = {
             series: [
                 {
+                    name: '',
                     data: countrySeries
                 }
             ],
+            grid: {
+                show: false
+            },
+            tooltip: {
+                shared: false,
+                y: {
+                    formatter: function(val) {
+                        return val + "%";
+                    }
+                }
+            },
             theme: {
                 palette: 'palette2',
                 mode: 'dark'
@@ -123,40 +135,23 @@
                 show: false
             },
             chart: {
-                height: 350,
-                type: 'treemap'
+                height: 600,
+                type: 'bar'
             },
             title: {
-                text: 'Players by country'
-            },
-            plotOptions: {
-                treemap: {
-                    distributed: true,
-                    enableShades: false,
-                    useFillColorAsStroke: true
-                }
+                text: 'Players origin'
             },
             dataLabels: {
-                enabled: true,
-                formatter: function(text, op) {
-                    return [text, op.value]
-                },
-                offsetY: -4
+                enabled: false
             },
-            colors: [
-                '#1e43f6',
-                '#F7B844',
-                '#ADD8C7',
-                '#EC3C65',
-                '#CDD7B6',
-                '#C1F666',
-                '#D43F97',
-                '#1E5D8C',
-                '#421243',
-                '#7F94B0',
-                '#EF6537',
-                '#C0ADDB'
-            ],
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            xaxis: {
+                categories: countryNames
+            }
         };
     }
 
@@ -434,7 +429,7 @@
         </header>
         <br>
         <br>
-        <div style="max-width: 1000px;" >
+        <div style="" >
             <div id="chart-line2"></div>
             <div id="chart-line"></div>
             <br>
