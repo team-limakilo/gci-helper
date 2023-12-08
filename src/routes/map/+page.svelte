@@ -5,7 +5,7 @@ import Menu from "../components/Menu.svelte";
 <main>
     <Menu></Menu>
     <div class="content-gci">
-        <iframe src="https://gci.kestrelsnest.co.ua/servers/NewHope" frameborder="0"></iframe>
+        <iframe src="https://gci.kestrelsnest.co.ua/servers/Mission%20Map" frameborder="0"></iframe>
     </div>
 </main>
 
