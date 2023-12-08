@@ -230,8 +230,8 @@
     {#if data != null}
 
     <section>
-        <h1>Battle of lebabon</h1>
-        <p class="uppercase extra">syria</p>
+        <h1>OPERATION STORMFORGE</h1>
+        <p class="uppercase extra">caucasus</p>
     </section>
     
     <section>

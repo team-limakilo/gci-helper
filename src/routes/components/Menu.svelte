@@ -40,7 +40,6 @@
     </a>
     <div class="nav">
         <nav>
-            <a href="https://kestrelsnest.co.ua/">Home</a>
             <a href="/status" on:click(toggle) class:active={lastsegment == 'status'}>Campaign overview</a>
             <a href="/statistics" on:click(toggle) class:active={[lastsegment, beforelast].includes('statistics')}>Statistics</a>
             <a href="/map" on:click(toggle) class:active={lastsegment == 'map'}>Mission Map</a>
