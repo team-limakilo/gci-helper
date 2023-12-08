@@ -30,14 +30,6 @@
     <div class="close" on:click={toggle}>
         <img src={close} alt="">
     </div>
-    <a class="logo">
-        <div>
-            <img src={logo} alt="">
-        </div>
-        <span>
-                Kestrel's nest
-            </span>
-    </a>
     <div class="nav">
         <nav>
             <a href="/status" on:click(toggle) class:active={lastsegment == 'status'}>Campaign overview</a>
@@ -56,7 +48,7 @@
 
     aside   {
         background: #272A31;
-        padding: 40px 18px;
+        padding: 60px 18px 40px;
         height: 100vh;
         position: fixed;
         top: 0;
@@ -125,7 +117,7 @@
             display: block;
             position: absolute;
             right: 21px;
-            top: 53px;
+            top: 24px;
             cursor: pointer;
         }
     }
