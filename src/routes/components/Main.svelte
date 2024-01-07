@@ -216,6 +216,20 @@
     </div>
 </section>
 
+<section>
+    <h2>Enemy Assets:</h2>
+    <div class="row">
+        {#each data.enemyAssets as region}
+            <div class="card">
+                <h3 class="red">{ region.name }:</h3>
+                {#each region.assets as a}
+                    <div>{ a.type } ({ a.codename })</div>
+                {/each}
+            </div>
+        {/each}
+    </div>
+</section>
+
 <footer>
     <div class="dim">
         Last Update: {new Date(data.date).toLocaleString()}

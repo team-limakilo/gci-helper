@@ -48,8 +48,8 @@ export async function GET(event: RequestEvent): Promise<Response> {
     return json({
         missions: getMissions(data, Coalition.Blue),
         availableMissions: getAvailableMissions(data, Coalition.Blue),
-        enemySAMs: samThreads,
-        enemyAssets: getAssets(data, Coalition.Red),
+        enemySAMs: getSAMs(data, Coalition.Red).filter(sam => sam.assets.length),
+        enemyAssets: getAssets(data, Coalition.Red).filter(a => a.assets.length),
         airbases: getAirbases(data),
         tickets: getTickets(data),
         theater: data.theater,
