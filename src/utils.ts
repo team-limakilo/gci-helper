@@ -57,3 +57,16 @@ export function formatTime(totalSeconds: number, trueTime: boolean) {
     const seconds = padTime(Math.floor(totalSeconds % 60), 2);
     return `${hours}:${minutes}:${seconds}`;
 }
+
+export function groupBy(values, keyFinder) {
+    return values.reduce((a, b) => {
+        const key = typeof keyFinder === 'function' ? keyFinder(b) : b[keyFinder];
+        if(!a[key]){
+            a[key] = [b];
+        }else{
+            a[key] = [...a[key], b];
+        }
+
+        return a;
+    }, {});
+}

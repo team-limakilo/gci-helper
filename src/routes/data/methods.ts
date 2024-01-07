@@ -4,6 +4,7 @@ import fs from "fs/promises";
 import getSampleData from "../../sample";
 import type { Asset, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
+import 'dotenv/config'
 
 export const exportDataPath = process.env["EXPORT_DATA_PATH"];
 export const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];

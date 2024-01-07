@@ -2,22 +2,10 @@
     import {onMount} from "svelte";
     import Menu from "../components/Menu.svelte";
     import {base} from "$app/paths";
+    import {groupBy} from "../../utils";
 
     let options;
     let optionsTreemap;
-
-    const groupBy = (values, keyFinder) => {
-        return values.reduce((a, b) => {
-            const key = typeof keyFinder === 'function' ? keyFinder(b) : b[keyFinder];
-            if(!a[key]){
-                a[key] = [b];
-            }else{
-                a[key] = [...a[key], b];
-            }
-
-            return a;
-        }, {});
-    };
 
     async function handleData() {
         async function fetchData() {

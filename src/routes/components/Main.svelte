@@ -202,9 +202,23 @@
     </div>
 </section>
 
+<section>
+    <h2>SAM Threats</h2>
+    <div class="row">
+        {#each data.enemySAMs as region}
+            <div class="card">
+                <h3 class="red">{ region.name }:</h3>
+                {#each region.assets as a}
+                    <div>{ a.sitetype } ({ a.codename })</div>
+                {/each}
+            </div>
+        {/each}
+    </div>
+</section>
+
 <footer>
     <div class="dim">
-        Last Update: {new Date(data.date).toLocaleString("uk")}
+        Last Update: {new Date(data.date).toLocaleString()}
     </div>
     <div class="dim">
         DCS Version: <VersionLink
