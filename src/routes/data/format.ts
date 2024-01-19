@@ -23,6 +23,14 @@ export function prettyAircraftName(aircraft: any) {
         case "A-10C_2": return "A-10C Warthog";
         case "AH-64D_BLK_II": return "AH-64D Apache";
         case "UH-1H": return "UH-1H Huey";
+        case "Mi-8MT": return "Mi-8MT Hip";
+        case "Mi-24P": return "Mi-24P Hind";
+        case "SA342M": return "SA-342M Gazelle";
+        case "SA342L": return "SA-342L Gazelle";
+        case "Su-25T": return "Su-25T Frogfoot";
+        case "Su-25": return "Su-25 Frogfoot";
+        case "Su-27": return "Su-27 Flanker";
+        case "MiG-29S": return "MiG-29S Fulcrum";
         default: return aircraft;
     }
 }
