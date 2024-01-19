@@ -153,12 +153,16 @@
             if (airframes.length) {
               
                 general.totalTime = Object.keys(airframes).reduce((a, b) => {
-                    return a + airframes[b].inAir;
+                    if (+airframes[b].inAir) {
+                        return a + airframes[b].inAir;
+                    }
+                    return a;
                 }, 0);
                 general.totalTime = formatTime(general.totalTime);
             
                 general.totalAirframe = airframes.sort((a, b) => {
-                    return b.inAir - a.inAir;
+                     return b.inAir - a.inAir;
+                    return 
                 })[0].name;
                 
                 general.totalSorties = airframes.reduce((a, b) => {
