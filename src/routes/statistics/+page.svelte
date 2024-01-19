@@ -81,28 +81,28 @@
                     return a;
                 }, 0);
                 const totalAa = Object.keys(times).reduce((a, b) => {
-                    if(+times[b].kills?.Planes?.total) {
+                    if(times[b].kills?.Planes?.total) {
                         return a + times[b].kills.Planes.total;
                     }
-                    if(+times[b].kills?.Helicopters?.total) {
+                    if(times[b].kills?.Helicopters?.total) {
                         return a + times[b].kills.Helicopters.total;
                     }
                     return a;
                 }, 0);
                 const totalAg = Object.keys(times).reduce((a, b) => {
-                    if(+times[b].kills && times[b].kills['Ground Units']?.total) {
+                    if(times[b].kills && times[b].kills['Ground Units']?.total) {
                         a = a + times[b].kills['Ground Units'].total;
                     }
-                    if(+times[b].kills && times[b].kills['Buildings']?.total) {
+                    if(times[b].kills && times[b].kills['Buildings']?.total) {
                         a = a + times[b].kills['Buildings'].total;
                     }
-                    if(+times[b].kills && times[b].kills['Ships']?.total) {
+                    if(times[b].kills && times[b].kills['Ships']?.total) {
                         a = a + times[b].kills['Ships'].total;
                     }
                     return a;
                 }, 0);
                 const totalLandings = Object.keys(times).reduce((a, b) => {
-                    if(+times[b].kills && times[b].actions?.landing) {
+                    if(times[b].kills && times[b].actions?.landing) {
                         const landing = times[b].kills && times[b].actions?.landing;
                         if (landing.landedWhileDamaged) {
                             delete landing.landedWhileDamaged;

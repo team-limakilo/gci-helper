@@ -1,6 +1,7 @@
 import { json, RequestEvent } from "@sveltejs/kit";
 import fs from "fs";
 import CryptoJs from 'crypto-js';
+import 'dotenv/config'
 
 export async function GET(event: RequestEvent): Promise<Response> {
     let traffic = [];
@@ -10,7 +11,9 @@ export async function GET(event: RequestEvent): Promise<Response> {
             { encoding: 'utf8', flag: 'r' });
         traffic = JSON.parse(`[${data.trim().slice(0, -1)}]`);
         traffic = traffic.map(t => ({...t, ip: CryptoJs.MD5(t.ip).toString()}))
-    } catch(e) {}
+    } catch(e) {
+        console.log
+    }
 
     return json({
         traffic
