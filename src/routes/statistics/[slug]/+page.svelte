@@ -9,6 +9,7 @@
     import Select from 'svelte-select';
     import Menu from "../../components/Menu.svelte";
     import {formatTime} from "../../../utils.js";
+    import { prettyAircraftName } from "src/routes/data/format";
 
     export let data;
     const slug = data.params.slug + '';
@@ -262,7 +263,7 @@
                         </div>
                         <div class="card-row">
                             <div>
-                                {general.totalAirframe}
+                                {prettyAircraftName(general.totalAirframe)}
                             </div>
                         </div>
                     </div>
@@ -348,7 +349,7 @@
                     <tbody>
                     {#each filteredAirframes as airframe}
                         <tr class="airframe-row" on:click={() => onToggle(airframe.name)}>
-                            <td><b>{airframe.name}</b></td>
+                            <td><b>{prettyAircraftName(airframe.name)}</b></td>
                             <td>{airframe.totalTime}</td>
                             <td>{airframe.aa}</td>
                             <td>{airframe.ag}</td>
@@ -392,7 +393,7 @@
                         <ul on:click={() => onToggle(airframe.name)}>
                             <li>
                                 <p class="dim">Airframe</p>
-                                <p>{airframe.name}</p>
+                                <p>{prettyAircraftName(airframe.name)}</p>
                             </li>
                             <li>
                                 <p class="dim">Total Time Flown</p>

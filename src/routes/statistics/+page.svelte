@@ -9,6 +9,7 @@
     import Select from 'svelte-select';
     import Menu from "../components/Menu.svelte";
     import {formatTime} from "../../utils";
+    import { prettyAircraftName } from "../data/format";
 
     dayjs.extend(relativeTime);
 
@@ -272,7 +273,7 @@
                 </div>
                 <div class="card-row">
                     <div>
-                        {general.topAirframe.name}
+                        {prettyAircraftName(general.topAirframe.name)}
                     </div>
                     <div>
                         {general.topAirframe.time}
@@ -326,7 +327,7 @@
                         <tr on:click={onShowPilot(pilot.name)}>
                             <td><b>{pilot.name}</b></td>
                             <td>{pilot.totalTime}</td>
-                            <td>{pilot.airframe}</td>
+                            <td>{prettyAircraftName(pilot.airframe)}</td>
                             <td>{pilot.totalAa}</td>
                             <td>{pilot.totalAg}</td>
                             <td>{pilot.totalLoses}</td>
