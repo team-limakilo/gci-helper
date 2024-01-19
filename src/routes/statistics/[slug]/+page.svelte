@@ -9,7 +9,7 @@
     import Select from 'svelte-select';
     import Menu from "../../components/Menu.svelte";
     import {formatTime} from "../../../utils.js";
-    import { prettyAircraftName } from "src/routes/data/format";
+    import { prettyAircraftName } from "../../data/format";
 
     export let data;
     const slug = data.params.slug + '';
