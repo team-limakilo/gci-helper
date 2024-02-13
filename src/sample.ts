@@ -3293,7 +3293,7 @@ const getSampleData = () => ({
             "type": "M-2000C",
             "group": "2/5 chasse 1-1",
             "iffmode3": "5740",
-            "player": "Leltch",
+            "player": "RebelSapph",
           }, {
             "type": "M-2000C",
             "group": "2/5 chasse 1-2",
@@ -3346,7 +3346,7 @@ const getSampleData = () => ({
       "side": 2,
       "slot": 100,
     }, {
-      "name": "Leltch",
+      "name": "RebelSapph",
       "side": 2,
       "slot": 101,
     }, {
