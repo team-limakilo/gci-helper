@@ -9,7 +9,7 @@
     import type { ClientData } from "./data/types";
     import { userPrefersDarkMode } from "../utils";
 
-    let interval: NodeJS.Timer;
+    let interval: NodeJS.Timeout;
     let toasts: ToastData[] = [];
 
     export let data: ClientData;
