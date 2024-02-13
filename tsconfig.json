@@ -3,17 +3,12 @@
 		"./.svelte-kit/tsconfig.json"
 	],
 	"compilerOptions": {
-		"baseUrl": ".",
 		"resolveJsonModule": true,
 		"sourceMap": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"allowJs": true,
-		"checkJs": true,
-		"paths": {
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"]
-		}
+		"checkJs": true
 	}
 }
