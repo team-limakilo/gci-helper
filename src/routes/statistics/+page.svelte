@@ -231,8 +231,8 @@
     {#if data != null}
 
     <section>
-        <h1>OPERATION STORMFORGE</h1>
-        <p class="uppercase extra">caucasus</p>
+        <h1>{data.data.sortie}</h1>
+        <p class="uppercase extra">{data.data.theater}</p>
     </section>
     
     <section>

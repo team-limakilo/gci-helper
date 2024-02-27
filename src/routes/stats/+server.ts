@@ -1,6 +1,7 @@
 import { json, redirect, RequestEvent } from "@sveltejs/kit";
 import axios from "axios";
 import parser from "luaparse";
+import { getExportData } from "../data/methods";
 
 export async function GET(event: RequestEvent): Promise<Response> {
     const additionalData = {};
@@ -30,13 +31,16 @@ export async function GET(event: RequestEvent): Promise<Response> {
 
     const updateStats = mergeDeep(stats, mergeUpdated)
 
+    const data = await getExportData();
+
     event.setHeaders({
         "Cache-Control": "max-age=60",
         "Access-Control-Allow-Origin": "*",
     });
     // Then build a new response
     return json({
-        stats: updateStats
+        stats: updateStats,
+        data
     });
 
     function walkThroughKeys(data, id) {
