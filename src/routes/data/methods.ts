@@ -7,6 +7,7 @@ import { Coalition } from "./types";
 import 'dotenv/config'
 
 export const exportDataPath = process.env["EXPORT_DATA_PATH"];
+export const exportDataFiles = process.env["EXPORT_DATA_FILES"];
 export const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
 export const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
 export const customTitle = process.env["CUSTOM_TITLE"];
@@ -167,11 +168,24 @@ export function getDCSDateTime(isoDate: string, absTime: number): Date {
     return new Date(date);
 }
 
-export async function getExportData(): Promise<ExportData> {
+export function getAvailableCampaigns() {
+    return exportDataFiles?.replace(/\.state\.export\.json/g, "").trim().split("|")
+}
+
+export async function getExportData(campaing: string): Promise<ExportData> {
+
+
     if (exportDataPath != null && exportDataPath.length > 0) {
+        if (!getAvailableCampaigns().includes(campaing)) {
+            return
+        }
+
+        const filePath = exportDataPath + campaing + '.state.export.json';
         // Read from file
-        const data = await fs.readFile(exportDataPath, { encoding: "utf-8" });
-        return JSON.parse(data);
+        const data = await fs.readFile(filePath, { encoding: "utf-8" });
+        const result = JSON.parse(data);
+        result.fileName = campaing;
+        return result;
     } else if (exportDataEndpoint != null && exportDataEndpoint.length > 0) {
         // Read from external API
         const data = await axios.get(exportDataEndpoint).then((response) => response.data);

@@ -12,6 +12,7 @@
     import MissionTable from "./MissionTable.svelte";
     import VersionLink from "./VersionLink.svelte";
     export let data: ClientData;
+    export let dropdown: any;
 
     const DCT_VERSION_PATH = import.meta.env.VITE_DCT_VERSION_PATH;
 
@@ -55,17 +56,50 @@
     $: blueTicketsStartNumber = data.tickets["2"].startnumber;
 
     const missionTypes = ['ANTISHIP', 'ARMEDRECON', 'BAI', 'CAP', 'CAS', 'OCA', 'SEAD', 'STRIKE'];
+
     const availableMissions = missionTypes.map( t => {
         const found = data.availableMissions.find(m => {
             return m.type === t
         });
         return found || {count:0, type: t}
     })
+
+    let isOpen = false;
+    const togglePopup = () => isOpen = !isOpen;
+
 </script>
 
 <section class="header">
-    <div class="">
-        <h1>{data.sortie}</h1>
+    <div class="campaign-name">
+        <div>
+            <h1 class="prevent-select" on:click={togglePopup}>
+                {data.sortie}
+                <span class="chevron"></span>
+            </h1>
+            {#if isOpen}
+            <div class="popup">
+                {#each dropdown as item}
+                    {#if item.active}
+                        <a class="menu-item active">
+                            <div>
+                                <b>{item.campaignName}</b>
+                                <span class="map">({item.mapName})</span>
+                            </div>
+                            <span class="check"></span>
+                        </a>
+                    {:else}
+                        <a data-sveltekit-reload href={`/status/?c=${item.fileName}`} class="menu-item ">
+                            <div>
+                                <b>{item.campaignName}</b>
+                                <span class="map">({item.mapName})</span>
+                            </div>
+                            <span class="check"></span>
+                        </a>
+                    {/if}
+                {/each}
+            </div>
+            {/if}
+        </div>
         <p class="uppercase extra">{data.theater}</p>
     </div>
     {#if data.weather}
@@ -246,3 +280,109 @@
 <!--    />-->
     </div>
 </footer>
+<style>
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.campaign-name {
+    position:relative;
+}
+
+.campaign-name p {
+    color: #fff;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    background-color: #272A31;
+    padding: 8px 16px;
+    margin-bottom: 5px;
+    cursor:pointer;
+    border-radius: 4px;
+}
+
+h1:hover {
+    opacity: .95;
+}
+
+.popup {
+  background: #272A31;
+  border-radius: 4px;
+  padding: 0;
+  font-family: monospace;
+  position:absolute;
+  min-width: 100%;
+  width: max-content;
+  cursor:pointer;
+  margin-top: 5px;
+  box-shadow: 0px 8px 25px 0px #00000080;
+}
+
+.header {
+  color: #FA253C;
+  font-size: 18px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chevron {
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  display: inline-block;
+  margin-left: 16px;
+  margin-top: -5px;
+}
+
+.menu-item {
+  color: #c8c8c8;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+}
+
+.menu-item.active {
+  color: #fff;
+  background-color: #222429;
+  cursor: default;
+}
+
+.menu-item:not(.active):hover {
+    opacity: .9;
+}
+
+.menu-item b {
+    font-weight: 700;
+}
+
+.menu-item .map {
+    color: #c8c8c8;
+}
+
+.check {
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  width: 6px;
+  height: 14px;
+  transform: rotate(45deg);
+  display: none;
+  margin-left: 32px;
+  margin-top: -2px;
+}
+
+.menu-item.active .check {
+  display: inline-block;
+}
+</style>

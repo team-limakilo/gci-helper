@@ -5,14 +5,21 @@ import fs from "fs";
 import 'dotenv/config'
 
 export async function GET(event: RequestEvent): Promise<Response> {
-    const data = await getExportData();
+    const searchParams = event.url.searchParams;
+    const campaign = searchParams.get('c');
+    const refresh = searchParams.get('r');
+    
+    const data = await getExportData(campaign);
     const metarDataPath = process.env["METAR_DATA_PATH"];
 
-    // Check if cached response is fresh enough
-    const clientCachedDate = new Date(event.request.headers.get("if-modified-since"));
-    if (!isNaN(clientCachedDate.valueOf()) && new Date(data.date) <= clientCachedDate) {
-        throw redirect(304, '');
+    if (!refresh) {
+        // Check if cached response is fresh enough
+        const clientCachedDate = new Date(event.request.headers.get("if-modified-since"));
+        if (!isNaN(clientCachedDate.valueOf()) && new Date(data.date) <= clientCachedDate) {
+            throw redirect(304, '');
+        }
     }
+
     let weather = null;
 
     if (metarDataPath) {

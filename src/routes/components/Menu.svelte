@@ -33,10 +33,8 @@
     <div class="nav">
         <nav>
             <a href="/status" on:click(toggle) class:active={lastsegment == 'status'}>Campaign overview</a>
-            <a href="/statistics" on:click(toggle) class:active={[lastsegment, beforelast].includes('statistics')}>Statistics</a>
             <a href="/map" on:click(toggle) class:active={lastsegment == 'map'}>Mission Map</a>
             <a href="https://drive.google.com/drive/folders/1--hm1m8S_gOkwbgNIW5FoEDAaLV13ey5" on:click(toggle) target="_blank">Tacview</a>
-            <a href="/analytics" on:click(toggle) class:active={lastsegment == 'analytics'}>Server Analytics</a>
         </nav>
         <div class="discord">
             <a href="/discord" target="_blank">&#10140; Join our Discord</a>

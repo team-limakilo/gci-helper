@@ -9,16 +9,20 @@
     import type { ClientData } from "../data/types";
     import Menu from "../components/Menu.svelte";
 
+    export let data;
+    let { campaignDropdown, campaign } = data;
+    
     dayjs.extend(relativeTime);
 
     let interval: NodeJS.Timer;
-    let data: ClientData;
+    let selectedCampaign = campaign;
+    let clientData: ClientData;
     let toasts: ToastData[] = [];
     let error = "";
 
-    async function updateData() {
+    async function updateData(refresh = 0) {
         async function fetchData(): Promise<ClientData | Error> {
-            const response = await fetch(`${base}/data`).catch(() => {
+            const response = await fetch(`${base}/data?c=${selectedCampaign}&r=${refresh}`).catch(() => {
                 return new Error("Could not connect to server");
             });
             if (response instanceof Error) {
@@ -39,18 +43,18 @@
             error = `Error: ${result.message}`;
         } else {
             error = "";
-            data = result;
+            clientData = result;
 
             // Warn the user in case the server stops generating new data exports for a while
-            if (dayjs().diff(data.date, "minutes") >= 10) {
-                const ago = dayjs(data.date).fromNow();
+            if (dayjs().diff(clientData.date, "minutes") >= 10) {
+                const ago = dayjs(clientData.date).fromNow();
                 error = `Warning: this data is from ${ago}`;
             }
         }
     }
 
     onMount(() => {
-        updateData();
+        updateData(1);
         window.toasts = writable([]);
         window.toasts.subscribe((value: ToastData[]) => (toasts = value));
         interval = setInterval(updateData, 10 * 1000);
@@ -59,21 +63,20 @@
 </script>
 
 <svelte:head>
-    {#if data != null}
+    {#if clientData != null}
         <title
-            >{data.pageTitle ||
-                `Campaign Status - ${data.sortie || data.theater}`}</title
+            >{clientData.pageTitle ||
+                `Campaign Status - ${clientData.sortie || clientData.theater}`}</title
         >
     {/if}
 </svelte:head>
 
 <div class="warning {error.length > 0 ? 'visible' : ''}">{error}</div>
-
 <main>
     <Menu></Menu>
     <div class="content">
-        {#if data != null}
-            <Main {data} />
+        {#if clientData != null}
+            <Main data={clientData} dropdown={campaignDropdown} />
         {:else if error == ""}
             <h1>Loading...</h1>
         {/if}
@@ -106,7 +109,7 @@
         text-transform: uppercase;
     }
     body {
-        font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+        font-family: "Noto Sans Mono", monospace;
         color: #fff;
         background: #222429;
         line-height: 1.5;
