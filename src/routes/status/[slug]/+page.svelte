@@ -4,10 +4,10 @@
     import relativeTime from "dayjs/plugin/relativeTime.js";
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
-    import Main from "../components/Main.svelte";
-    import Toast from "../components/Toast.svelte";
-    import type { ClientData } from "../data/types";
-    import Menu from "../components/Menu.svelte";
+    import Main from "../../components/Main.svelte";
+    import Toast from "../../components/Toast.svelte";
+    import type { ClientData } from "../../data/types";
+    import Menu from "../../components/Menu.svelte";
 
     export let data;
     let { campaignDropdown, campaign } = data;

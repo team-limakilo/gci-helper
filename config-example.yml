@@ -1,0 +1,5 @@
+// Copy file to config.yml
+
+export_path:
+  stormforge: "/home/user/gci-helper/Caucasus_Operation Stormforge.state.export.json"
+  new_order: "/home/user/gci-helper/Syria_Operation New Order.state.export.json"

@@ -88,7 +88,7 @@
                             <span class="check"></span>
                         </a>
                     {:else}
-                        <a data-sveltekit-reload href={`/status/?c=${item.fileName}`} class="menu-item ">
+                        <a data-sveltekit-reload href={`/status/${item.fileName}`} class="menu-item ">
                             <div>
                                 <b>{item.campaignName}</b>
                                 <span class="map">({item.mapName})</span>
@@ -313,7 +313,7 @@ h1:hover {
   background: #272A31;
   border-radius: 4px;
   padding: 0;
-  font-family: monospace;
+  font-family: "Noto Sans Mono", monospace;
   position:absolute;
   min-width: 100%;
   width: max-content;

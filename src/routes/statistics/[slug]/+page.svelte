@@ -490,7 +490,7 @@
         text-transform: uppercase;
     }
     body {
-        font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+        font-family: "Noto Sans Mono", monospace;
         color: #fff;
         background: #222429;
         line-height: 1.5;

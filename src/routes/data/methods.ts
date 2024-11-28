@@ -1,10 +1,15 @@
 import axios from "axios";
 import crypto from "crypto";
+import fss from "fs";
 import fs from "fs/promises";
 import getSampleData from "../../sample";
 import type { Asset, ExportData, ExportDataAsset, ExportDataMission, MissionTarget } from "./types";
 import { Coalition } from "./types";
 import 'dotenv/config'
+import YAML from 'yaml'
+
+const file = fss.readFileSync('./config.yml', 'utf8')
+const config = YAML.parse(file)
 
 export const exportDataPath = process.env["EXPORT_DATA_PATH"];
 export const exportDataFiles = process.env["EXPORT_DATA_FILES"];
@@ -169,18 +174,18 @@ export function getDCSDateTime(isoDate: string, absTime: number): Date {
 }
 
 export function getAvailableCampaigns() {
-    return exportDataFiles?.replace(/\.state\.export\.json/g, "").trim().split("|")
+    return Object.keys(config.export_path)
 }
 
 export async function getExportData(campaing: string): Promise<ExportData> {
 
 
-    if (exportDataPath != null && exportDataPath.length > 0) {
+    if (config.export_path && Object.keys(config.export_path).length) {
         if (!getAvailableCampaigns().includes(campaing)) {
             return
         }
 
-        const filePath = exportDataPath + campaing + '.state.export.json';
+        const filePath = config.export_path[campaing]
         // Read from file
         const data = await fs.readFile(filePath, { encoding: "utf-8" });
         const result = JSON.parse(data);
