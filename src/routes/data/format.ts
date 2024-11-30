@@ -9,6 +9,7 @@ export function prettyAircraftName(aircraft: string) {
         case "M-2000C": return "Mirage 2000C";
         case "MiG-21Bis": return "MiG-21bis";
         case "JF-17": return "JF-17 Thunder";
+        case "F-4E-45MC": return "F-4E Phantom II";
         case "F-5E-3": return "F-5E Tiger";
         case "F-14A-135-GR": return "F-14A Tomcat";
         case "F-14A-95-GR": return "F-14A Tomcat";
