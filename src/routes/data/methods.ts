@@ -111,6 +111,7 @@ export function getAssets(data: ExportData, coalition: Coalition) {
 }
 
 export function getMissions(data: ExportData, coalition: Coalition) {
+    console.log(data);
     return extract(data.coalitions[coalition].missions,
         (_, mission: ExportDataMission) => mission.assigned.filter((assigned) => assigned.player != null).length > 0,
         (id, mission: ExportDataMission) => ({
