@@ -8,7 +8,16 @@ import { Coalition } from "./types";
 export const exportDataPath = process.env["EXPORT_DATA_PATH"];
 export const exportDataEndpoint = process.env["EXPORT_DATA_ENDPOINT"];
 export const exportDataSubkey = process.env["EXPORT_DATA_SUBKEY"];
+export const hideRegions = parseList(process.env["HIDE_REGIONS"]);
 export const customTitle = process.env["CUSTOM_TITLE"];
+
+function parseList(env?: string): string[] {
+    if (env == null) {
+        return [];
+    } else {
+        return env.split(",");
+    }
+}
 
 async function getSalt() {
     const keyPath = "salt.txt";
@@ -76,53 +85,64 @@ export function getAirbases(data: ExportData, coalitions: Coalition[] = []) {
 }
 
 export function getSAMs(data: ExportData, coalition: Coalition) {
-    return extract(data.coalitions[coalition].assets, false, (region, assets) => ({
-        name: region,
-        assets: extract(assets,
-            (_, asset: ExportDataAsset) =>
-                !asset.dead &&
-                !asset.ignore &&
-                asset.type === "SAM",
-            (_, asset: ExportDataAsset) => ({
-                sitetype: asset.sitetype ?? "Unknown",
-                codename: asset.codename,
-            }))
-            .sort(byKey("codename"))
-            .sort(byKey("sitetype"))
-    }));
+    return extract(data.coalitions[coalition].assets,
+        (region, _) => !hideRegions.includes(region),
+        (region, assets) => ({
+            name: region,
+            assets: extract(assets,
+                (_, asset: ExportDataAsset) =>
+                    !asset.dead &&
+                    !asset.ignore &&
+                    asset.type === "SAM",
+                (_, asset: ExportDataAsset) => ({
+                    sitetype: asset.sitetype ?? "Unknown",
+                    codename: asset.codename,
+                }))
+                .sort(byKey("codename"))
+                .sort(byKey("sitetype"))
+        })
+    );
 }
 
-export function getAssets(data: ExportData, coalition: Coalition) {
-    return extract(data.coalitions[coalition].assets, false, (region, assets) => ({
-        name: region,
-        assets: extract(assets,
-            (_, asset: ExportDataAsset) =>
-                !asset.dead &&
-                !asset.ignore &&
-                asset.strategic &&
-                asset.type !== "SAM",
-            (name, asset: ExportDataAsset) => ({
-                codename: asset.type === "AIRBASE" ? name : asset.codename,
-                type: asset.type,
-            }))
-            .sort(byKey("codename"))
-            .sort(byKey("type"))
-    }));
+export function getStaticAssets(data: ExportData, coalition: Coalition) {
+    return extract(data.coalitions[coalition].assets,
+        (region, _) => !hideRegions.includes(region),
+        (region, assets) => ({
+            name: region,
+            assets: extract(assets,
+                (_, asset: ExportDataAsset) =>
+                    !asset.dead &&
+                    !asset.ignore &&
+                    asset.strategic &&
+                    asset.type !== "SAM",
+                (name, asset: ExportDataAsset) => ({
+                    codename: asset.type === "AIRBASE" ? name : asset.codename,
+                    type: asset.type,
+                }))
+                .sort(byKey("codename"))
+                .sort(byKey("type"))
+        })
+    );
 }
 
 export function getMissions(data: ExportData, coalition: Coalition) {
-    console.log(data);
     return extract(data.coalitions[coalition].missions,
         (_, mission: ExportDataMission) => mission.assigned.filter((assigned) => assigned.player != null).length > 0,
-        (id, mission: ExportDataMission) => ({
-            id: crypto.createHash("sha1").update(`${SALT}${id}`).digest("hex").substring(0, 8),
-            region: mission.target.region,
-            target: target(data, mission),
-            assigned: assignedPilots(mission),
-            type: mission.type,
-            mode1: mission.iffmode1,
-            timeout: mission.timeout,
-        }))
+        (id, mission: ExportDataMission) => {
+            let regionName = mission.target.region || "";
+            if (hideRegions.includes(regionName)) {
+                regionName = "Other";
+            }
+            return {
+                id: crypto.createHash("sha1").update(`${SALT}${id}`).digest("hex").substring(0, 8),
+                region: regionName,
+                target: target(data, mission),
+                assigned: assignedPilots(mission),
+                type: mission.type,
+                mode1: mission.iffmode1,
+                timeout: mission.timeout,
+            };
+        })
         .sort(byKey("target"))
         .sort(byKey("type"));
 }

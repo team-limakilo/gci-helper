@@ -1,5 +1,5 @@
 import { json, redirect, type RequestEvent } from "@sveltejs/kit";
-import { customTitle, getAirbases, getAssets, getAvailableMissions, getDCSDateTime, getExportData, getMissions, getPlayers, getSAMs, getTickets, getTugOfWar } from "./methods";
+import { customTitle, getAirbases, getStaticAssets, getAvailableMissions, getDCSDateTime, getExportData, getMissions, getPlayers, getSAMs, getTickets, getTugOfWar } from "./methods";
 import { Coalition, type ExportData } from "./types";
 
 let data: ExportData;
@@ -28,7 +28,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
         missions: getMissions(data, Coalition.Blue),
         availableMissions: getAvailableMissions(data, Coalition.Blue),
         enemySAMs: getSAMs(data, Coalition.Red),
-        enemyAssets: getAssets(data, Coalition.Red),
+        enemyAssets: getStaticAssets(data, Coalition.Red),
         airbases: getAirbases(data),
         tickets: getTickets(data),
         theater: data.theater,
