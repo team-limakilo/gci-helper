@@ -1,6 +1,6 @@
 <!-- Adapted from https://loading.io/css -->
 
-<div class="lds-dual-ring" />
+<div class="lds-dual-ring"></div>
 
 <style scoped>
     .lds-dual-ring {

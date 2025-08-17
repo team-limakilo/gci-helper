@@ -53,11 +53,11 @@
                     </tr>
                 {:else}
                     <tr>
-                        <td />
-                        <td />
-                        <td />
-                        <td />
-                        <td />
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td class="name">
                             {assigned.player || assigned.group}
                         </td>
